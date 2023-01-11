@@ -1,8 +1,29 @@
-require "bundler/setup"
+require "rubygems"
+require "rake"
+require "rake/testtask"
+require "rspec/core/rake_task"
+require "aypex/api/testing_support/api_rake"
 
-APP_RAKEFILE = File.expand_path("test/dummy/Rakefile", __dir__)
-load "rails/tasks/engine.rake"
+RSpec::Core::RakeTask.new
 
-load "rails/tasks/statistics.rake"
+task default: :spec
 
-require "bundler/gem_tasks"
+desc "Generates a dummy app for testing"
+task :test_app do
+  ENV["LIB_NAME"] = "aypex/api"
+  Rake::Task["api:test_app"].invoke
+end
+
+namespace :rswag do
+  namespace :specs do
+    desc "Generate Swagger JSON files from integration specs"
+    RSpec::Core::RakeTask.new("swaggerize") do |t|
+      t.pattern = ENV.fetch(
+        "PATTERN",
+        "spec/integration/**/*_spec.rb"
+      )
+
+      t.rspec_opts = ["--format Rswag::Specs::SwaggerFormatter", "--order defined"]
+    end
+  end
+end
