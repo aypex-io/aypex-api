@@ -17,11 +17,11 @@ module Aypex
           end
 
           def resource_finder
-            Aypex::Api::Dependencies.storefront_completed_order_finder.constantize
+            Aypex::Api::Dependency.storefront_completed_order_finder.constantize
           end
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_cart_serializer.constantize
+            Aypex::Api::Dependency.storefront_cart_serializer.constantize
           end
 
           def ensure_order_token

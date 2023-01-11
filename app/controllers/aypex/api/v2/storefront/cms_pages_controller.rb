@@ -14,15 +14,15 @@ module Aypex
           end
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_cms_page_serializer.constantize
+            Aypex::Api::Dependency.storefront_cms_page_serializer.constantize
           end
 
           def collection_serializer
-            Aypex::Api::Dependencies.storefront_cms_page_serializer.constantize
+            Aypex::Api::Dependency.storefront_cms_page_serializer.constantize
           end
 
           def collection_finder
-            Aypex::Api::Dependencies.storefront_cms_page_finder.constantize
+            Aypex::Api::Dependency.storefront_cms_page_finder.constantize
           end
 
           def scope

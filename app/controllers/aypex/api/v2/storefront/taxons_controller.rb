@@ -6,15 +6,15 @@ module Aypex
           private
 
           def collection_serializer
-            Aypex::Api::Dependencies.storefront_taxon_serializer.constantize
+            Aypex::Api::Dependency.storefront_taxon_serializer.constantize
           end
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_taxon_serializer.constantize
+            Aypex::Api::Dependency.storefront_taxon_serializer.constantize
           end
 
           def collection_finder
-            Aypex::Api::Dependencies.storefront_taxon_finder.constantize
+            Aypex::Api::Dependency.storefront_taxon_finder.constantize
           end
 
           def paginated_collection

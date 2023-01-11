@@ -140,7 +140,7 @@ module Aypex
 
           def associate
             guest_order_token = params[:guest_order_token]
-            guest_order = ::Aypex::Api::Dependencies.storefront_current_order_finder.constantize.new.execute(
+            guest_order = ::Aypex::Api::Dependency.storefront_current_order_finder.constantize.new.execute(
               store: current_store,
               user: nil,
               token: guest_order_token,
@@ -169,47 +169,47 @@ module Aypex
           private
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_cart_serializer.constantize
+            Aypex::Api::Dependency.storefront_cart_serializer.constantize
           end
 
           def create_service
-            Aypex::Api::Dependencies.storefront_cart_create_service.constantize
+            Aypex::Api::Dependency.storefront_cart_create_service.constantize
           end
 
           def add_item_service
-            Aypex::Api::Dependencies.storefront_cart_add_item_service.constantize
+            Aypex::Api::Dependency.storefront_cart_add_item_service.constantize
           end
 
           def empty_cart_service
-            Aypex::Api::Dependencies.storefront_cart_empty_service.constantize
+            Aypex::Api::Dependency.storefront_cart_empty_service.constantize
           end
 
           def destroy_cart_service
-            Aypex::Api::Dependencies.storefront_cart_destroy_service.constantize
+            Aypex::Api::Dependency.storefront_cart_destroy_service.constantize
           end
 
           def set_item_quantity_service
-            Aypex::Api::Dependencies.storefront_cart_set_item_quantity_service.constantize
+            Aypex::Api::Dependency.storefront_cart_set_item_quantity_service.constantize
           end
 
           def remove_line_item_service
-            Aypex::Api::Dependencies.storefront_cart_remove_line_item_service.constantize
+            Aypex::Api::Dependency.storefront_cart_remove_line_item_service.constantize
           end
 
           def coupon_handler
-            Aypex::Api::Dependencies.storefront_coupon_handler.constantize
+            Aypex::Api::Dependency.storefront_coupon_handler.constantize
           end
 
           def estimate_shipping_rates_service
-            Aypex::Api::Dependencies.storefront_cart_estimate_shipping_rates_service.constantize
+            Aypex::Api::Dependency.storefront_cart_estimate_shipping_rates_service.constantize
           end
 
           def associate_service
-            Aypex::Api::Dependencies.storefront_cart_associate_service.constantize
+            Aypex::Api::Dependency.storefront_cart_associate_service.constantize
           end
 
           def change_currency_service
-            Aypex::Api::Dependencies.storefront_cart_change_currency_service.constantize
+            Aypex::Api::Dependency.storefront_cart_change_currency_service.constantize
           end
 
           def line_item
@@ -225,7 +225,7 @@ module Aypex
           end
 
           def estimate_shipping_rates_serializer
-            Aypex::Api::Dependencies.storefront_estimated_shipment_serializer.constantize
+            Aypex::Api::Dependency.storefront_estimated_shipment_serializer.constantize
           end
 
           def serialize_estimated_shipping_rates(shipping_rates)

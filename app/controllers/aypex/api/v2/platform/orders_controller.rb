@@ -106,43 +106,43 @@ module Aypex
           end
 
           def update_service
-            Aypex::Api::Dependencies.platform_order_update_service.constantize
+            Aypex::Api::Dependency.platform_order_update_service.constantize
           end
 
           def next_service
-            Aypex::Api::Dependencies.platform_order_next_service.constantize
+            Aypex::Api::Dependency.platform_order_next_service.constantize
           end
 
           def advance_service
-            Aypex::Api::Dependencies.platform_order_advance_service.constantize
+            Aypex::Api::Dependency.platform_order_advance_service.constantize
           end
 
           def use_store_credit_service
-            Aypex::Api::Dependencies.platform_order_use_store_credit_service.constantize
+            Aypex::Api::Dependency.platform_order_use_store_credit_service.constantize
           end
 
           def complete_service
-            Aypex::Api::Dependencies.platform_order_complete_service.constantize
+            Aypex::Api::Dependency.platform_order_complete_service.constantize
           end
 
           def empty_service
-            Aypex::Api::Dependencies.platform_order_empty_service.constantize
+            Aypex::Api::Dependency.platform_order_empty_service.constantize
           end
 
           def destroy_service
-            Aypex::Api::Dependencies.platform_order_destroy_service.constantize
+            Aypex::Api::Dependency.platform_order_destroy_service.constantize
           end
 
           def approve_service
-            Aypex::Api::Dependencies.platform_order_approve_service.constantize
+            Aypex::Api::Dependency.platform_order_approve_service.constantize
           end
 
           def cancel_service
-            Aypex::Api::Dependencies.platform_order_cancel_service.constantize
+            Aypex::Api::Dependency.platform_order_cancel_service.constantize
           end
 
           def coupon_handler
-            Aypex::Api::Dependencies.platform_coupon_handler.constantize
+            Aypex::Api::Dependency.platform_coupon_handler.constantize
           end
 
           def aypex_permitted_attributes

@@ -18,7 +18,7 @@ module Aypex
           end
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_store_serializer.constantize
+            Aypex::Api::Dependency.storefront_store_serializer.constantize
           end
         end
       end

@@ -3,15 +3,15 @@ module Aypex
     module V2
       class BaseController < ActionController::API
         include CanCan::ControllerAdditions
-        include Aypex::Core::ControllerHelpers::StrongParameters
-        include Aypex::Core::ControllerHelpers::Store
-        include Aypex::Core::ControllerHelpers::Locale
-        include Aypex::Core::ControllerHelpers::Currency
+        include Aypex::ControllerHelpers::StrongParameters
+        include Aypex::ControllerHelpers::Store
+        include Aypex::ControllerHelpers::Locale
+        include Aypex::ControllerHelpers::Currency
 
         rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
         rescue_from CanCan::AccessDenied, with: :access_denied
         rescue_from Doorkeeper::Errors::DoorkeeperError, with: :access_denied_401
-        rescue_from Aypex::Core::GatewayError, with: :gateway_error
+        rescue_from Aypex::GatewayError, with: :gateway_error
         rescue_from ActionController::ParameterMissing, with: :error_during_processing
         if defined?(JSONAPI::Serializer::UnsupportedIncludeError)
           rescue_from JSONAPI::Serializer::UnsupportedIncludeError, with: :error_during_processing
@@ -46,7 +46,7 @@ module Aypex
         end
 
         def collection_paginator
-          Aypex::Api::Dependencies.storefront_collection_paginator.constantize
+          Aypex::Api::Dependency.storefront_collection_paginator.constantize
         end
 
         def render_serialized_payload(status = 200)
@@ -93,7 +93,7 @@ module Aypex
 
         # Needs to be overridden so that we use Aypex's Ability rather than anyone else's.
         def current_ability
-          @current_ability ||= Aypex::Dependencies.ability_class.constantize.new(aypex_current_user)
+          @current_ability ||= Aypex::Dependency.ability_class.constantize.new(aypex_current_user)
         end
 
         def request_includes
@@ -164,7 +164,7 @@ module Aypex
         end
 
         def error_handler
-          Aypex::Api::Dependencies.error_handler.constantize
+          Aypex::Api::Dependency.error_handler.constantize
         end
       end
     end

@@ -30,19 +30,19 @@ module Aypex
             end
 
             def collection_serializer
-              Aypex::Api::Dependencies.storefront_credit_card_serializer.constantize
+              Aypex::Api::Dependency.storefront_credit_card_serializer.constantize
             end
 
             def collection_finder
-              Aypex::Api::Dependencies.storefront_credit_card_finder.constantize
+              Aypex::Api::Dependency.storefront_credit_card_finder.constantize
             end
 
             def resource_serializer
-              Aypex::Api::Dependencies.storefront_credit_card_serializer.constantize
+              Aypex::Api::Dependency.storefront_credit_card_serializer.constantize
             end
 
             def destroy_service
-              Aypex::Api::Dependencies.storefront_credit_cards_destroy_service.constantize
+              Aypex::Api::Dependency.storefront_credit_cards_destroy_service.constantize
             end
           end
         end

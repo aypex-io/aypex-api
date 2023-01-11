@@ -6,15 +6,15 @@ module Aypex
           private
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_menu_serializer.constantize
+            Aypex::Api::Dependency.storefront_menu_serializer.constantize
           end
 
           def collection_serializer
-            Aypex::Api::Dependencies.storefront_menu_serializer.constantize
+            Aypex::Api::Dependency.storefront_menu_serializer.constantize
           end
 
           def collection_finder
-            Aypex::Api::Dependencies.storefront_menu_finder.constantize
+            Aypex::Api::Dependency.storefront_menu_finder.constantize
           end
 
           def model_class

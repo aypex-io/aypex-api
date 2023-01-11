@@ -68,7 +68,7 @@ module Aypex
         end
 
         def collection_sorter
-          Aypex::Api::Dependencies.storefront_collection_sorter.constantize
+          Aypex::Api::Dependency.storefront_collection_sorter.constantize
         end
       end
     end

@@ -42,15 +42,15 @@ module Aypex
           end
 
           def create_service
-            Aypex::Api::Dependencies.platform_line_item_create_service.constantize
+            Aypex::Api::Dependency.platform_line_item_create_service.constantize
           end
 
           def update_service
-            Aypex::Api::Dependencies.platform_line_item_update_service.constantize
+            Aypex::Api::Dependency.platform_line_item_update_service.constantize
           end
 
           def destroy_service
-            Aypex::Api::Dependencies.platform_line_item_destroy_service.constantize
+            Aypex::Api::Dependency.platform_line_item_destroy_service.constantize
           end
         end
       end

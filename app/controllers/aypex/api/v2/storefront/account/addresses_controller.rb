@@ -47,23 +47,23 @@ module Aypex
             end
 
             def collection_finder
-              Aypex::Api::Dependencies.storefront_address_finder.constantize
+              Aypex::Api::Dependency.storefront_address_finder.constantize
             end
 
             def collection_serializer
-              Aypex::Api::Dependencies.storefront_address_serializer.constantize
+              Aypex::Api::Dependency.storefront_address_serializer.constantize
             end
 
             def resource_serializer
-              Aypex::Api::Dependencies.storefront_address_serializer.constantize
+              Aypex::Api::Dependency.storefront_address_serializer.constantize
             end
 
             def create_service
-              Aypex::Api::Dependencies.storefront_address_create_service.constantize
+              Aypex::Api::Dependency.storefront_address_create_service.constantize
             end
 
             def update_service
-              Aypex::Api::Dependencies.storefront_address_update_service.constantize
+              Aypex::Api::Dependency.storefront_address_update_service.constantize
             end
 
             def address_params

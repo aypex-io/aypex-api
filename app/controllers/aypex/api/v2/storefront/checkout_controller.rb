@@ -95,51 +95,51 @@ module Aypex
           private
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_cart_serializer.constantize
+            Aypex::Api::Dependency.storefront_cart_serializer.constantize
           end
 
           def next_service
-            Aypex::Api::Dependencies.storefront_checkout_next_service.constantize
+            Aypex::Api::Dependency.storefront_checkout_next_service.constantize
           end
 
           def advance_service
-            Aypex::Api::Dependencies.storefront_checkout_advance_service.constantize
+            Aypex::Api::Dependency.storefront_checkout_advance_service.constantize
           end
 
           def add_store_credit_service
-            Aypex::Api::Dependencies.storefront_checkout_add_store_credit_service.constantize
+            Aypex::Api::Dependency.storefront_checkout_add_store_credit_service.constantize
           end
 
           def remove_store_credit_service
-            Aypex::Api::Dependencies.storefront_checkout_remove_store_credit_service.constantize
+            Aypex::Api::Dependency.storefront_checkout_remove_store_credit_service.constantize
           end
 
           def complete_service
-            Aypex::Api::Dependencies.storefront_checkout_complete_service.constantize
+            Aypex::Api::Dependency.storefront_checkout_complete_service.constantize
           end
 
           def update_service
-            Aypex::Api::Dependencies.storefront_checkout_update_service.constantize
+            Aypex::Api::Dependency.storefront_checkout_update_service.constantize
           end
 
           def payment_methods_serializer
-            Aypex::Api::Dependencies.storefront_payment_method_serializer.constantize
+            Aypex::Api::Dependency.storefront_payment_method_serializer.constantize
           end
 
           def shipping_rates_service
-            Aypex::Api::Dependencies.storefront_checkout_get_shipping_rates_service.constantize
+            Aypex::Api::Dependency.storefront_checkout_get_shipping_rates_service.constantize
           end
 
           def shipping_rates_serializer
-            Aypex::Api::Dependencies.storefront_shipment_serializer.constantize
+            Aypex::Api::Dependency.storefront_shipment_serializer.constantize
           end
 
           def create_payment_service
-            Aypex::Api::Dependencies.storefront_payment_create_service.constantize
+            Aypex::Api::Dependency.storefront_payment_create_service.constantize
           end
 
           def select_shipping_method_service
-            Aypex::Api::Dependencies.storefront_checkout_select_shipping_method_service.constantize
+            Aypex::Api::Dependency.storefront_checkout_select_shipping_method_service.constantize
           end
 
           def serialize_payment_methods(payment_methods)

@@ -20,19 +20,19 @@ module Aypex
           end
 
           def collection_sorter
-            Aypex::Api::Dependencies.storefront_products_sorter.constantize
+            Aypex::Api::Dependency.storefront_products_sorter.constantize
           end
 
           def collection_finder
-            Aypex::Api::Dependencies.storefront_products_finder.constantize
+            Aypex::Api::Dependency.storefront_products_finder.constantize
           end
 
           def collection_serializer
-            Aypex::Api::Dependencies.storefront_product_serializer.constantize
+            Aypex::Api::Dependency.storefront_product_serializer.constantize
           end
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_product_serializer.constantize
+            Aypex::Api::Dependency.storefront_product_serializer.constantize
           end
 
           def model_class

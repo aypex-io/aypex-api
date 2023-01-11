@@ -6,9 +6,9 @@ module Aypex
           include ResourceSerializerConcern
 
           belongs_to :user
-          belongs_to :created_by, serializer: Dependencies.platform_admin_user_serializer.constantize
-          belongs_to :approver, serializer: Dependencies.platform_admin_user_serializer.constantize
-          belongs_to :canceler, serializer: Dependencies.platform_admin_user_serializer.constantize
+          belongs_to :created_by, serializer: Dependency.platform_admin_user_serializer.constantize
+          belongs_to :approver, serializer: Dependency.platform_admin_user_serializer.constantize
+          belongs_to :canceler, serializer: Dependency.platform_admin_user_serializer.constantize
 
           belongs_to :bill_address, serializer: AddressSerializer
           belongs_to :ship_address, serializer: AddressSerializer

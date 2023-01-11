@@ -26,7 +26,7 @@ module Aypex
           end
 
           def find_aypex_current_order
-            Aypex::Api::Dependencies.storefront_current_order_finder.constantize.new.execute(
+            Aypex::Api::Dependency.storefront_current_order_finder.constantize.new.execute(
               store: current_store,
               user: aypex_current_user,
               token: order_token,

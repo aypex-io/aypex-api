@@ -1,21 +1,21 @@
-aypex_path = Rails.application.routes.url_helpers.try(:aypex_path, trailing_slash: true) || '/'
+aypex_path = Rails.application.routes.url_helpers.try(:aypex_path, trailing_slash: true) || "/"
 
 Rails.application.routes.draw do
   use_doorkeeper scope: "#{aypex_path}/aypex_oauth"
 end
 
-Aypex::Core::Engine.add_routes do
-  namespace :api, defaults: { format: 'json' } do
+Aypex::Engine.add_routes do
+  namespace :api, defaults: {format: "json"} do
     namespace :v2 do
       namespace :storefront do
         resource :cart, controller: :cart, only: %i[show create destroy] do
-          post   :add_item
-          patch  :empty
-          delete 'remove_line_item/:line_item_id', to: 'cart#remove_line_item', as: :cart_remove_line_item
-          patch  :set_quantity
-          patch  :apply_coupon_code
-          delete 'remove_coupon_code/:coupon_code', to: 'cart#remove_coupon_code', as: :cart_remove_coupon_code
-          delete 'remove_coupon_code', to: 'cart#remove_coupon_code', as: :cart_remove_coupon_code_without_code
+          post :add_item
+          patch :empty
+          delete "remove_line_item/:line_item_id", to: "cart#remove_line_item", as: :cart_remove_line_item
+          patch :set_quantity
+          patch :apply_coupon_code
+          delete "remove_coupon_code/:coupon_code", to: "cart#remove_coupon_code", as: :cart_remove_coupon_code
+          delete "remove_coupon_code", to: "cart#remove_coupon_code", as: :cart_remove_coupon_code_without_code
           get :estimate_shipping_rates
           patch :associate
           patch :change_currency
@@ -42,12 +42,12 @@ Aypex::Core::Engine.add_routes do
         end
 
         resources :countries, only: %i[index]
-        get '/countries/:iso', to: 'countries#show', as: :country
-        get '/order_status/:number', to: 'order_status#show', as: :order_status
+        get "/countries/:iso", to: "countries#show", as: :country
+        get "/order_status/:number", to: "order_status#show", as: :order_status
         resources :products, only: %i[index show]
-        resources :taxons,   only: %i[index show], id: /.+/
-        get '/stores/:code', to: 'stores#show', as: :store
-        get '/store', to: 'stores#current', as: :current_store
+        resources :taxons, only: %i[index show], id: /.+/
+        get "/stores/:code", to: "stores#show", as: :store
+        get "/store", to: "stores#current", as: :current_store
 
         resources :menus, only: %i[index show]
         resources :cms_pages, only: %i[index show]
@@ -57,12 +57,12 @@ Aypex::Core::Engine.add_routes do
 
           member do
             post :add_item
-            patch 'set_item_quantity/:item_id', to: 'wishlists#set_item_quantity', as: :set_item_quantity
-            delete 'remove_item/:item_id', to: 'wishlists#remove_item', as: :remove_item
+            patch "set_item_quantity/:item_id", to: "wishlists#set_item_quantity", as: :set_item_quantity
+            delete "remove_item/:item_id", to: "wishlists#remove_item", as: :remove_item
           end
         end
 
-        get '/digitals/:token', to: 'digitals#download', as: 'digital'
+        get "/digitals/:token", to: "digitals#download", as: "digital"
       end
 
       namespace :platform do

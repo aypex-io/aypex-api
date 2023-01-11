@@ -23,7 +23,7 @@ module Aypex
           end
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_user_serializer.constantize
+            Aypex::Api::Dependency.storefront_user_serializer.constantize
           end
 
           def model_class
@@ -31,11 +31,11 @@ module Aypex
           end
 
           def create_service
-            Aypex::Api::Dependencies.storefront_account_create_service.constantize
+            Aypex::Api::Dependency.storefront_account_create_service.constantize
           end
 
           def update_service
-            Aypex::Api::Dependencies.storefront_account_update_service.constantize
+            Aypex::Api::Dependency.storefront_account_update_service.constantize
           end
 
           def user_create_params

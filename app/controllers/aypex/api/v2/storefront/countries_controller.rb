@@ -31,15 +31,15 @@ module Aypex
           end
 
           def resource_serializer
-            Aypex::Api::Dependencies.storefront_country_serializer.constantize
+            Aypex::Api::Dependency.storefront_country_serializer.constantize
           end
 
           def collection_serializer
-            Aypex::Api::Dependencies.storefront_country_serializer.constantize
+            Aypex::Api::Dependency.storefront_country_serializer.constantize
           end
 
           def collection_finder
-            Aypex::Api::Dependencies.storefront_country_finder.constantize
+            Aypex::Api::Dependency.storefront_country_finder.constantize
           end
 
           def model_class

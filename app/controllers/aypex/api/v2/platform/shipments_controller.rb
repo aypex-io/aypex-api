@@ -118,23 +118,23 @@ module Aypex
           end
 
           def create_service
-            Aypex::Api::Dependencies.platform_shipment_create_service.constantize
+            Aypex::Api::Dependency.platform_shipment_create_service.constantize
           end
 
           def update_service
-            Aypex::Api::Dependencies.platform_shipment_update_service.constantize
+            Aypex::Api::Dependency.platform_shipment_update_service.constantize
           end
 
           def change_state_service
-            Aypex::Api::Dependencies.platform_shipment_change_state_service.constantize
+            Aypex::Api::Dependency.platform_shipment_change_state_service.constantize
           end
 
           def add_item_service
-            Aypex::Api::Dependencies.platform_shipment_add_item_service.constantize
+            Aypex::Api::Dependency.platform_shipment_add_item_service.constantize
           end
 
           def remove_item_service
-            Aypex::Api::Dependencies.platform_shipment_remove_item_service.constantize
+            Aypex::Api::Dependency.platform_shipment_remove_item_service.constantize
           end
         end
       end
