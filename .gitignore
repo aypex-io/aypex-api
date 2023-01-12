@@ -4,3 +4,4 @@
 /pkg/
 /tmp/
 /dump.rdb
+/Gemfile.lock
