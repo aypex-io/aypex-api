@@ -1,8 +1,11 @@
 # Aypex::Api
-Short description and motivation.
+
+The API pack for Aypex
+
 
 ## Usage
 How to use my plugin.
+
 
 ## Installation
 Add this line to your application's Gemfile:
@@ -19,6 +22,21 @@ $ bundle
 Or install it yourself as:
 ```bash
 $ gem install aypex-api
+```
+
+## Testing
+
+```bash
+bundle exec rake test_app
+```
+
+```bash
+bundle exec rspec spec
+```
+
+## Generating Swagger Docs
+```bash
+bundle exec rake rswag:specs:swaggerize
 ```
 
 ## Contributing

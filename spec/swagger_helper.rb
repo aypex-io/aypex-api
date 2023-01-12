@@ -2031,7 +2031,7 @@ RSpec.configure do |config|
                 required: %w[name],
                 properties: {
                   name: {type: :string},
-                  position: {type: :integer, example: 2, description: "Pass the position that you want this BaseCategory to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
+                  position: {type: :integer, example: 2, description: "Pass the position that you want this Base Category to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
                   private_metadata: {type: :object, example: {"profitability" => 2}}
                 }
@@ -2047,7 +2047,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   name: {type: :string},
-                  position: {type: :integer, example: 2, description: "Pass the position that you want this BaseCategory to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
+                  position: {type: :integer, example: 2, description: "Pass the position that you want this Base Category to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
                   private_metadata: {type: :object, example: {"profitability" => 2}}
                 }
