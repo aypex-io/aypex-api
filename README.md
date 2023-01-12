@@ -22,7 +22,9 @@ And then execute:
 bundle
 ```
 
-
+```bash
+bin/rails g aypex:api:install
+```
 
 ## Testing
 

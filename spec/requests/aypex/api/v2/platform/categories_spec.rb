@@ -25,8 +25,11 @@ describe "Platform API v2 Categories API" do
     context "sorting" do
       before { get "/api/v2/platform/categories?sort=name", headers: bearer_token }
 
-      it "returns categories sorted by name" do
+      it "returns 3 items" do
         expect(json_response["data"].count).to eq base_category.categories.count
+      end
+
+      it "returns categories sorted by name" do
         expect(json_response["data"].first).to have_id(category_2.id.to_s)
       end
     end
