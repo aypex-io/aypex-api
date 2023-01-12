@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Aypex::Api::V2::Storefront::Account::AddressesController" do
+describe "Aypex::Api::V2::Storefront::Account::AddressesController", type: :request do
   let!(:user) { create(:user_with_addresses) }
   let!(:addresses) { create_list(:address, 1, user_id: user.id, country: country, state: state) }
   let!(:country) { create(:country) }
@@ -194,7 +194,7 @@ describe "Aypex::Api::V2::Storefront::Account::AddressesController" do
 
             patch_update
 
-            expect(address.reload.deleted_at).not_to be nil
+            expect(address.reload.deleted_at).not_to be_nil
           end
         end
       end
