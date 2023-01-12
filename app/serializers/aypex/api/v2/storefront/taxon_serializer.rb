@@ -1,36 +1,36 @@
 module Aypex
   module Api::V2
     module Storefront
-      class TaxonSerializer < BaseSerializer
-        set_type   :taxon
+      class CategorySerializer < BaseSerializer
+        set_type   :category
 
         attributes :name, :pretty_name, :permalink, :seo_title, :description, :meta_title, :meta_description,
                    :meta_keywords, :left, :right, :position, :depth, :updated_at, :public_metadata
 
-        attribute :is_root do |taxon|
-          taxon.root?
+        attribute :is_root do |category|
+          category.root?
         end
 
-        attribute :is_child do |taxon|
-          taxon.child?
+        attribute :is_child do |category|
+          category.child?
         end
 
-        attribute :is_leaf do |taxon|
-          taxon.leaf?
+        attribute :is_leaf do |category|
+          category.leaf?
         end
 
-        belongs_to :parent,   record_type: :taxon, serializer: :taxon
-        belongs_to :taxonomy, record_type: :taxonomy
+        belongs_to :parent,   record_type: :category, serializer: :category
+        belongs_to :base_category, record_type: :base_category
 
-        has_many   :children, record_type: :taxon, serializer: :taxon
+        has_many   :children, record_type: :category, serializer: :category
         has_many   :products, record_type: :product,
-                              if: proc { |_taxon, params| params && params[:include_products] == true }
+                              if: proc { |_category, params| params && params[:include_products] == true }
 
         has_one    :image,
                    object_method_name: :icon,
                    id_method_name: :icon_id,
-                   record_type: :taxon_image,
-                   serializer: :taxon_image
+                   record_type: :category_image,
+                   serializer: :category_image
       end
     end
   end

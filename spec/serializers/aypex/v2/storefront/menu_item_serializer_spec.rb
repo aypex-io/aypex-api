@@ -4,7 +4,7 @@ describe Aypex::Api::V2::Storefront::MenuItemSerializer do
   subject { described_class.new(menu_item) }
 
   let(:menu) { create(:menu) }
-  let(:menu_item) { create(:menu_item, menu: menu, linked_resource: create(:taxon)) }
+  let(:menu_item) { create(:menu_item, menu: menu, linked_resource: create(:category)) }
   let!(:children) { create(:menu_item, parent_id: menu_item.id, menu: menu) }
 
   it { expect(subject.serializable_hash).to be_kind_of(Hash) }
@@ -53,7 +53,7 @@ describe Aypex::Api::V2::Storefront::MenuItemSerializer do
             linked_resource: {
               data: {
                 id: menu_item.linked_resource.id.to_s,
-                type: :taxon
+                type: :category
               }
             },
             children: {

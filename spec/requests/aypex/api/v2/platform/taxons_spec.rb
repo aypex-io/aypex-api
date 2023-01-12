@@ -1,80 +1,80 @@
 require 'spec_helper'
 
-describe 'Platform API v2 Taxons API' do
+describe 'Platform API v2 Categories API' do
   include_context 'Platform API v2'
 
-  let(:taxonomy) { create(:taxonomy, store: store) }
+  let(:base_category) { create(:base_category, store: store) }
   let(:store_2) { create(:store) }
   let(:bearer_token) { { 'Authorization' => valid_authorization } }
 
-  describe 'taxons#index' do
-    let!(:taxon) { create(:taxon, name: 'T-Shirts', taxonomy: taxonomy) }
-    let!(:taxon_2) { create(:taxon, name: 'Pants', taxonomy: taxonomy) }
-    let!(:taxon_3) { create(:taxon, name: 'T-Shirts', taxonomy: create(:taxonomy, store: store_2)) }
+  describe 'categories#index' do
+    let!(:category) { create(:category, name: 'T-Shirts', base_category: base_category) }
+    let!(:category_2) { create(:category, name: 'Pants', base_category: base_category) }
+    let!(:category_3) { create(:category, name: 'T-Shirts', base_category: create(:base_category, store: store_2)) }
 
     context 'filtering' do
-      before { get '/api/v2/platform/taxons?filter[name_i_cont]=shirt', headers: bearer_token }
+      before { get '/api/v2/platform/categories?filter[name_i_cont]=shirt', headers: bearer_token }
 
-      it 'returns taxons with matching name' do
+      it 'returns categories with matching name' do
         expect(json_response['data'].count).to eq 1
-        expect(json_response['data'].first).to have_id(taxon.id.to_s)
-        expect(json_response['data'].first).to have_relationships(:taxonomy, :parent, :children, :image)
+        expect(json_response['data'].first).to have_id(category.id.to_s)
+        expect(json_response['data'].first).to have_relationships(:base_category, :parent, :children, :image)
       end
     end
 
     context 'sorting' do
-      before { get '/api/v2/platform/taxons?sort=name', headers: bearer_token }
+      before { get '/api/v2/platform/categories?sort=name', headers: bearer_token }
 
-      it 'returns taxons sorted by name' do
-        expect(json_response['data'].count).to eq taxonomy.taxons.count
-        expect(json_response['data'].first).to have_id(taxon_2.id.to_s)
+      it 'returns categories sorted by name' do
+        expect(json_response['data'].count).to eq base_category.categories.count
+        expect(json_response['data'].first).to have_id(category_2.id.to_s)
       end
     end
   end
 
-  describe 'taxons#show' do
-    let!(:taxon) { create(:taxon, name: 'T-Shirts', taxonomy: taxonomy) }
+  describe 'categories#show' do
+    let!(:category) { create(:category, name: 'T-Shirts', base_category: base_category) }
 
     context 'with valid id' do
-      before { get "/api/v2/platform/taxons/#{taxon.id}", headers: bearer_token }
+      before { get "/api/v2/platform/categories/#{category.id}", headers: bearer_token }
 
-      it 'returns taxon' do
-        expect(json_response['data']).to have_id(taxon.id.to_s)
-        expect(json_response['data']).to have_relationships(:taxonomy, :parent, :children, :image, :products)
+      it 'returns category' do
+        expect(json_response['data']).to have_id(category.id.to_s)
+        expect(json_response['data']).to have_relationships(:base_category, :parent, :children, :image, :products)
       end
     end
 
-    context 'with taxon image data' do
-      shared_examples 'returns taxon image data' do
-        it 'returns taxon image data' do
+    context 'with category image data' do
+      shared_examples 'returns category image data' do
+        it 'returns category image data' do
           expect(json_response['included'].count).to eq(1)
-          expect(json_response['included'].first['type']).to eq('taxon_image')
+          expect(json_response['included'].first['type']).to eq('category_image')
         end
       end
 
-      let!(:image) { create(:taxon_image, viewable: taxon) }
+      let!(:image) { create(:category_image, viewable: category) }
       let(:image_json_data) { json_response['included'].first['attributes'] }
 
-      before { get "/api/v2/storefront/taxons/#{taxon.id}?include=image#{taxon_image_transformation_params}", headers: bearer_token }
+      before { get "/api/v2/storefront/categories/#{category.id}?include=image#{category_image_transformation_params}", headers: bearer_token }
 
       context 'when no image transformation params are passed' do
-        let(:taxon_image_transformation_params) { '' }
+        let(:category_image_transformation_params) { '' }
 
         it_behaves_like 'returns 200 HTTP status'
-        it_behaves_like 'returns taxon image data'
+        it_behaves_like 'returns category image data'
 
-        it 'returns taxon image' do
+        it 'returns category image' do
           expect(image_json_data['transformed_url']).to be_nil
         end
       end
 
-      context 'when taxon image json returned' do
-        let(:taxon_image_transformation_params) { '&taxon_image_transformation[size]=100x50&taxon_image_transformation[quality]=50' }
+      context 'when category image json returned' do
+        let(:category_image_transformation_params) { '&category_image_transformation[size]=100x50&category_image_transformation[quality]=50' }
 
         it_behaves_like 'returns 200 HTTP status'
-        it_behaves_like 'returns taxon image data'
+        it_behaves_like 'returns category image data'
 
-        it 'returns taxon image' do
+        it 'returns category image' do
           expect(image_json_data['transformed_url']).not_to be_nil
         end
       end
@@ -141,27 +141,27 @@ describe 'Platform API v2 Taxons API' do
     end
   end
 
-  describe 'taxons#update for metadata' do
-    let!(:taxon) { create(:taxon, name: 'T-Shirts', taxonomy: taxonomy) }
+  describe 'categories#update for metadata' do
+    let!(:category) { create(:category, name: 'T-Shirts', base_category: base_category) }
 
     before do
-      patch "/api/v2/platform/taxons/#{taxon.id}",
+      patch "/api/v2/platform/categories/#{category.id}",
             headers: bearer_token,
-            params: { taxon: metadata_params }
+            params: { category: metadata_params }
     end
 
     it_behaves_like 'a resource containing metadata'
   end
 
-  describe 'taxons#create for metadata' do
+  describe 'categories#create for metadata' do
     before do
-      post '/api/v2/platform/taxons/',
+      post '/api/v2/platform/categories/',
            headers: bearer_token,
            params: {
-             taxon: {
+             category: {
                name: 'Tires',
-               taxonomy_id: taxonomy.id,
-               parent_id: taxonomy.root.id
+               base_category_id: base_category.id,
+               parent_id: base_category.root.id
              }.merge(metadata_params)
            }
     end
@@ -169,15 +169,15 @@ describe 'Platform API v2 Taxons API' do
     it_behaves_like 'a resource containing metadata'
   end
 
-  describe 'taxons#reposition' do
-    let!(:taxon_a) { create(:taxon, name: 'T-Shirts', taxonomy: taxonomy) }
-    let!(:taxon_b) { create(:taxon, name: 'Shorts', taxonomy: taxonomy) }
-    let!(:taxon_c) { create(:taxon, name: 'Pants', taxonomy: taxonomy) }
+  describe 'categories#reposition' do
+    let!(:category_a) { create(:category, name: 'T-Shirts', base_category: base_category) }
+    let!(:category_b) { create(:category, name: 'Shorts', base_category: base_category) }
+    let!(:category_c) { create(:category, name: 'Pants', base_category: base_category) }
 
     context 'with no params' do
       let(:params) do
         {
-          taxon: {
+          category: {
             new_parent_id: nil,
             new_position_idx: nil
           }
@@ -185,7 +185,7 @@ describe 'Platform API v2 Taxons API' do
       end
 
       before do
-        patch "/api/v2/platform/taxons/#{taxon_a.id}/reposition", headers: bearer_token, params: params
+        patch "/api/v2/platform/categories/#{category_a.id}/reposition", headers: bearer_token, params: params
       end
 
       it_behaves_like 'returns 404 HTTP status'
@@ -194,7 +194,7 @@ describe 'Platform API v2 Taxons API' do
     context 'with none existing parent ID' do
       let(:params) do
         {
-          taxon: {
+          category: {
             new_parent_id: 999129192192,
             new_position_idx: 0
           }
@@ -202,7 +202,7 @@ describe 'Platform API v2 Taxons API' do
       end
 
       before do
-        patch "/api/v2/platform/taxons/#{taxon_a.id}/reposition", headers: bearer_token, params: params
+        patch "/api/v2/platform/categories/#{category_a.id}/reposition", headers: bearer_token, params: params
       end
 
       it_behaves_like 'returns 404 HTTP status'
@@ -211,56 +211,56 @@ describe 'Platform API v2 Taxons API' do
     context 'with correct params' do
       let(:params) do
         {
-          taxon: {
-            new_parent_id: taxon_c.id,
+          category: {
+            new_parent_id: category_c.id,
             new_position_idx: 0
           }
         }
       end
 
       before do
-        patch "/api/v2/platform/taxons/#{taxon_a.id}/reposition", headers: bearer_token, params: params
+        patch "/api/v2/platform/categories/#{category_a.id}/reposition", headers: bearer_token, params: params
       end
 
       it_behaves_like 'returns 200 HTTP status'
 
-      it 'taxon_a can be nested inside another taxon_c' do
-        reload_taxons
+      it 'category_a can be nested inside another category_c' do
+        reload_categories
 
-        expect(taxon_a.permalink).to eq("#{taxonomy.root.permalink}/pants/t-shirts")
-        expect(taxon_a.parent_id).to eq(taxon_c.id)
-        expect(taxon_a.depth).to eq(2)
+        expect(category_a.permalink).to eq("#{base_category.root.permalink}/pants/t-shirts")
+        expect(category_a.parent_id).to eq(category_c.id)
+        expect(category_a.depth).to eq(2)
       end
     end
 
-    context 'with correct params moving within the same taxon' do
+    context 'with correct params moving within the same category' do
       let(:params) do
         {
-          taxon: {
-            new_parent_id: taxon_b.id,
+          category: {
+            new_parent_id: category_b.id,
             new_position_idx: 0
           }
         }
       end
 
       before do
-        patch "/api/v2/platform/taxons/#{taxon_a.id}/reposition", headers: bearer_token, params: params
+        patch "/api/v2/platform/categories/#{category_a.id}/reposition", headers: bearer_token, params: params
       end
 
       it_behaves_like 'returns 200 HTTP status'
 
-      it 're-indexes the taxon' do
-        reload_taxons
+      it 're-indexes the category' do
+        reload_categories
 
-        expect(taxon_a.parent_id).to eq(taxon_b.id)
-        expect(taxon_a.lft).to eq(taxon_b.lft + 1)
+        expect(category_a.parent_id).to eq(category_b.id)
+        expect(category_a.lft).to eq(category_b.lft + 1)
       end
     end
 
-    def reload_taxons
-      taxon_a.reload
-      taxon_b.reload
-      taxon_c.reload
+    def reload_categories
+      category_a.reload
+      category_b.reload
+      category_c.reload
     end
   end
 end

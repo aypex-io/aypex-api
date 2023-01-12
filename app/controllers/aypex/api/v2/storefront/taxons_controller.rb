@@ -2,19 +2,19 @@ module Aypex
   module Api
     module V2
       module Storefront
-        class TaxonsController < ::Aypex::Api::V2::ResourceController
+        class CategoriesController < ::Aypex::Api::V2::ResourceController
           private
 
           def collection_serializer
-            Aypex::Api::Dependency.storefront_taxon_serializer.constantize
+            Aypex::Api::Dependency.storefront_category_serializer.constantize
           end
 
           def resource_serializer
-            Aypex::Api::Dependency.storefront_taxon_serializer.constantize
+            Aypex::Api::Dependency.storefront_category_serializer.constantize
           end
 
           def collection_finder
-            Aypex::Api::Dependency.storefront_taxon_finder.constantize
+            Aypex::Api::Dependency.storefront_category_finder.constantize
           end
 
           def paginated_collection
@@ -26,16 +26,16 @@ module Aypex
           end
 
           def model_class
-            Aypex::Taxon
+            Aypex::Category
           end
 
           def scope_includes
-            node_includes = %i[icon parent taxonomy]
+            node_includes = %i[icon parent base_category]
 
             {
               parent: node_includes,
               children: node_includes,
-              taxonomy: [root: node_includes],
+              base_category: [root: node_includes],
               icon: [attachment_attachment: :blob]
             }
           end

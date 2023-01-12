@@ -63,7 +63,7 @@ describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
 
   context 'cms_featured_article_section' do
     let(:homepage) { create(:cms_homepage) }
-    let(:cms_section) { create(:cms_featured_article_section, name: 'Test', linked_resource_type: 'Aypex::Taxon', cms_page: homepage) }
+    let(:cms_section) { create(:cms_featured_article_section, name: 'Test', linked_resource_type: 'Aypex::Category', cms_page: homepage) }
 
     it_behaves_like 'returns proper hash'
   end
@@ -98,7 +98,7 @@ describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
 
   context 'cms_product_carousel_section' do
     let(:homepage) { create(:cms_homepage) }
-    let(:cms_section) { create(:cms_product_carousel_section, name: 'Test', linked_resource_type: 'Aypex::Taxon', cms_page: homepage) }
+    let(:cms_section) { create(:cms_product_carousel_section, name: 'Test', linked_resource_type: 'Aypex::Category', cms_page: homepage) }
 
     it_behaves_like 'returns proper hash'
   end

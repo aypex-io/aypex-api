@@ -110,9 +110,9 @@ describe 'Storefront API v2 CMS Pages spec', type: :request do
     end
 
     context 'including cms sections with linked resources' do
-      let(:taxonomy) { create(:taxonomy, store: store) }
-      let(:taxon) { create(:taxon, taxonomy: taxonomy) }
-      let!(:cms_section) { create(:cms_hero_image_section, cms_page: home_en, linked_resource: taxon) }
+      let(:base_category) { create(:base_category, store: store) }
+      let(:category) { create(:category, base_category: base_category) }
+      let!(:cms_section) { create(:cms_hero_image_section, cms_page: home_en, linked_resource: category) }
 
       before { get '/api/v2/storefront/cms_pages?include=cms_sections.linked_resource' }
 
@@ -122,7 +122,7 @@ describe 'Storefront API v2 CMS Pages spec', type: :request do
       it 'returns sections and their associations' do
         page.reload
 
-        expect(json_response['included']).to include(have_type('taxon').and(have_id(taxon.id.to_s)))
+        expect(json_response['included']).to include(have_type('category').and(have_id(category.id.to_s)))
         expect(json_response['included']).to include(
           have_type('cms_section').
             and(
@@ -142,9 +142,9 @@ describe 'Storefront API v2 CMS Pages spec', type: :request do
   describe 'cms_pages#show' do
     context 'with valid page ID' do
       let!(:page) { create(:cms_standard_page, store: store) }
-      let(:taxonomy) { create(:taxonomy, store: store) }
-      let(:taxon) { create(:taxon, taxonomy: taxonomy) }
-      let!(:page_item) { create(:cms_hero_image_section, cms_page: page, linked_resource: taxon) }
+      let(:base_category) { create(:base_category, store: store) }
+      let(:category) { create(:category, base_category: base_category) }
+      let!(:page_item) { create(:cms_hero_image_section, cms_page: page, linked_resource: category) }
 
       before { get "/api/v2/storefront/cms_pages/#{page.id}?include=cms_sections.linked_resource" }
 
@@ -154,7 +154,7 @@ describe 'Storefront API v2 CMS Pages spec', type: :request do
         expect(json_response['data']['id']).to eq(page.id.to_s)
         expect(json_response['data']['attributes']['title']).to eq page.title
 
-        expect(json_response['included']).to include(have_type('taxon').and(have_id(taxon.id.to_s)))
+        expect(json_response['included']).to include(have_type('category').and(have_id(category.id.to_s)))
         expect(json_response['included']).to include(have_type('cms_section').and(have_id(page_item.id.to_s).and(have_relationship(:linked_resource))))
       end
     end

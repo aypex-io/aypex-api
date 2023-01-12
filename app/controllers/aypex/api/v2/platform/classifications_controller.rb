@@ -11,7 +11,7 @@ module Aypex
 
           def scope_includes
             [
-              taxon: [],
+              category: [],
               product: [:variants_including_master, :variant_images, :master, { variants: [:prices] }]
             ]
           end

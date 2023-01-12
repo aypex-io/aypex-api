@@ -2,15 +2,15 @@ module Aypex
   module Api
     module V2
       module Platform
-        class TaxonomiesController < ResourceController
+        class BaseCategoriesController < ResourceController
           private
 
           def model_class
-            Aypex::Taxonomy
+            Aypex::BaseCategory
           end
 
           def scope_includes
-            [:taxons, :root]
+            [:categories, :root]
           end
         end
       end

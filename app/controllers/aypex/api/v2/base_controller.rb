@@ -137,7 +137,7 @@ module Aypex
             store: current_store,
             user: aypex_current_user,
             image_transformation: params[:image_transformation],
-            taxon_image_transformation: params[:taxon_image_transformation]
+            category_image_transformation: params[:category_image_transformation]
           }
         end
 

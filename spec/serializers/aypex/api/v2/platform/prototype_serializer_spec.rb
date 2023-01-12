@@ -7,8 +7,8 @@ describe Aypex::Api::V2::Platform::PrototypeSerializer do
 
   let(:property) { create(:property) }
   let(:option_type) { create(:option_type) }
-  let(:resource) { create(type, properties: [property], option_types: [option_type], taxons: [taxon]) }
-  let(:taxon) { create(:taxon) }
+  let(:resource) { create(type, properties: [property], option_types: [option_type], categories: [category]) }
+  let(:category) { create(:category) }
   let(:type) { :prototype }
 
   it do
@@ -35,10 +35,10 @@ describe Aypex::Api::V2::Platform::PrototypeSerializer do
               type: :option_type
             }]
           },
-          taxons: {
+          categories: {
             data: [{
-              id: taxon.id.to_s,
-              type: :taxon
+              id: category.id.to_s,
+              type: :category
             }]
           }
         },

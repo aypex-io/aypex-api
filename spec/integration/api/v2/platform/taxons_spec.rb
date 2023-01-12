@@ -1,22 +1,22 @@
 require 'swagger_helper'
 
-describe 'Taxons API', swagger: true do
+describe 'Categories API', swagger: true do
   include_context 'Platform API v2'
 
-  resource_name = 'Taxon'
+  resource_name = 'Category'
   options = {
-    include_example: 'taxonomy,parent,children',
-    filter_examples: [{ name: 'filter[taxonomy_id_eq]', example: '1' },
+    include_example: 'base_category,parent,children',
+    filter_examples: [{ name: 'filter[base_category_id_eq]', example: '1' },
                       { name: 'filter[name_cont]', example: 'Shirts' }]
   }
 
-  let(:taxonomy) { create(:taxonomy, store: store) }
-  let(:id) { create(:taxon, taxonomy: taxonomy).id }
+  let(:base_category) { create(:base_category, store: store) }
+  let(:id) { create(:category, base_category: base_category).id }
 
-  let!(:taxon_b) { create(:taxon, name: 'Shorts', taxonomy: taxonomy) }
+  let!(:category_b) { create(:category, name: 'Shorts', base_category: base_category) }
 
-  let(:records_list) { create_list(:taxon, 2, taxonomy: taxonomy) }
-  let(:valid_create_param_value) { build(:taxon, taxonomy: taxonomy).attributes }
+  let(:records_list) { create_list(:category, 2, base_category: base_category) }
+  let(:valid_create_param_value) { build(:category, base_category: base_category).attributes }
   let(:valid_update_param_value) do
     {
       name: 'T-Shirts',
@@ -30,8 +30,8 @@ describe 'Taxons API', swagger: true do
   end
   let(:valid_update_position_param_value) do
     {
-      taxon: {
-        new_parent_id: taxon_b.id,
+      category: {
+        new_parent_id: category_b.id,
         new_position_idx: 0
       }
     }
@@ -39,20 +39,20 @@ describe 'Taxons API', swagger: true do
 
   include_examples 'CRUD examples', resource_name, options
 
-  path '/api/v2/platform/taxons/{id}/reposition' do
-    patch 'Reposition a Taxon' do
+  path '/api/v2/platform/categories/{id}/reposition' do
+    patch 'Reposition a Category' do
       tags resource_name.pluralize
       security [ bearer_auth: [] ]
-      operationId 'reposition-taxon'
-      description 'Reposition a Taxon'
+      operationId 'reposition-category'
+      description 'Reposition a Category'
       consumes 'application/json'
       parameter name: :id, in: :path, type: :string
-      parameter name: :taxon, in: :body, schema: { '$ref' => '#/components/schemas/taxon_reposition' }
+      parameter name: :category, in: :body, schema: { '$ref' => '#/components/schemas/category_reposition' }
 
-      let(:taxon) { valid_update_position_param_value }
+      let(:category) { valid_update_position_param_value }
 
       it_behaves_like 'record updated'
-      it_behaves_like 'record not found', :taxon
+      it_behaves_like 'record not found', :category
       it_behaves_like 'authentication failed'
     end
   end

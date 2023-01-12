@@ -13,7 +13,7 @@ module Aypex
 
           has_many :products, through: :product_promotion_rules, if: proc { |record| record.respond_to?(:product_promotion_rules) }
           has_many :users, through: :promotion_rule_users, if: proc { |record| record.respond_to?(:promotion_rule_users) }
-          has_many :taxons, through: :promotion_rule_taxons, if: proc { |record| record.respond_to?(:promotion_rule_taxons) }
+          has_many :categories, through: :promotion_rule_categories, if: proc { |record| record.respond_to?(:promotion_rule_categories) }
         end
       end
     end

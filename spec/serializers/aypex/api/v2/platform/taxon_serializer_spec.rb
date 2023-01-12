@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe Aypex::Api::V2::Platform::TaxonSerializer do
+describe Aypex::Api::V2::Platform::CategorySerializer do
   include_context 'API v2 serializers params'
 
-  subject { described_class.new(taxon, params: serializer_params).serializable_hash }
+  subject { described_class.new(category, params: serializer_params).serializable_hash }
 
-  let(:taxonomy) { create(:taxonomy, store: store) }
-  let(:taxon) { create(:taxon, products: create_list(:product, 2, stores: [store]), taxonomy: taxonomy) }
-  let!(:children) { [create(:taxon, parent: taxon, taxonomy: taxonomy), create(:taxon, parent: taxon, taxonomy: taxonomy)] }
+  let(:base_category) { create(:base_category, store: store) }
+  let(:category) { create(:category, products: create_list(:product, 2, stores: [store]), base_category: base_category) }
+  let!(:children) { [create(:category, parent: category, base_category: base_category), create(:category, parent: category, base_category: base_category)] }
 
   it { expect(subject).to be_kind_of(Hash) }
 
@@ -16,57 +16,57 @@ describe Aypex::Api::V2::Platform::TaxonSerializer do
       expect(subject).to eq(
         {
           data: {
-            id: taxon.id.to_s,
-            type: :taxon,
+            id: category.id.to_s,
+            type: :category,
             attributes: {
-              position: taxon.position,
-              name: taxon.name,
-              permalink: taxon.permalink,
-              lft: taxon.lft,
-              rgt: taxon.rgt,
-              description: taxon.description,
-              created_at: taxon.created_at,
-              updated_at: taxon.updated_at,
-              meta_title: taxon.meta_title,
-              meta_description: taxon.meta_description,
-              meta_keywords: taxon.meta_keywords,
-              depth: taxon.depth,
-              pretty_name: taxon.pretty_name,
-              seo_title: taxon.seo_title,
-              is_root: taxon.root?,
-              is_child: taxon.child?,
-              is_leaf: taxon.leaf?,
+              position: category.position,
+              name: category.name,
+              permalink: category.permalink,
+              lft: category.lft,
+              rgt: category.rgt,
+              description: category.description,
+              created_at: category.created_at,
+              updated_at: category.updated_at,
+              meta_title: category.meta_title,
+              meta_description: category.meta_description,
+              meta_keywords: category.meta_keywords,
+              depth: category.depth,
+              pretty_name: category.pretty_name,
+              seo_title: category.seo_title,
+              is_root: category.root?,
+              is_child: category.child?,
+              is_leaf: category.leaf?,
               public_metadata: {},
               private_metadata: {}
             },
             relationships: {
               parent: {
                 data: {
-                  id: taxon.parent.id.to_s,
-                  type: :taxon
+                  id: category.parent.id.to_s,
+                  type: :category
                 }
               },
-              taxonomy: {
+              base_category: {
                 data: {
-                  id: taxon.taxonomy.id.to_s,
-                  type: :taxonomy
+                  id: category.base_category.id.to_s,
+                  type: :base_category
                 }
               },
               image: {
                 data: {
-                  id: taxon.icon.id.to_s,
-                  type: :taxon_image
+                  id: category.icon.id.to_s,
+                  type: :category_image
                 }
               },
               children: {
                 data: [
                   {
-                    id: taxon.children.first.id.to_s,
-                    type: :taxon
+                    id: category.children.first.id.to_s,
+                    type: :category
                   },
                   {
-                    id: taxon.children.second.id.to_s,
-                    type: :taxon
+                    id: category.children.second.id.to_s,
+                    type: :category
                   }
                 ]
               }
@@ -86,56 +86,56 @@ describe Aypex::Api::V2::Platform::TaxonSerializer do
       expect(subject).to eq(
         {
           data: {
-            id: taxon.id.to_s,
-            type: :taxon,
+            id: category.id.to_s,
+            type: :category,
             attributes: {
-              position: taxon.position,
-              name: taxon.name,
-              permalink: taxon.permalink,
-              lft: taxon.lft,
-              rgt: taxon.rgt,
-              description: taxon.description,
-              created_at: taxon.created_at,
-              updated_at: taxon.updated_at,
-              meta_title: taxon.meta_title,
-              meta_description: taxon.meta_description,
-              meta_keywords: taxon.meta_keywords,
-              depth: taxon.depth,
-              pretty_name: taxon.pretty_name,
-              seo_title: taxon.seo_title,
-              is_root: taxon.root?,
-              is_child: taxon.child?,
-              is_leaf: taxon.leaf?,
+              position: category.position,
+              name: category.name,
+              permalink: category.permalink,
+              lft: category.lft,
+              rgt: category.rgt,
+              description: category.description,
+              created_at: category.created_at,
+              updated_at: category.updated_at,
+              meta_title: category.meta_title,
+              meta_description: category.meta_description,
+              meta_keywords: category.meta_keywords,
+              depth: category.depth,
+              pretty_name: category.pretty_name,
+              seo_title: category.seo_title,
+              is_root: category.root?,
+              is_child: category.child?,
+              is_leaf: category.leaf?,
               public_metadata: {},
               private_metadata: {}
             },
             relationships: {
               parent: {
                 data: {
-                  id: taxon.parent.id.to_s,
-                  type: :taxon
+                  id: category.parent.id.to_s,
+                  type: :category
                 }
               },
-              taxonomy: {
+              base_category: {
                 data: {
-                  id: taxon.taxonomy.id.to_s,
-                  type: :taxonomy
+                  id: category.base_category.id.to_s,
+                  type: :base_category
                 }
               },
               image: {
                 data: {
-                  id: taxon.icon.id.to_s,
-                  type: :taxon_image
+                  id: category.icon.id.to_s,
+                  type: :category_image
                 }
               },
               products: {
                 data: [
                   {
-                    id: taxon.products.first.id.to_s,
+                    id: category.products.first.id.to_s,
                     type: :product
                   },
                   {
-                    id: taxon.products.second.id.to_s,
+                    id: category.products.second.id.to_s,
                     type: :product
                   }
                 ]
@@ -143,12 +143,12 @@ describe Aypex::Api::V2::Platform::TaxonSerializer do
               children: {
                 data: [
                   {
-                    id: taxon.children.first.id.to_s,
-                    type: :taxon
+                    id: category.children.first.id.to_s,
+                    type: :category
                   },
                   {
-                    id: taxon.children.second.id.to_s,
-                    type: :taxon
+                    id: category.children.second.id.to_s,
+                    type: :category
                   }
                 ]
               }

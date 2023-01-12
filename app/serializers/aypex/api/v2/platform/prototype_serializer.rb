@@ -7,7 +7,7 @@ module Aypex
 
           has_many :properties
           has_many :option_types
-          has_many :taxons
+          has_many :categories
         end
       end
     end

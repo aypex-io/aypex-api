@@ -1,6 +1,6 @@
 require 'swagger_helper'
 
-describe 'Taxons API', swagger: true do
+describe 'Categories API', swagger: true do
   include_context 'Platform API v2'
 
   resource_name = 'Shipping Category'
