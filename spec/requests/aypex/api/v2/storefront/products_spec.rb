@@ -3,9 +3,9 @@ require 'spec_helper'
 describe 'API V2 Storefront Products Spec', type: :request do
   let!(:store)                     { Aypex::Store.default }
   let!(:products)                  { create_list(:product, 5, stores: [store]) }
-  let(:taxonomy)                   { create(:taxonomy, store: store) }
-  let!(:taxon)                     { taxonomy.root }
-  let(:product_with_taxon)         { create(:product, taxons: [taxon], stores: [store]) }
+  let(:base_category)                   { create(:base_category, store: store) }
+  let!(:category)                     { base_category.root }
+  let(:product_with_category)         { create(:product, categories: [category], stores: [store]) }
   let(:product_with_name)          { create(:product, name: 'Test Product', stores: [store]) }
   let(:product_with_price)         { create(:product, price: 13.44, stores: [store]) }
   let!(:option_type)               { create(:option_type) }
@@ -40,45 +40,45 @@ describe 'API V2 Storefront Products Spec', type: :request do
     end
 
     context 'when product associated with two stores' do
-      let!(:new_store_taxonomy) { create(:taxonomy, store: store) }
+      let!(:new_store_base_category) { create(:base_category, store: store) }
       let(:store2) { create(:store) }
-      let(:taxonomy2) { create(:taxonomy, store: store2) }
-      let!(:taxon2) { taxonomy2.root }
+      let(:base_category2) { create(:base_category, store: store2) }
+      let!(:category2) { base_category2.root }
 
       before do
-        product_with_taxon.stores << store2
-        product_with_taxon.taxons << taxon2
+        product_with_category.stores << store2
+        product_with_category.categories << category2
       end
 
-      shared_examples 'should not return not related taxon' do
+      shared_examples 'should not return not related category' do
         it do
-          expect(json_response['data'][0]).not_to have_relationship(:taxons).with_data([{ 'id' => new_store_taxonomy.id.to_s, 'type' => 'taxon' }])
+          expect(json_response['data'][0]).not_to have_relationship(:categories).with_data([{ 'id' => new_store_base_category.id.to_s, 'type' => 'category' }])
         end
       end
 
       context 'when current store is store' do
-        before { get "/api/v2/storefront/products?filter[ids]=#{product_with_taxon.id}" }
+        before { get "/api/v2/storefront/products?filter[ids]=#{product_with_category.id}" }
 
-        it 'should return only store taxons ralated to product', aggregate_failures: true do
-          expect(json_response['data'][0]).to have_relationship(:taxons).with_data([{ 'id' => taxon.id.to_s, 'type' => 'taxon' }])
-          expect(json_response['data'][0]).not_to have_relationship(:taxons).with_data([{ 'id' => taxon2.id.to_s, 'type' => 'taxon' }])
+        it 'should return only store categories ralated to product', aggregate_failures: true do
+          expect(json_response['data'][0]).to have_relationship(:categories).with_data([{ 'id' => category.id.to_s, 'type' => 'category' }])
+          expect(json_response['data'][0]).not_to have_relationship(:categories).with_data([{ 'id' => category2.id.to_s, 'type' => 'category' }])
         end
 
-        it_behaves_like 'should not return not related taxon'
+        it_behaves_like 'should not return not related category'
       end
 
       context 'when current store is store2' do
         before do
           allow_any_instance_of(Aypex::Api::V2::Storefront::ProductsController).to receive(:current_store).and_return(store2)
-          get "/api/v2/storefront/products?filter[ids]=#{product_with_taxon.id}"
+          get "/api/v2/storefront/products?filter[ids]=#{product_with_category.id}"
         end
 
-        it 'should return only store2 taxons ralated to product', aggregate_failures: true do
-          expect(json_response['data'][0]).to have_relationship(:taxons).with_data([{ 'id' => taxon2.id.to_s, 'type' => 'taxon' }])
-          expect(json_response['data'][0]).not_to have_relationship(:taxons).with_data([{ 'id' => taxon.id.to_s, 'type' => 'taxon' }])
+        it 'should return only store2 categories ralated to product', aggregate_failures: true do
+          expect(json_response['data'][0]).to have_relationship(:categories).with_data([{ 'id' => category2.id.to_s, 'type' => 'category' }])
+          expect(json_response['data'][0]).not_to have_relationship(:categories).with_data([{ 'id' => category.id.to_s, 'type' => 'category' }])
         end
 
-        it_behaves_like 'should not return not related taxon'
+        it_behaves_like 'should not return not related category'
       end
     end
 
@@ -130,13 +130,13 @@ describe 'API V2 Storefront Products Spec', type: :request do
       end
     end
 
-    context 'with specified taxon_ids' do
-      before { get "/api/v2/storefront/products?filter[taxons]=#{product_with_taxon.taxons.first.id}" }
+    context 'with specified category_ids' do
+      before { get "/api/v2/storefront/products?filter[categories]=#{product_with_category.categories.first.id}" }
 
       it_behaves_like 'returns 200 HTTP status'
 
-      it 'returns products with specified taxons' do
-        expect(json_response['data'].first).to have_id(product_with_taxon.id.to_s)
+      it 'returns products with specified categories' do
+        expect(json_response['data'].first).to have_id(product_with_category.id.to_s)
       end
     end
 
@@ -738,15 +738,15 @@ describe 'API V2 Storefront Products Spec', type: :request do
         end
       end
 
-      context 'when filter by taxon is applied' do
-        let(:product_with_taxon_and_options) { create(:product, taxons: [taxon], option_types: [option_type2], stores: [store]) }
-        let!(:product_with_taxon_and_options_property) { create(:product_property, property: property3, product: product_with_taxon_and_options, value: 'Test') }
-        let!(:product_with_taxon_and_options_variant1) { create(:variant, product: product_with_taxon_and_options, option_values: [option_type2_value1]) }
-        let!(:product_with_taxon_and_options_variant2) { create(:variant, product: product_with_taxon_and_options, option_values: [option_type2_value2]) }
+      context 'when filter by category is applied' do
+        let(:product_with_category_and_options) { create(:product, categories: [category], option_types: [option_type2], stores: [store]) }
+        let!(:product_with_category_and_options_property) { create(:product_property, property: property3, product: product_with_category_and_options, value: 'Test') }
+        let!(:product_with_category_and_options_variant1) { create(:variant, product: product_with_category_and_options, option_values: [option_type2_value1]) }
+        let!(:product_with_category_and_options_variant2) { create(:variant, product: product_with_category_and_options, option_values: [option_type2_value2]) }
 
-        before { get "/api/v2/storefront/products?filter[taxons]=#{taxon.id}" }
+        before { get "/api/v2/storefront/products?filter[categories]=#{category.id}" }
 
-        it 'returns list of available filters for given taxon' do
+        it 'returns list of available filters for given category' do
           expect(json_response['meta']['filters']['option_types'].count).to eq 1
           expect(json_response['meta']['filters']['option_types']).to contain_exactly(option_type2_response)
           expect(json_response['meta']['filters']['product_properties'].count).to eq 1
@@ -754,21 +754,21 @@ describe 'API V2 Storefront Products Spec', type: :request do
         end
       end
 
-      context 'when filter by multiple taxons is applied' do
-        let(:product_with_taxon_and_options) { create(:product, taxons: [taxon], option_types: [option_type2], stores: [store]) }
-        let!(:product_with_taxon_and_options_property) { create(:product_property, property: property3, product: product_with_taxon_and_options, value: 'Test') }
-        let!(:product_with_taxon_and_options_variant1) { create(:variant, product: product_with_taxon_and_options, option_values: [option_type2_value1]) }
-        let!(:product_with_taxon_and_options_variant2) { create(:variant, product: product_with_taxon_and_options, option_values: [option_type2_value2]) }
+      context 'when filter by multiple categories is applied' do
+        let(:product_with_category_and_options) { create(:product, categories: [category], option_types: [option_type2], stores: [store]) }
+        let!(:product_with_category_and_options_property) { create(:product_property, property: property3, product: product_with_category_and_options, value: 'Test') }
+        let!(:product_with_category_and_options_variant1) { create(:variant, product: product_with_category_and_options, option_values: [option_type2_value1]) }
+        let!(:product_with_category_and_options_variant2) { create(:variant, product: product_with_category_and_options, option_values: [option_type2_value2]) }
 
-        let(:taxonomy2) { create(:taxonomy, store: store) }
-        let(:taxon2) { taxonomy2.root }
-        let(:product_with_taxon2_and_options) { create(:product, taxons: [taxon2], option_types: [option_type2], stores: [store]) }
-        let!(:product_with_taxon2_and_options_property) { create(:product_property, property: property3, product: product_with_taxon2_and_options, value: 'Test') }
-        let!(:product_with_taxon2_and_options_variant1) { create(:variant, product: product_with_taxon2_and_options, option_values: [option_value]) }
+        let(:base_category2) { create(:base_category, store: store) }
+        let(:category2) { base_category2.root }
+        let(:product_with_category2_and_options) { create(:product, categories: [category2], option_types: [option_type2], stores: [store]) }
+        let!(:product_with_category2_and_options_property) { create(:product_property, property: property3, product: product_with_category2_and_options, value: 'Test') }
+        let!(:product_with_category2_and_options_variant1) { create(:variant, product: product_with_category2_and_options, option_values: [option_value]) }
 
-        before { get "/api/v2/storefront/products?filter[taxons]=#{taxon.id},#{taxon2.id}" }
+        before { get "/api/v2/storefront/products?filter[categories]=#{category.id},#{category2.id}" }
 
-        it 'returns list of available filters for given taxons' do
+        it 'returns list of available filters for given categories' do
           expect(json_response['meta']['filters']['option_types'].count).to eq 2
           expect(json_response['meta']['filters']['option_types']).to contain_exactly(option_type1_response, option_type2_response)
           expect(json_response['meta']['filters']['product_properties'].count).to eq 1
@@ -842,10 +842,10 @@ describe 'API V2 Storefront Products Spec', type: :request do
           '&filter[show_deleted]=true'\
           '&filter[show_discontinued]=true'\
           '&filter[skus]=SKU-123,SKU-345'\
-          '&filter[taxons]=1,2,3,4,5,6,7,8,9,10,11'\
+          '&filter[categories]=1,2,3,4,5,6,7,8,9,10,11'\
           '&image_transformation[quality]=anim consequat fugiat sed'\
           '&image_transformation[size]=100x50'\
-          '&include=default_variant,variants,option_types,product_properties,taxons,images,primary_variant'\
+          '&include=default_variant,variants,option_types,product_properties,categories,images,primary_variant'\
           '&page=1'\
           '&per_page=25'\
           '&sort=-updated_at,price,-name,created_at,-available_on,sku'

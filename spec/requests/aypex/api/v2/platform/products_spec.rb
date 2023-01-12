@@ -6,9 +6,9 @@ describe 'API V2 Platform Products Spec' do
   let(:bearer_token) { { 'Authorization' => valid_authorization } }
 
   let!(:products)                  { create_list(:product, 5, stores: [store]) }
-  let(:taxonomy)                   { create(:taxonomy, store: store) }
-  let!(:taxon)                     { taxonomy.root }
-  let(:product_with_taxon)         { create(:product, taxons: [taxon], stores: [store]) }
+  let(:base_category)                   { create(:base_category, store: store) }
+  let!(:category)                     { base_category.root }
+  let(:product_with_category)         { create(:product, categories: [category], stores: [store]) }
   let(:product_with_name)          { create(:product, name: 'Test Product', stores: [store]) }
   let(:product_with_price)         { create(:product, price: 13.44, stores: [store]) }
   let!(:option_type)               { create(:option_type) }
@@ -40,19 +40,19 @@ describe 'API V2 Platform Products Spec' do
     end
 
     context 'when product associated with two stores' do
-      let!(:new_store_taxonomy) { create(:taxonomy, store: store) }
+      let!(:new_store_base_category) { create(:base_category, store: store) }
       let(:store2) { create(:store) }
-      let(:taxonomy2) { create(:taxonomy, store: store2) }
-      let!(:taxon2) { taxonomy2.root }
+      let(:base_category2) { create(:base_category, store: store2) }
+      let!(:category2) { base_category2.root }
 
       before do
-        product_with_taxon.stores << store2
-        product_with_taxon.taxons << taxon2
+        product_with_category.stores << store2
+        product_with_category.categories << category2
       end
 
-      shared_examples 'should not return not related taxon' do
+      shared_examples 'should not return not related category' do
         it do
-          expect(json_response['data'][0]).not_to have_relationship(:taxons).with_data([{ 'id' => new_store_taxonomy.id.to_s, 'type' => 'taxon' }])
+          expect(json_response['data'][0]).not_to have_relationship(:categories).with_data([{ 'id' => new_store_base_category.id.to_s, 'type' => 'category' }])
         end
       end
     end

@@ -14,8 +14,8 @@ module Aypex
         :storefront_credit_card_finder, :storefront_shipment_serializer, :storefront_payment_method_serializer, :storefront_country_finder,
         :storefront_country_serializer, :storefront_menu_serializer, :storefront_menu_finder, :storefront_current_order_finder,
         :storefront_completed_order_finder, :storefront_order_sorter, :storefront_collection_paginator, :storefront_user_serializer,
-        :storefront_products_sorter, :storefront_products_finder, :storefront_product_serializer, :storefront_taxon_serializer,
-        :storefront_taxon_finder, :storefront_find_by_variant_finder, :storefront_cart_update_service, :storefront_cart_associate_service,
+        :storefront_products_sorter, :storefront_products_finder, :storefront_product_serializer, :storefront_category_serializer,
+        :storefront_category_finder, :storefront_find_by_variant_finder, :storefront_cart_update_service, :storefront_cart_associate_service,
         :storefront_cart_estimate_shipping_rates_service, :storefront_estimated_shipment_serializer,
         :storefront_store_serializer, :storefront_address_serializer, :storefront_order_serializer,
         :storefront_account_create_address_service, :storefront_account_update_address_service, :storefront_address_finder,
@@ -96,7 +96,7 @@ module Aypex
         @storefront_menu_serializer = 'Aypex::Api::V2::Storefront::MenuSerializer'
         @storefront_user_serializer = 'Aypex::Api::V2::Storefront::UserSerializer'
         @storefront_shipment_serializer = 'Aypex::Api::V2::Storefront::ShipmentSerializer'
-        @storefront_taxon_serializer = 'Aypex::Api::V2::Storefront::TaxonSerializer'
+        @storefront_category_serializer = 'Aypex::Api::V2::Storefront::CategorySerializer'
         @storefront_payment_method_serializer = 'Aypex::Api::V2::Storefront::PaymentMethodSerializer'
         @storefront_payment_serializer = 'Aypex::Api::V2::Storefront::PaymentSerializer'
         @storefront_product_serializer = 'Aypex::Api::V2::Storefront::ProductSerializer'
@@ -123,7 +123,7 @@ module Aypex
         @storefront_credit_card_finder = Aypex::Dependency.credit_card_finder
         @storefront_find_by_variant_finder = Aypex::Dependency.line_item_by_variant_finder
         @storefront_products_finder = Aypex::Dependency.products_finder
-        @storefront_taxon_finder = Aypex::Dependency.taxon_finder
+        @storefront_category_finder = Aypex::Dependency.category_finder
 
         @error_handler = 'Aypex::Api::ErrorHandler'
       end

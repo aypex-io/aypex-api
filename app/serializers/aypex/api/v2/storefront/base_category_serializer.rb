@@ -1,8 +1,8 @@
 module Aypex
   module Api::V2
     module Storefront
-      class TaxonomySerializer < BaseSerializer
-        set_type   :taxonomy
+      class BaseCategorySerializer < BaseSerializer
+        set_type   :base_category
 
         attributes :name, :position, :public_metadata
       end
