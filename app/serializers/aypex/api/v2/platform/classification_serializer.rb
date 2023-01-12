@@ -6,7 +6,7 @@ module Aypex
           include ResourceSerializerConcern
 
           belongs_to :product
-          belongs_to :taxon
+          belongs_to :category
         end
       end
     end

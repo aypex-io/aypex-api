@@ -73,8 +73,8 @@ RSpec.configure do |config|
         {name: "Store Credits"},
         {name: "Tax Categories"},
         {name: "Tax Rates"},
-        {name: "Taxons"},
-        {name: "Taxonomies"},
+        {name: "Categories"},
+        {name: "BaseCategories"},
         {name: "Users"},
         {name: "Variants"},
         {name: "Webhook Events"},
@@ -206,10 +206,10 @@ RSpec.configure do |config|
             properties: {
               classification: {
                 type: :object,
-                required: %w[product_id taxon_id position],
+                required: %w[product_id category_id position],
                 properties: {
                   product_id: {type: :string, example: "1"},
-                  taxon_id: {type: :string, example: "1"},
+                  category_id: {type: :string, example: "1"},
                   position: {type: :integer, example: 1}
                 }
               }
@@ -224,7 +224,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   product_id: {type: :string, example: "1"},
-                  taxon_id: {type: :string, example: "1"},
+                  category_id: {type: :string, example: "1"},
                   position: {type: :integer, example: 1}
                 }
               }
@@ -369,7 +369,7 @@ RSpec.configure do |config|
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage"], example: "Aypex::Cms::Sections::HeroImage", description: "Set the section type."},
-                  linked_resource_type: {type: :string, example: "Aypex::Taxon", nullable: true, enum: ["Aypex::Taxon", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
+                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
@@ -395,7 +395,7 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::ProductCarousel"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the Taxon that you would like displayed as a Product Carousel."}
+                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the Category that you would like displayed as a Product Carousel."}
                 }
               }
             },
@@ -414,8 +414,8 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::SideBySideImages"], example: "Aypex::Cms::Sections::SideBySideImages", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  link_type_one: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Set the resource type that image one links to."},
-                  link_type_two: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Set the resource type that image two links to."},
+                  link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image one links to."},
+                  link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image two links to."},
                   link_one: {type: :string, example: "men/shirts", nullable: true, description: "Set the slug or path that image two links to."},
                   link_two: {type: :string, example: "white-shirt", nullable: true, description: "Set the slug or path that image two links to."},
                   title_one: {type: :string, example: "Shop Men's Shirts", nullable: true, description: "Set the title used in image one."},
@@ -444,9 +444,9 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::ImageGallery"], example: "Aypex::Cms::Sections::ImageGallery", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  link_type_one: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Set the resource type that image one links to."},
-                  link_type_two: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Set the resource type that image two links to."},
-                  link_type_three: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Set the resource type that image three links to."},
+                  link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image one links to."},
+                  link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image two links to."},
+                  link_type_three: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image three links to."},
                   link_one: {type: :string, example: "men/shirts", nullable: true, description: "Set the slug or path that image two links to."},
                   link_two: {type: :string, example: "white-shirt", nullable: true, description: "Set the slug or path that image two links to."},
                   link_three: {type: :string, example: "red-shirt", nullable: true, description: "Set the slug or path that image three links to."},
@@ -477,7 +477,7 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::FeaturedArticle"], example: "Aypex::Cms::Sections::FeaturedArticle", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  linked_resource_type: {type: :string, example: "Aypex::Taxon", nullable: true, enum: ["Aypex::Taxon", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
+                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
                   gutters: {type: :string, example: "No Gutters", enum: ["Gutters", "No Gutters"], description: "This value is used by front end developers for styling the section padding."},
@@ -520,7 +520,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Update this section name."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
-                  linked_resource_type: {type: :string, example: "Aypex::Taxon", nullable: true, enum: ["Aypex::Taxon", "Aypex::Product", "Aypex::CmsPage"], description: "Update the resource type that this section links to."},
+                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Update the resource type that this section links to."},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
@@ -545,7 +545,7 @@ RSpec.configure do |config|
                   name: {type: :string, description: "Change this section name."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Update the ID of the Taxon that you would like displayed as a Product Carousel."}
+                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Update the ID of the Category that you would like displayed as a Product Carousel."}
                 }
               }
             },
@@ -562,8 +562,8 @@ RSpec.configure do |config|
                   name: {type: :string, description: "Update this section name."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  link_type_one: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Update the resource type that image one links to."},
-                  link_type_two: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Update the resource type that image two links to."},
+                  link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image one links to."},
+                  link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image two links to."},
                   link_one: {type: :string, example: "men/shirts", nullable: true, description: "Update the slug or path that image two links to."},
                   link_two: {type: :string, example: "white-shirt", nullable: true, description: "Update the slug or path that image two links to."},
                   title_one: {type: :string, example: "Shop Men's Shirts", nullable: true, description: "Update the title used in image one."},
@@ -590,9 +590,9 @@ RSpec.configure do |config|
                   name: {type: :string, description: "Update this section name."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  link_type_one: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Update the resource type that image one links to."},
-                  link_type_two: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Update the resource type that image two links to."},
-                  link_type_three: {type: :string, example: "Aypex::Taxon", enum: ["Aypex::Taxon", "Aypex::Product"], description: "Update the resource type that image three links to."},
+                  link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image one links to."},
+                  link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image two links to."},
+                  link_type_three: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image three links to."},
                   link_one: {type: :string, example: "men/shirts", nullable: true, description: "Update the slug or path that image two links to."},
                   link_two: {type: :string, example: "white-shirt", nullable: true, description: "Update the slug or path that image two links to."},
                   link_three: {type: :string, example: "red-shirt", nullable: true, description: "Update the slug or path that image three links to."},
@@ -621,7 +621,7 @@ RSpec.configure do |config|
                   name: {type: :string, description: "Update this section name."},
                   type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  linked_resource_type: {type: :string, example: "Aypex::Taxon", nullable: true, enum: ["Aypex::Taxon", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
+                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Change the ID of the resource that you would like this section to link to."},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
                   gutters: {type: :string, example: "No Gutters", enum: ["Gutters", "No Gutters"], description: "This value is used by front end developers for styling the section padding."},
@@ -791,7 +791,7 @@ RSpec.configure do |config|
                   menu_id: {type: :integer, example: 1, description: "Specify the ID of the Menu this item belongs to."},
                   new_window: {type: :boolean, description: "When set to `true` the link will be opened in a new tab or window."},
                   item_type: {type: :string, enum: ["Link", "Container"], description: "Links are standard links, where as Containers are used to group links."},
-                  linked_resource_type: {type: :string, enum: ["URL", "Aypex::Taxon", "Aypex::Product", "Aypex::CmsPage"], description: "Set the type of resource you want to link to, or set to: URL to use the destination field for an external link."},
+                  linked_resource_type: {type: :string, enum: ["URL", "Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the type of resource you want to link to, or set to: URL to use the destination field for an external link."},
                   linked_resource_id: {type: :integer, example: 1, nullable: true, description: "The ID of the resource you are linking to."}
                 }
               }
@@ -813,7 +813,7 @@ RSpec.configure do |config|
                   menu_id: {type: :integer, example: 1, description: "Specify the ID of the Menu this item belongs to."},
                   new_window: {type: :boolean, description: "When set to `true` the link will be opened in a new tab or window."},
                   item_type: {type: :string, enum: ["Link", "Container"], description: "Links are standard links, where as Containers are used to group links."},
-                  linked_resource_type: {type: :string, enum: ["URL", "Aypex::Taxon", "Aypex::Product", "Aypex::CmsPage"], description: "Change the type of resource you want to link to, or set to: URL to use the destination field for an external link."},
+                  linked_resource_type: {type: :string, enum: ["URL", "Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Change the type of resource you want to link to, or set to: URL to use the destination field for an external link."},
                   linked_resource_id: {type: :integer, example: 1, nullable: true, description: "The ID of the resource you are linking to."}
                 }
               }
@@ -1119,7 +1119,7 @@ RSpec.configure do |config|
                   cost_price: {type: :string},
                   compare_at_price: {type: :string},
                   option_type_ids: {type: :string},
-                  taxon_ids: {type: :string},
+                  category_ids: {type: :string},
                   public_metadata: {type: :object},
                   private_metadata: {type: :object}
                 }
@@ -1156,7 +1156,7 @@ RSpec.configure do |config|
                   cost_price: {type: :string},
                   compare_at_price: {type: :string},
                   option_type_ids: {type: :string},
-                  taxon_ids: {type: :string},
+                  category_ids: {type: :string},
                   public_metadata: {type: :object},
                   private_metadata: {type: :object}
                 }
@@ -1235,7 +1235,7 @@ RSpec.configure do |config|
                     items: {
                       allOf: [
                         properties: {
-                          type: {type: :string, example: "Aypex::Promotion::Rules::Country", enum: ["Aypex::Promotion::Rules::Country", "Aypex::Promotion::Rules::ItemTotal", "Aypex::Promotion::Rules::Product", "Aypex::Promotion::Rules::User", "Aypex::Promotion::Rules::FirstOrder", "Aypex::Promotion::Rules::UserLoggedIn", "Aypex::Promotion::Rules::OneUsePerUser", "Aypex::Promotion::Rules::Taxon", "Aypex::Promotion::Rules::OptionValue"], description: "Set the Promotion Rule type."},
+                          type: {type: :string, example: "Aypex::Promotion::Rules::Country", enum: ["Aypex::Promotion::Rules::Country", "Aypex::Promotion::Rules::ItemTotal", "Aypex::Promotion::Rules::Product", "Aypex::Promotion::Rules::User", "Aypex::Promotion::Rules::FirstOrder", "Aypex::Promotion::Rules::UserLoggedIn", "Aypex::Promotion::Rules::OneUsePerUser", "Aypex::Promotion::Rules::Category", "Aypex::Promotion::Rules::OptionValue"], description: "Set the Promotion Rule type."},
                           country_id: {type: :integer, example: 122, description: "Each rule type has its own preferred attributes. In this example we are setting the ID of the Country this rule applies to. To learn more about Aypex preferences visit TODO: [LINK]."}
                         }
                       ]
@@ -1260,7 +1260,7 @@ RSpec.configure do |config|
                       allOf: [
                         properties: {
                           id: {type: :string, example: "22", description: "To update an existing Promotion Rule, you are required to pass the ID of the rule you are updating."},
-                          type: {type: :string, example: "Aypex::Promotion::Rules::Country", enum: ["Aypex::Promotion::Rules::Country", "Aypex::Promotion::Rules::ItemTotal", "Aypex::Promotion::Rules::Product", "Aypex::Promotion::Rules::User", "Aypex::Promotion::Rules::FirstOrder", "Aypex::Promotion::Rules::UserLoggedIn", "Aypex::Promotion::Rules::OneUsePerUser", "Aypex::Promotion::Rules::Taxon", "Aypex::Promotion::Rules::OptionValue"], description: "Set the Promotion Rule type."},
+                          type: {type: :string, example: "Aypex::Promotion::Rules::Country", enum: ["Aypex::Promotion::Rules::Country", "Aypex::Promotion::Rules::ItemTotal", "Aypex::Promotion::Rules::Product", "Aypex::Promotion::Rules::User", "Aypex::Promotion::Rules::FirstOrder", "Aypex::Promotion::Rules::UserLoggedIn", "Aypex::Promotion::Rules::OneUsePerUser", "Aypex::Promotion::Rules::Category", "Aypex::Promotion::Rules::OptionValue"], description: "Set the Promotion Rule type."},
                           country_id: {type: :integer, example: 143, description: "Each rule type has its own preferred attributes. In this example we are changing the ID of the Country this rule applies to. To learn more about Aypex preferences visit TODO: [LINK]."}
                         }
                       ]
@@ -1452,7 +1452,7 @@ RSpec.configure do |config|
                 required: %w[type promotion_id],
                 properties: {
                   promotion_id: {type: :string, example: "22", description: "Set the ID of the promotion this Promotion Rule belongs to."},
-                  type: {type: :string, example: "Aypex::Promotion::Rules::Country", enum: ["Aypex::Promotion::Rules::Country", "Aypex::Promotion::Rules::ItemTotal", "Aypex::Promotion::Rules::Product", "Aypex::Promotion::Rules::User", "Aypex::Promotion::Rules::FirstOrder", "Aypex::Promotion::Rules::UserLoggedIn", "Aypex::Promotion::Rules::OneUsePerUser", "Aypex::Promotion::Rules::Taxon", "Aypex::Promotion::Rules::OptionValue"], description: "Set the Promotion Rule type."}
+                  type: {type: :string, example: "Aypex::Promotion::Rules::Country", enum: ["Aypex::Promotion::Rules::Country", "Aypex::Promotion::Rules::ItemTotal", "Aypex::Promotion::Rules::Product", "Aypex::Promotion::Rules::User", "Aypex::Promotion::Rules::FirstOrder", "Aypex::Promotion::Rules::UserLoggedIn", "Aypex::Promotion::Rules::OneUsePerUser", "Aypex::Promotion::Rules::Category", "Aypex::Promotion::Rules::OptionValue"], description: "Set the Promotion Rule type."}
                 }
               }
             },
@@ -1466,7 +1466,7 @@ RSpec.configure do |config|
               promotion_rule: {
                 type: :object,
                 properties: {
-                  type: {type: :string, example: "Aypex::Promotion::Rules::Country", enum: ["Aypex::Promotion::Rules::Country", "Aypex::Promotion::Rules::ItemTotal", "Aypex::Promotion::Rules::Product", "Aypex::Promotion::Rules::User", "Aypex::Promotion::Rules::FirstOrder", "Aypex::Promotion::Rules::UserLoggedIn", "Aypex::Promotion::Rules::OneUsePerUser", "Aypex::Promotion::Rules::Taxon", "Aypex::Promotion::Rules::OptionValue"], description: "Set the Promotion Rule type."}
+                  type: {type: :string, example: "Aypex::Promotion::Rules::Country", enum: ["Aypex::Promotion::Rules::Country", "Aypex::Promotion::Rules::ItemTotal", "Aypex::Promotion::Rules::Product", "Aypex::Promotion::Rules::User", "Aypex::Promotion::Rules::FirstOrder", "Aypex::Promotion::Rules::UserLoggedIn", "Aypex::Promotion::Rules::OneUsePerUser", "Aypex::Promotion::Rules::Category", "Aypex::Promotion::Rules::OptionValue"], description: "Set the Promotion Rule type."}
                 }
               }
             },
@@ -1969,15 +1969,15 @@ RSpec.configure do |config|
             "x-internal": false
           },
 
-          # Taxon
-          create_taxon_params: {
+          # Category
+          create_category_params: {
             type: :object,
             properties: {
-              taxon: {
+              category: {
                 type: :object,
-                required: %w[name taxonomy_id],
+                required: %w[name base_category_id],
                 properties: {
-                  taxonomy_id: {type: :string},
+                  base_category_id: {type: :string},
                   parent_id: {type: :string},
                   name: {type: :string},
                   public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
@@ -1985,16 +1985,16 @@ RSpec.configure do |config|
                 }
               }
             },
-            required: %w[taxon],
+            required: %w[category],
             "x-internal": false
           },
-          update_taxon_params: {
+          update_category_params: {
             type: :object,
             properties: {
-              taxon: {
+              category: {
                 type: :object,
                 properties: {
-                  taxonomy_id: {type: :string},
+                  base_category_id: {type: :string},
                   parent_id: {type: :string},
                   name: {type: :string},
                   public_metadata: {type: :object},
@@ -2002,58 +2002,58 @@ RSpec.configure do |config|
                 }
               }
             },
-            required: %w[taxon],
+            required: %w[category],
             "x-internal": false
           },
-          taxon_reposition: {
+          category_reposition: {
             type: :object,
             properties: {
-              taxon: {
+              category: {
                 type: :object,
                 required: %w[new_parent_id new_position_idx],
                 properties: {
-                  new_parent_id: {type: :integer, example: 1, description: "The ID of the new target parent Taxon."},
-                  new_position_idx: {type: :integer, example: 1, description: "The new index position of the Taxon within the parent Taxon."}
+                  new_parent_id: {type: :integer, example: 1, description: "The ID of the new target parent Category."},
+                  new_position_idx: {type: :integer, example: 1, description: "The new index position of the Category within the parent Category."}
                 }
               }
             },
-            required: %w[taxon],
-            title: "Reposition a Taxon",
+            required: %w[category],
+            title: "Reposition a Category",
             "x-internal": false
           },
 
-          # Taxonomies
-          create_taxonomy_params: {
+          # BaseCategories
+          create_base_category_params: {
             type: :object,
             properties: {
-              taxonomy: {
+              base_category: {
                 type: :object,
                 required: %w[name],
                 properties: {
                   name: {type: :string},
-                  position: {type: :integer, example: 2, description: "Pass the position that you want this Taxonomy to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
+                  position: {type: :integer, example: 2, description: "Pass the position that you want this Base Category to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
                   private_metadata: {type: :object, example: {"profitability" => 2}}
                 }
               }
             },
-            required: %w[taxonomy],
+            required: %w[base_category],
             "x-internal": false
           },
-          update_taxonomy_params: {
+          update_base_category_params: {
             type: :object,
             properties: {
-              taxonomy: {
+              base_category: {
                 type: :object,
                 properties: {
                   name: {type: :string},
-                  position: {type: :integer, example: 2, description: "Pass the position that you want this Taxonomy to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
+                  position: {type: :integer, example: 2, description: "Pass the position that you want this Base Category to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
                   private_metadata: {type: :object, example: {"profitability" => 2}}
                 }
               }
             },
-            required: %w[taxonomy],
+            required: %w[base_category],
             "x-internal": false
           },
 

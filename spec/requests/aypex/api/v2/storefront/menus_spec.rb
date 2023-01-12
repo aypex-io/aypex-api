@@ -52,13 +52,13 @@ describe 'Storefront API v2 Menus spec', type: :request do
 
     context 'including menu items with linked resources' do
       let(:product) { create(:product, stores: [store]) }
-      let(:taxonomy) { create(:taxonomy, store: store) }
-      let(:taxon) { create(:taxon, taxonomy: taxonomy) }
+      let(:base_category) { create(:base_category, store: store) }
+      let(:category) { create(:category, base_category: base_category) }
       let(:standard_page) { create(:cms_standard_page, store: store) }
       let(:feature_page) { create(:cms_feature_page, store: store) }
       let(:homepage) { create(:cms_homepage, store: store) }
 
-      let!(:menu_item) { create(:menu_item, menu: header_en, linked_resource: taxon) }
+      let!(:menu_item) { create(:menu_item, menu: header_en, linked_resource: category) }
       let!(:menu_item_product) { create(:menu_item, menu: header_en, linked_resource: product) }
       let!(:menu_item_standard_page) { create(:menu_item, menu: header_en, linked_resource: standard_page) }
       let!(:menu_item_feature_page) { create(:menu_item, menu: header_en, linked_resource: feature_page) }
@@ -70,7 +70,7 @@ describe 'Storefront API v2 Menus spec', type: :request do
       it_behaves_like 'returns proper JSON structure'
 
       it 'returns menu items and their associations' do
-        expect(json_response['included']).to include(have_type('taxon').and(have_id(taxon.id.to_s)))
+        expect(json_response['included']).to include(have_type('category').and(have_id(category.id.to_s)))
         expect(json_response['included']).to include(
           have_type('menu_item').
             and(
@@ -96,9 +96,9 @@ describe 'Storefront API v2 Menus spec', type: :request do
   describe 'menus#show' do
     context 'with valid menu ID' do
       let!(:menu) { create(:menu, store: store) }
-      let(:taxonomy) { create(:taxonomy, store: store) }
-      let(:taxon) { create(:taxon, taxonomy: taxonomy) }
-      let!(:menu_item) { create(:menu_item, menu: menu, linked_resource: taxon) }
+      let(:base_category) { create(:base_category, store: store) }
+      let(:category) { create(:category, base_category: base_category) }
+      let!(:menu_item) { create(:menu_item, menu: menu, linked_resource: category) }
 
       before { get "/api/v2/storefront/menus/#{menu.id}?include=menu_items.linked_resource" }
 
@@ -110,7 +110,7 @@ describe 'Storefront API v2 Menus spec', type: :request do
         expect(json_response['data']['attributes']['location']).to eq menu.location
         expect(json_response['data']['attributes']['locale']).to eq menu.locale
 
-        expect(json_response['included']).to include(have_type('taxon').and(have_id(taxon.id.to_s)))
+        expect(json_response['included']).to include(have_type('category').and(have_id(category.id.to_s)))
         expect(json_response['included']).to include(have_type('menu_item').and(have_id(menu_item.id.to_s).and(have_relationship(:icon, :menu, :parent, :children, :linked_resource))))
       end
     end

@@ -1,12 +1,12 @@
 module Aypex
   module Api
     module V2
-      module TaxonImageTransformationConcern
+      module CategoryImageTransformationConcern
         extend ActiveSupport::Concern
 
         def self.included(base)
           base.attribute :transformed_url do |image, params|
-            image.generate_url(size: params.dig(:taxon_image_transformation, :size))
+            image.generate_url(size: params.dig(:category_image_transformation, :size))
           end
         end
       end

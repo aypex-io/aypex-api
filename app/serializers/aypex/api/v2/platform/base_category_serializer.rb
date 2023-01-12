@@ -2,11 +2,11 @@ module Aypex
   module Api
     module V2
       module Platform
-        class TaxonomySerializer < BaseSerializer
+        class BaseCategorySerializer < BaseSerializer
           include ResourceSerializerConcern
 
-          has_many :taxons
-          has_one :root, serializer: :taxon
+          has_many :categories
+          has_one :root, serializer: :category
         end
       end
     end

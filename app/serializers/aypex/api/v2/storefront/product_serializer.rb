@@ -48,8 +48,8 @@ module Aypex
         has_many :option_types
         has_many :product_properties
 
-        has_many :taxons, serializer: :taxon, record_type: :taxon do |object, params|
-          object.taxons_for_store(params[:store]).order(:id)
+        has_many :categories, serializer: :category, record_type: :category do |object, params|
+          object.categories_for_store(params[:store]).order(:id)
         end
 
         # all images from all variants

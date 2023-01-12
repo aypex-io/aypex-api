@@ -45,7 +45,7 @@ Aypex::Engine.add_routes do
         get "/countries/:iso", to: "countries#show", as: :country
         get "/order_status/:number", to: "order_status#show", as: :order_status
         resources :products, only: %i[index show]
-        resources :taxons, only: %i[index show], id: /.+/
+        resources :categories, only: %i[index show], id: /.+/
         get "/stores/:code", to: "stores#show", as: :store
         get "/store", to: "stores#current", as: :current_store
 
@@ -85,8 +85,8 @@ Aypex::Engine.add_routes do
 
         # Product Catalog API
         resources :products
-        resources :taxonomies
-        resources :taxons do
+        resources :base_categories
+        resources :categories do
           member do
             patch :reposition
           end

@@ -28,11 +28,11 @@ describe Aypex::Api::V2::BaseController, type: :controller do
   describe '#resource_includes' do
     context 'passed as params' do
       before do
-        dummy_controller.params = { include: 'variants,images,taxons' }
+        dummy_controller.params = { include: 'variants,images,categories' }
       end
 
       it 'returns included resources specified in params' do
-        expect(dummy_controller.send(:resource_includes)).to eq([:variants, :images, :taxons])
+        expect(dummy_controller.send(:resource_includes)).to eq([:variants, :images, :categories])
       end
     end
 
@@ -156,7 +156,7 @@ describe Aypex::Api::V2::BaseController, type: :controller do
       let(:serializer_params) { dummy_controller.send(:serializer_params) }
 
       it 'contains the expected hash serializer keys' do
-        expect(serializer_params.keys).to match_array(%i[currency image_transformation locale price_options store taxon_image_transformation user])
+        expect(serializer_params.keys).to match_array(%i[currency image_transformation locale price_options store category_image_transformation user])
       end
 
       it do
@@ -168,7 +168,7 @@ describe Aypex::Api::V2::BaseController, type: :controller do
             user: user,
             locale: locale,
             image_transformation: nil,
-            taxon_image_transformation: nil
+            category_image_transformation: nil
           }
         )
       end

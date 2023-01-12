@@ -2,41 +2,41 @@ module Aypex
   module Api
     module V2
       module Platform
-        class TaxonsController < ResourceController
+        class CategoriesController < ResourceController
           include ::Aypex::Api::V2::Platform::NestedSetRepositionConcern
 
           private
 
           def successful_reposition_actions
-            reload_taxon_and_set_new_permalink(resource)
-            update_permalinks_on_child_taxons
+            reload_category_and_set_new_permalink(resource)
+            update_permalinks_on_child_categories
 
             render_serialized_payload { serialize_resource(resource) }
           end
 
-          def reload_taxon_and_set_new_permalink(taxon)
-            taxon.reload
-            taxon.set_permalink
-            taxon.save!
+          def reload_category_and_set_new_permalink(category)
+            category.reload
+            category.set_permalink
+            category.save!
           end
 
-          def update_permalinks_on_child_taxons
-            resource.descendants.each do |taxon|
-              reload_taxon_and_set_new_permalink(taxon)
+          def update_permalinks_on_child_categories
+            resource.descendants.each do |category|
+              reload_category_and_set_new_permalink(category)
             end
           end
 
           def model_class
-            Aypex::Taxon
+            Aypex::Category
           end
 
           def scope_includes
-            node_includes = %i[icon parent taxonomy]
+            node_includes = %i[icon parent base_category]
 
             {
               parent: node_includes,
               children: node_includes,
-              taxonomy: [root: node_includes],
+              base_category: [root: node_includes],
               icon: [attachment_attachment: :blob]
             }
           end

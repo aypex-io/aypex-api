@@ -14,7 +14,7 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
            variants_including_master: [create(:variant, images: images), create(:variant)],
            option_types: create_list(:option_type, 2),
            product_properties: create_list(:product_property, 2),
-           taxons: create_list(:taxon, 2),
+           categories: create_list(:category, 2),
            tax_category: create(:tax_category))
   end
   let(:serializable_hash) do
@@ -104,15 +104,15 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
               }
             ]
           },
-          taxons: {
+          categories: {
             data: [
               {
-                id: product.taxons.first.id.to_s,
-                type: :taxon
+                id: product.categories.first.id.to_s,
+                type: :category
               },
               {
-                id: product.taxons.second.id.to_s,
-                type: :taxon
+                id: product.categories.second.id.to_s,
+                type: :category
               }
             ]
           },
@@ -136,7 +136,7 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
   context 'without a store in the params' do
     subject { described_class.new(product, params: serializer_params.merge(store: nil)).serializable_hash }
 
-    it 'returns all the product taxons' do
+    it 'returns all the product categories' do
       expect(subject).to eq(serializable_hash)
     end
   end

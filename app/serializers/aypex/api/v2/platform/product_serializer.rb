@@ -59,11 +59,11 @@ module Aypex
           has_many :variants
           has_many :option_types
           has_many :product_properties
-          has_many :taxons, serializer: :taxon, record_type: :taxon do |object, params|
+          has_many :categories, serializer: :category, record_type: :category do |object, params|
             if params[:store].present?
-              object.taxons_for_store(params[:store])
+              object.categories_for_store(params[:store])
             else
-              object.taxons
+              object.categories
             end
           end
 
