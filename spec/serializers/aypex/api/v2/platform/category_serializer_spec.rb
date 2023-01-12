@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::CategorySerializer do
-  include_context 'API v2 serializers params'
+  include_context "API v2 serializers params"
 
   subject { described_class.new(category, params: serializer_params).serializable_hash }
 
@@ -11,7 +11,7 @@ describe Aypex::Api::V2::Platform::CategorySerializer do
 
   it { expect(subject).to be_kind_of(Hash) }
 
-  context 'without products' do
+  context "without products" do
     it do
       expect(subject).to eq(
         {
@@ -77,7 +77,7 @@ describe Aypex::Api::V2::Platform::CategorySerializer do
     end
   end
 
-  context 'with products' do
+  context "with products" do
     before do
       serializer_params[:include_products] = true
     end
@@ -159,5 +159,5 @@ describe Aypex::Api::V2::Platform::CategorySerializer do
     end
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

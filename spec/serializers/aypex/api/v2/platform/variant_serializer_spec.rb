@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::VariantSerializer do
   subject { described_class.new(variant, params: serializer_params).serializable_hash }
 
-  include_context 'API v2 serializers params'
+  include_context "API v2 serializers params"
 
   let!(:variant) { create(:variant, price: 10, compare_at_price: 15, images: create_list(:image, 2), tax_category: create(:tax_category)) }
   let!(:digital) { create(:digital, variant: variant) }
@@ -39,10 +39,10 @@ describe Aypex::Api::V2::Platform::VariantSerializer do
             backorderable: variant.backorderable?,
             available: variant.available?,
             currency: currency,
-            price: BigDecimal(10),
-            display_price: '$10.00',
-            compare_at_price: BigDecimal(15),
-            display_compare_at_price: '$15.00',
+            price: BigDecimal("10"),
+            display_price: "$10.00",
+            compare_at_price: BigDecimal("15"),
+            display_compare_at_price: "$15.00",
             public_metadata: {},
             private_metadata: {}
           },
@@ -109,5 +109,5 @@ describe Aypex::Api::V2::Platform::VariantSerializer do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

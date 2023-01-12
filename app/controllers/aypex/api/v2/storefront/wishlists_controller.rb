@@ -45,7 +45,7 @@ module Aypex
             if resource.destroy
               head 204
             else
-              render_error_payload(I18n.t('aypex.api.v2.wishlist.errors.the_wishlist_could_not_be_destroyed'))
+              render_error_payload(I18n.t("aypex.api.v2.wishlist.errors.the_wishlist_could_not_be_destroyed"))
             end
           end
 
@@ -103,7 +103,7 @@ module Aypex
           private
 
           def scope(skip_cancancan: true)
-            if action_name == 'show'
+            if action_name == "show"
               super
             else
               super.where(user: aypex_current_user)
@@ -152,17 +152,17 @@ module Aypex
           end
 
           def render_error_item_quantity
-            render json: { error: I18n.t('aypex.api.v2.wishlist.wrong_quantity') }, status: 422
+            render json: {error: I18n.t("aypex.api.v2.wishlist.wrong_quantity")}, status: 422
           end
 
           def ensure_valid_quantity
             return render_error_item_quantity if params[:quantity].present? && params[:quantity].to_i <= 0
 
             params[:quantity] = if params[:quantity].present?
-                                  params[:quantity].to_i
-                                else
-                                  1
-                                end
+              params[:quantity].to_i
+            else
+              1
+            end
           end
         end
       end

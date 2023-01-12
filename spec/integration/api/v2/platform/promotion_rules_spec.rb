@@ -1,13 +1,13 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Promotion Rules API', swagger: true do
-  include_context 'Platform API v2'
+describe "Promotion Rules API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Promotion Rule'
+  resource_name = "Promotion Rule"
   options = {
     skip_invalid_params: true,
-    include_example: 'user',
-    filter_examples: [{ name: 'filter[type_eq]', example: 'Aypex::Promotion::Rules::Product' }]
+    include_example: "user",
+    filter_examples: [{name: "filter[type_eq]", example: "Aypex::Promotion::Rules::Product"}]
   }
 
   let(:promotion) { create(:promotion) }
@@ -17,9 +17,9 @@ describe 'Promotion Rules API', swagger: true do
   let(:valid_create_param_value) { build(:promotion_rule, promotion: promotion).attributes }
   let(:valid_update_param_value) do
     {
-      type: 'Aypex::Promotion::Rules::Country'
+      type: "Aypex::Promotion::Rules::Country"
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

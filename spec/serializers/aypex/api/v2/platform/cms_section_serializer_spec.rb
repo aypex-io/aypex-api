@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::CmsSectionSerializer do
   subject { described_class.new(cms_section) }
@@ -44,7 +44,7 @@ describe Aypex::Api::V2::Platform::CmsSectionSerializer do
               }
             }
           }
-        },
+        }
       }
     )
   end

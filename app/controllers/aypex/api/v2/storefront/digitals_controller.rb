@@ -21,17 +21,17 @@ module Aypex
 
                   redirect_to attachment.url(
                     expires_in: current_store.digital_asset_link_expire_time.seconds,
-                    disposition: 'attachment',
+                    disposition: "attachment",
                     host: digital_attachment_host
                   ) and return
 
                 end
               end
             else
-              Rails.logger.error I18n.t('aypex.api.v2.digitals.missing_file')
+              Rails.logger.error I18n.t("aypex.api.v2.digitals.missing_file")
             end
 
-            render json: { error: I18n.t('aypex.api.v2.digitals.unauthorized') }, status: 403
+            render json: {error: I18n.t("aypex.api.v2.digitals.unauthorized")}, status: 403
           end
 
           private

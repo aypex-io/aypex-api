@@ -1,8 +1,8 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::PromotionSerializer do
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
-  include_context 'API v2 serializers params'
+  include_context "API v2 serializers params"
 
   let(:promotion_category) { create(:promotion_category) }
   let(:promotion_rule) { create(:promotion_rule) }
@@ -37,7 +37,7 @@ describe Aypex::Api::V2::Platform::PromotionSerializer do
               data: {
                 id: resource.promotion_category.id.to_s,
                 type: :promotion_category
-              },
+              }
             },
             promotion_rules: {
               data: [
@@ -69,5 +69,5 @@ describe Aypex::Api::V2::Platform::PromotionSerializer do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

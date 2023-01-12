@@ -12,17 +12,17 @@ module Aypex
 
         def after_cancel
           super
-          queue_webhooks_requests!('order.canceled')
+          queue_webhooks_requests!("order.canceled")
         end
 
         def finalize!
           super
-          queue_webhooks_requests!('order.placed')
+          queue_webhooks_requests!("order.placed")
         end
 
         def after_resume
           super
-          queue_webhooks_requests!('order.resumed')
+          queue_webhooks_requests!("order.resumed")
           self.state_machine_resumed = false
         end
 
@@ -31,9 +31,9 @@ module Aypex
         def queue_webhooks_requests_for_order_resumed!
           return if state_machine_resumed?
           return unless state_previously_changed?
-          return unless state_previous_change&.last == 'resumed'
+          return unless state_previous_change&.last == "resumed"
 
-          queue_webhooks_requests!('order.resumed')
+          queue_webhooks_requests!("order.resumed")
         end
       end
     end

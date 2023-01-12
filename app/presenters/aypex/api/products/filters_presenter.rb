@@ -30,7 +30,7 @@ module Aypex
           categories_param = params.dig(:filter, :categories)
           return nil if categories_param.nil? || categories_param.to_s.blank?
 
-          category_ids = categories_param.to_s.split(',')
+          category_ids = categories_param.to_s.split(",")
           current_store.categories.where(id: category_ids)
         end
       end

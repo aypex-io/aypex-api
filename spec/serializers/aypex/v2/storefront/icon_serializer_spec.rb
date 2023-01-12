@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Storefront::IconSerializer do
   subject { described_class.new(icon) }
@@ -25,5 +25,5 @@ describe Aypex::Api::V2::Storefront::IconSerializer do
 
   it { expect(subject.serializable_hash[:data][:id]).to be_kind_of(String) }
   it { expect(subject.serializable_hash[:data][:type]).to be(:icon) }
-  it { expect(subject.serializable_hash[:data][:attributes][:url]).to include('thinking-cat.jpg') }
+  it { expect(subject.serializable_hash[:data][:attributes][:url]).to include("thinking-cat.jpg") }
 end

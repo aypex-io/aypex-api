@@ -1,24 +1,24 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Wishlists API', swagger: true do
-  include_context 'Platform API v2'
+describe "Wishlists API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Wishlist'
+  resource_name = "Wishlist"
   options = {
-    include_example: 'wished_items',
-    filter_examples: [{ name: 'filter[name_cont]', example: 'Birthday' }]
+    include_example: "wished_items",
+    filter_examples: [{name: "filter[name_cont]", example: "Birthday"}]
   }
 
   let!(:user) { create(:user) }
 
-  let(:id) { create(:wishlist, name: 'My Wishlist', user: user).id }
+  let(:id) { create(:wishlist, name: "My Wishlist", user: user).id }
   let(:records_list) do
     build_list(:wishlist, 2) do |record, i|
       record.name = if i == 0
-                      'Black Friday'
-                    else
-                      'Birthday'
-                    end
+        "Black Friday"
+      else
+        "Birthday"
+      end
       record.store = store
       record.user = user
 
@@ -36,14 +36,14 @@ describe 'Wishlists API', swagger: true do
   let(:valid_create_param_value) { build(:wishlist, user: user).attributes }
   let(:valid_update_param_value) do
     {
-      name: 'My Super Wishlist'
+      name: "My Super Wishlist"
     }
   end
   let(:invalid_param_value) do
     {
-      name: ''
+      name: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

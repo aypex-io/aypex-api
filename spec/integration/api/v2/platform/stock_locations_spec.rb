@@ -1,11 +1,11 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Stock Locations API', swagger: true do
-  include_context 'Platform API v2'
+describe "Stock Locations API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Stock Location'
+  resource_name = "Stock Location"
   options = {
-    include_example: 'country',
+    include_example: "country",
     filter_examples: []
   }
 
@@ -14,19 +14,19 @@ describe 'Stock Locations API', swagger: true do
   let(:valid_create_param_value) { build(:stock_location).attributes }
   let(:valid_update_param_value) do
     {
-      name: 'Warehouse 3',
+      name: "Warehouse 3",
       default: true,
-      address1: 'South Street 8/2',
-      city: 'Los Angeles',
-      zipcode: '11223',
+      address1: "South Street 8/2",
+      city: "Los Angeles",
+      zipcode: "11223",
       active: true
     }
   end
   let(:invalid_param_value) do
     {
-      name: ''
+      name: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

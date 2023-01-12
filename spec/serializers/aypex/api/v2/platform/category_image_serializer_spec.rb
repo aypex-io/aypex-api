@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::CategoryImageSerializer do
   subject { described_class.new(image) }
@@ -17,9 +17,9 @@ describe Aypex::Api::V2::Platform::CategoryImageSerializer do
             alt: image.alt,
             created_at: image.created_at,
             updated_at: image.updated_at,
-            transformed_url: image.generate_url(size: ''),
+            transformed_url: image.generate_url(size: ""),
             original_url: image.original_url
-          },
+          }
         }
       }
     )

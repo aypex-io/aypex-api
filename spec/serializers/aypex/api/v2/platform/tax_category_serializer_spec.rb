@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::TaxCategorySerializer do
-  include_context 'API v2 serializers params'
+  include_context "API v2 serializers params"
 
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
@@ -31,5 +31,5 @@ describe Aypex::Api::V2::Platform::TaxCategorySerializer do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

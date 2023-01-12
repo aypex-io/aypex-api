@@ -1,27 +1,27 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Menus API', swagger: true do
-  include_context 'Platform API v2'
+describe "Menus API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Menu'
+  resource_name = "Menu"
   options = {
-    include_example: 'menu_items',
-    filter_examples: [{ name: 'filter[name_eq]', example: 'Main Menu' },
-                      { name: 'filter[location_eq]', example: 'header' }]
+    include_example: "menu_items",
+    filter_examples: [{name: "filter[name_eq]", example: "Main Menu"},
+      {name: "filter[location_eq]", example: "header"}]
   }
 
-  let(:id) { create(:menu, name: 'Main Menu').id }
+  let(:id) { create(:menu, name: "Main Menu").id }
   let(:records_list) do
     build_list(:menu, 2) do |record, i|
       if i == 0
-        record.name = 'Main Menu'
-        record.location = 'header'
+        record.name = "Main Menu"
+        record.location = "header"
       else
-        record.name = 'Footer Menu'
-        record.location = 'footer'
+        record.name = "Footer Menu"
+        record.location = "footer"
       end
       record.store = store
-      record.locale = 'en'
+      record.locale = "en"
 
       record.save!
     end
@@ -33,21 +33,21 @@ describe 'Menus API', swagger: true do
     create(:menu_item, menu: menu_2)
     create(:menu_item, menu: menu_2)
   end
-  let(:valid_create_param_value) { build(:menu, name: 'Main Menu').attributes }
+  let(:valid_create_param_value) { build(:menu, name: "Main Menu").attributes }
   let(:valid_update_param_value) do
     {
-      name: 'Main Menu',
-      location: 'header',
-      locale: 'en'
+      name: "Main Menu",
+      location: "header",
+      locale: "en"
     }
   end
   let(:invalid_param_value) do
     {
-      name: '',
-      locale: '',
-      location: ''
+      name: "",
+      locale: "",
+      location: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

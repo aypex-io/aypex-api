@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 module Aypex
   TestOrder = Struct.new(:adjustment_total, :id, :item_total, :outstanding_balance, keyword_init: true) do
@@ -31,7 +31,7 @@ module Aypex
 end
 
 describe Aypex::Api::V2::ResourceSerializerConcern do
-  describe '.included' do
+  describe ".included" do
     let(:adjustment_total) { 100.0 }
     let(:created_at) { 1.day.ago }
     let(:id) { 1 }
@@ -68,22 +68,22 @@ describe Aypex::Api::V2::ResourceSerializerConcern do
       )
     end
 
-    it 'sets the base type' do
+    it "sets the base type" do
       expect(serializable_hash[:data][:type]).to eq(:test_order)
     end
 
-    it 'adds the model class json_api_columns as attributes' do
+    it "adds the model class json_api_columns as attributes" do
       expect(serializable_hash[:data][:attributes][:created_at]).to eq(created_at)
       expect(serializable_hash[:data][:attributes][:updated_at]).to eq(updated_at)
     end
 
-    it 'adds all the display instance methods the class has' do
+    it "adds all the display instance methods the class has" do
       expect(serializable_hash[:data][:attributes].key?(:display_adjustment_total)).to eq(true)
       expect(serializable_hash[:data][:attributes].key?(:display_item_total)).to eq(true)
       expect(serializable_hash[:data][:attributes].key?(:display_outstanding_balance)).to eq(true)
     end
 
-    it 'converts to string the display money attributes' do
+    it "converts to string the display money attributes" do
       expect(serializable_hash[:data][:attributes][:display_outstanding_balance]).to(
         eq(test_order.display_outstanding_balance.to_s)
       )
@@ -99,23 +99,23 @@ describe Aypex::Api::V2::ResourceSerializerConcern do
       expect(serializable_hash[:data][:attributes].key?(:display_item_total=)).to eq(false)
     end
 
-    context 'when model class is a Aypex::Product' do
-      context 'display_amount method' do
+    context "when model class is a Aypex::Product" do
+      context "display_amount method" do
         let(:product) { create(:product) }
         let(:serializable_hash) { Aypex::Api::V2::Platform::ProductSerializer.new(product).serializable_hash }
 
-        it 'does not add the display_amount method' do
+        it "does not add the display_amount method" do
           expect(serializable_hash[:data][:attributes].key?(:display_amount)).to eq(false)
         end
       end
     end
 
-    context 'when model class is a Aypex::Variant' do
-      context 'display_amount method' do
+    context "when model class is a Aypex::Variant" do
+      context "display_amount method" do
         let(:variant) { create(:variant) }
         let(:serializable_hash) { Aypex::Api::V2::Platform::VariantSerializer.new(variant).serializable_hash }
 
-        it 'does not add the display_amount method' do
+        it "does not add the display_amount method" do
           expect(serializable_hash[:data][:attributes].key?(:display_amount)).to eq(false)
         end
       end

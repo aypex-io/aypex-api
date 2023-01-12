@@ -61,7 +61,7 @@ RSpec::Matchers.define :emit_webhook_event do |event_to_emit|
 end
 
 def with_webhooks_enabled
-  ENV['DISABLE_AYPEX_WEBHOOKS'] = nil
+  ENV["DISABLE_AYPEX_WEBHOOKS"] = nil
   yield
-  ENV['DISABLE_AYPEX_WEBHOOKS'] = 'true'
+  ENV["DISABLE_AYPEX_WEBHOOKS"] = "true"
 end

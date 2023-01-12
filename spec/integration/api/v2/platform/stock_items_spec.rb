@@ -1,11 +1,11 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Stock Items API', swagger: true do
-  include_context 'Platform API v2'
+describe "Stock Items API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Stock Item'
+  resource_name = "Stock Item"
   options = {
-    include_example: 'stock_location,variant',
+    include_example: "stock_location,variant",
     filter_examples: []
   }
 
@@ -38,5 +38,5 @@ describe 'Stock Items API', swagger: true do
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

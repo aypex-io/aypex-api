@@ -1,16 +1,16 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Payment Methods API', swagger: true do
-  include_context 'Platform API v2'
+describe "Payment Methods API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Payment Method'
+  resource_name = "Payment Method"
   options = {
-    include_example: 'stores',
-    filter_examples: [{ name: 'filter[name]', example: 'Stripe' }],
+    include_example: "stores",
+    filter_examples: [{name: "filter[name]", example: "Stripe"}],
     custom_update_params: {
       oneOf: [
-        { '$ref' => '#/components/schemas/update_payment_method_params' },
-        { '$ref' => '#/components/schemas/update_payment_method_params_bogus_gateway' }
+        {"$ref" => "#/components/schemas/update_payment_method_params"},
+        {"$ref" => "#/components/schemas/update_payment_method_params_bogus_gateway"}
       ]
     }
   }
@@ -28,9 +28,9 @@ describe 'Payment Methods API', swagger: true do
   let(:valid_create_param_value) do
     {
       payment_method: {
-        name: 'API Bogus',
-        type: 'Aypex::Gateway::Bogus',
-        display_on: 'both',
+        name: "API Bogus",
+        type: "Aypex::Gateway::Bogus",
+        display_on: "both",
         store_ids: [store.id.to_s, store_two.id.to_s]
       }
     }
@@ -40,8 +40,8 @@ describe 'Payment Methods API', swagger: true do
     {
       payment_method: {
         test_mode: false,
-        dummy_key: 'UPDATED-DUMMY-KEY-123',
-        server: 'production'
+        dummy_key: "UPDATED-DUMMY-KEY-123",
+        server: "production"
       }
     }
   end
@@ -49,10 +49,10 @@ describe 'Payment Methods API', swagger: true do
   let(:invalid_param_value) do
     {
       payment_method: {
-        name: ''
+        name: ""
       }
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

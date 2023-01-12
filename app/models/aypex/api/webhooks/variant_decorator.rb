@@ -16,7 +16,7 @@ module Aypex
           return unless discontinue_on_previously_changed?
           return if (change = discontinue_on_previous_change).blank? || change.last.blank?
 
-          queue_webhooks_requests!('variant.discontinued')
+          queue_webhooks_requests!("variant.discontinued")
         end
       end
     end

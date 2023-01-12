@@ -1,13 +1,13 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Shipping Methods API', swagger: true do
-  include_context 'Platform API v2'
+describe "Shipping Methods API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Shipping Method'
+  resource_name = "Shipping Method"
   options = {
-    include_example: 'calculator,shipping_categories,shipping_rates,tax_category',
-    filter_examples: [{ name: 'filter[name]', example: 'DHL Express' },
-                      { name: 'filter[title_cont]', example: 'About Us' }]
+    include_example: "calculator,shipping_categories,shipping_rates,tax_category",
+    filter_examples: [{name: "filter[name]", example: "DHL Express"},
+      {name: "filter[title_cont]", example: "About Us"}]
   }
 
   let(:shipping_category) { create(:shipping_category) }
@@ -18,14 +18,14 @@ describe 'Shipping Methods API', swagger: true do
   let(:valid_create_param_value) do
     {
       shipping_method: {
-        name: 'DHL Express Domestic',
-        display_on: 'both',
+        name: "DHL Express Domestic",
+        display_on: "both",
         shipping_category_ids: [shipping_category.id.to_s],
-        admin_name: 'DHL Express- Zone A',
-        code: 'DDD',
+        admin_name: "DHL Express- Zone A",
+        code: "DDD",
         tax_category_id: tax_category.id.to_s,
         calculator_attributes: {
-          type: 'Aypex::Calculator::Shipping::FlatRate'
+          type: "Aypex::Calculator::Shipping::FlatRate"
         }
       }
     }
@@ -34,9 +34,9 @@ describe 'Shipping Methods API', swagger: true do
   let(:valid_update_param_value) do
     {
       shipping_method: {
-        name: 'FedEx Expedited',
+        name: "FedEx Expedited",
         calculator_attributes: {
-          type: 'Aypex::Calculator::Shipping::FlatPercentItemTotal',
+          type: "Aypex::Calculator::Shipping::FlatPercentItemTotal",
           flat_percent: 23
         }
       }
@@ -46,10 +46,10 @@ describe 'Shipping Methods API', swagger: true do
   let(:invalid_param_value) do
     {
       shipping_method: {
-        name: ''
+        name: ""
       }
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

@@ -41,7 +41,7 @@ module Aypex
           end
 
           def serializer_params
-            super.merge(include_products: action_name == 'show')
+            super.merge(include_products: action_name == "show")
           end
         end
       end

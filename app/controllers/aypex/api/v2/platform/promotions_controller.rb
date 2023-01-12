@@ -17,12 +17,12 @@ module Aypex
           end
 
           def aypex_permitted_attributes
-            conditional_params = action_name == 'update' ? [:id] : []
+            conditional_params = (action_name == "update") ? [:id] : []
 
-            super + [{ promotion_actions_attributes: Aypex::PromotionAction.json_api_permitted_attributes.concat(conditional_params) + [{
+            super + [{promotion_actions_attributes: Aypex::PromotionAction.json_api_permitted_attributes.concat(conditional_params) + [{
               promotion_action_line_items_attributes: Aypex::PromotionActionLineItem.json_api_permitted_attributes.concat(conditional_params),
               calculator_attributes: Aypex::Calculator.json_api_permitted_attributes.concat(conditional_params, calculator_params)
-            }], promotion_rules_attributes: Aypex::PromotionRule.json_api_permitted_attributes.concat(conditional_params, rule_params) }]
+            }], promotion_rules_attributes: Aypex::PromotionRule.json_api_permitted_attributes.concat(conditional_params, rule_params)}]
           end
         end
       end

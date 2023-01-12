@@ -12,7 +12,7 @@ module Aypex
           has_many :log_entries
           has_many :state_changes
           has_many :payment_capture_events, object_method_name: :capture_events,
-                                            id_method_name: :capture_event_ids
+            id_method_name: :capture_event_ids
           has_many :refunds
         end
       end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 class PlatformApiDummyController < Aypex::Api::V2::Platform::ResourceController
   private
@@ -12,10 +12,10 @@ describe Aypex::Api::V2::Platform::ResourceController, type: :controller do
   let(:dummy_controller) { PlatformApiDummyController.new }
   let(:store) { Aypex::Store.default }
 
-  describe '#resource_serializer' do
+  describe "#resource_serializer" do
     subject { dummy_controller.send(:resource_serializer) }
 
-    context 'when controller model class is nested more than 2 levels' do
+    context "when controller model class is nested more than 2 levels" do
       before do
         allow(dummy_controller).to receive(:model_class).and_return(Aypex::Webhooks::Subscriber)
       end
@@ -26,11 +26,11 @@ describe Aypex::Api::V2::Platform::ResourceController, type: :controller do
     it { expect(subject).to be Aypex::Api::V2::Platform::ProductSerializer }
   end
 
-  describe '#collection_serializer' do
+  describe "#collection_serializer" do
     it { expect(dummy_controller.send(:collection_serializer)).to be Aypex::Api::V2::Platform::ProductSerializer }
   end
 
-  describe '#collection' do
+  describe "#collection" do
     let!(:product) { create(:product, stores: [store]) }
     let!(:product_from_another_store) { create(:product, stores: [create(:store)]) }
     let(:collection) { dummy_controller.send(:collection) }
@@ -47,11 +47,11 @@ describe Aypex::Api::V2::Platform::ResourceController, type: :controller do
     it { expect(collection.map(&:id)).not_to include(product_from_another_store.id) }
   end
 
-  describe '#permitted_resource_params' do
+  describe "#permitted_resource_params" do
     let(:valid_attributes) do
       {
         product: {
-          name: 'Test'
+          name: "Test"
         }
       }
     end

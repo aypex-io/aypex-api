@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::MenuItemSerializer do
   subject { described_class.new(menu_item).serializable_hash }
@@ -82,5 +82,5 @@ describe Aypex::Api::V2::Platform::MenuItemSerializer do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

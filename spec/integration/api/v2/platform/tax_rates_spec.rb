@@ -1,14 +1,14 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Tax Rates API', swagger: true do
-  include_context 'Platform API v2'
+describe "Tax Rates API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Tax Rate'
+  resource_name = "Tax Rate"
   options = {
-    include_example: 'zone,tax_category',
-    filter_examples: [{ name: 'filter[zone_id_eq]', example: '3' },
-                      { name: 'filter[amount_gt]', example: '0.05' },
-                      { name: 'filter[tax_category_id_eq]', example: '1' }]
+    include_example: "zone,tax_category",
+    filter_examples: [{name: "filter[zone_id_eq]", example: "3"},
+      {name: "filter[amount_gt]", example: "0.05"},
+      {name: "filter[tax_category_id_eq]", example: "1"}]
   }
 
   let(:tax_category) { create(:tax_category) }
@@ -16,7 +16,7 @@ describe 'Tax Rates API', swagger: true do
   let(:records_list) { create_list(:tax_rate, 2, tax_category: tax_category) }
   let(:calculator_attributes) { build(:calculator).attributes }
   let(:valid_create_param_value) do
-    build(:tax_rate, tax_category: tax_category).attributes.merge('calculator_attributes' => calculator_attributes)
+    build(:tax_rate, tax_category: tax_category).attributes.merge("calculator_attributes" => calculator_attributes)
   end
   let(:valid_update_param_value) do
     {
@@ -29,9 +29,9 @@ describe 'Tax Rates API', swagger: true do
   end
   let(:invalid_param_value) do
     {
-      amount: ''
+      amount: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

@@ -1,13 +1,13 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Promotion Actions API', swagger: true do
-  include_context 'Platform API v2'
+describe "Promotion Actions API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Promotion Action'
+  resource_name = "Promotion Action"
   options = {
     skip_invalid_params: true,
-    include_example: 'calculator',
-    filter_examples: [{ name: 'filter[type_eq]', example: 'Aypex::Promotion::Actions::CreateAdjustment' }]
+    include_example: "calculator",
+    filter_examples: [{name: "filter[type_eq]", example: "Aypex::Promotion::Actions::CreateAdjustment"}]
   }
 
   let(:promotion) { create(:promotion) }
@@ -17,9 +17,9 @@ describe 'Promotion Actions API', swagger: true do
   let(:valid_create_param_value) { build(:promotion_action, promotion: promotion).attributes }
   let(:valid_update_param_value) do
     {
-      type: 'Aypex::Promotion::Actions::CreateAdjustment'
+      type: "Aypex::Promotion::Actions::CreateAdjustment"
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

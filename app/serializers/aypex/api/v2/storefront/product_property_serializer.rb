@@ -2,7 +2,7 @@ module Aypex
   module Api::V2
     module Storefront
       class ProductPropertySerializer < BaseSerializer
-        set_type  :product_property
+        set_type :product_property
 
         attribute :value, :filter_param, :show_property, :position
 

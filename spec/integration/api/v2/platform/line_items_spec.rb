@@ -1,12 +1,12 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Line Items API', swagger: true do
-  include_context 'Platform API v2'
+describe "Line Items API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Line Item'
+  resource_name = "Line Item"
   options = {
-    include_example: 'order,tax_category,variant.product,digital_links',
-    filter_examples: [{ name: 'filter[order_id_eq]', example: '123' }]
+    include_example: "order,tax_category,variant.product,digital_links",
+    filter_examples: [{name: "filter[order_id_eq]", example: "123"}]
   }
 
   let(:product) { create(:product_in_stock, :without_backorder, stores: [store]) }
@@ -24,9 +24,9 @@ describe 'Line Items API', swagger: true do
     {
       order_id: order.id,
       # trying to add too much qty
-      quantity: 10_000,
+      quantity: 10_000
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

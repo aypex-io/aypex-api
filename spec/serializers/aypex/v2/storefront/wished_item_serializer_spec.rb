@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Storefront::WishedItemSerializer do
-  subject { described_class.new(wished_item, params: { currency: 'USD' }).serializable_hash }
+  subject { described_class.new(wished_item, params: {currency: "USD"}).serializable_hash }
 
   let!(:wishlist) { create(:wishlist) }
   let!(:wished_item) { create(:wished_item, wishlist: wishlist, variant: create(:variant), quantity: 5) }
@@ -15,11 +15,11 @@ describe Aypex::Api::V2::Storefront::WishedItemSerializer do
           id: wished_item.id.to_s,
           type: :wished_item,
           attributes: {
-            display_price: '$19.99',
-            display_total: '$99.95',
+            display_price: "$19.99",
+            display_total: "$99.95",
             price: wished_item.variant.price,
             total: (wished_item.variant.price * 5),
-            quantity: 5,
+            quantity: 5
           },
           relationships: {
             variant: {
@@ -34,5 +34,5 @@ describe Aypex::Api::V2::Storefront::WishedItemSerializer do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

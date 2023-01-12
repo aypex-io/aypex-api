@@ -5,7 +5,7 @@ module Aypex
         extend ActiveSupport::Concern
 
         def self.included(base)
-          serializer_base_name = base.to_s.sub(/^Aypex::Api::V2::Platform::/, '').sub(/Serializer$/, '')
+          serializer_base_name = base.to_s.sub(/^Aypex::Api::V2::Platform::/, "").sub(/Serializer$/, "")
           model_klazz = "Aypex::#{serializer_base_name}".constantize
 
           base.set_type model_klazz.json_api_type
@@ -21,8 +21,8 @@ module Aypex
 
         def self.display_getter_methods(model_klazz)
           model_klazz.new.methods.find_all do |method_name|
-            next unless method_name.to_s.start_with?('display_')
-            next if method_name.to_s.end_with?('=')
+            next unless method_name.to_s.start_with?("display_")
+            next if method_name.to_s.end_with?("=")
             next if [Aypex::Product, Aypex::Variant].include?(model_klazz) && method_name == :display_amount
 
             method_name

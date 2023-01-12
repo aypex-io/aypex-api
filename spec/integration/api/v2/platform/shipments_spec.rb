@@ -1,13 +1,13 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Shipments API', swagger: true do
-  include_context 'Platform API v2'
+describe "Shipments API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Shipment'
-  resource_path = 'shipments'
+  resource_name = "Shipment"
+  resource_path = "shipments"
   options = {
-    include_example: 'line_items,variants,product',
-    filter_examples: [{ name: 'filter[state_eq]', example: 'complete' }]
+    include_example: "line_items,variants,product",
+    filter_examples: [{name: "filter[state_eq]", example: "complete"}]
   }
 
   let(:order) { create(:order_ready_to_ship, store: store) }
@@ -37,19 +37,19 @@ describe 'Shipments API', swagger: true do
   let(:valid_update_param_value) do
     {
       shipment: {
-        tracking: 'MY-TRACKING-NUMBER-1234'
+        tracking: "MY-TRACKING-NUMBER-1234"
       }
     }
   end
   let(:invalid_param_value) do
     {
       shipment: {
-        stock_location_id: 'invalid'
+        stock_location_id: "invalid"
       }
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 
   path "/api/v2/platform/#{resource_path}/{id}/add_item" do
     let(:shipment) do
@@ -63,17 +63,17 @@ describe 'Shipments API', swagger: true do
 
     patch "Adds item (Variant) to an existing Shipment" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
+      security [bearer_auth: []]
       description "If selected Variant was already added to Order it will increase the quantity of existing Line Item, if not it will create a new Line Item"
       operationId "add-item-shipment"
-      consumes 'application/json'
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
-      parameter name: :shipment, in: :body, schema: { '$ref' => '#/components/schemas/add_item_shipment_params' }
+      parameter name: :shipment, in: :body, schema: {"$ref" => "#/components/schemas/add_item_shipment_params"}
       json_api_include_parameter(options[:include_example])
 
-      it_behaves_like 'record updated'
-      it_behaves_like 'record not found'
-      it_behaves_like 'authentication failed'
+      it_behaves_like "record updated"
+      it_behaves_like "record not found"
+      it_behaves_like "authentication failed"
     end
   end
 
@@ -84,26 +84,26 @@ describe 'Shipments API', swagger: true do
     let(:shipment) do
       {
         shipment: {
-          variant_id: line_item.variant_id,
+          variant_id: line_item.variant_id
         }
       }
     end
 
     patch "Removes item (Variant) from Shipment" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
+      security [bearer_auth: []]
       description "If selected Variant is removed completely and Shipment doesn't include any other Line Items, Shipment itself will be deleted"
       operationId "remove-item-shipment"
-      consumes 'application/json'
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
-      parameter name: :shipment, in: :body, schema: { '$ref' => '#/components/schemas/remove_item_shipment_params' }
+      parameter name: :shipment, in: :body, schema: {"$ref" => "#/components/schemas/remove_item_shipment_params"}
       json_api_include_parameter(options[:include_example])
 
-      context 'removes all the quantity' do
-        it_behaves_like 'record deleted'
+      context "removes all the quantity" do
+        it_behaves_like "record deleted"
       end
 
-      context 'removes only part of the quantity' do
+      context "removes only part of the quantity" do
         before do
           line_item.variant.stock_items.update_all(count_on_hand: 100)
           line_item.update_column(:quantity, 3)
@@ -118,38 +118,38 @@ describe 'Shipments API', swagger: true do
           }
         end
 
-        it_behaves_like 'record updated'
+        it_behaves_like "record updated"
       end
 
-      context '404' do
+      context "404" do
         let(:shipment) do
           {
             shipment: {
-              variant_id: '1',
+              variant_id: "1"
             }
           }
         end
 
-        it_behaves_like 'record not found'
+        it_behaves_like "record not found"
       end
 
-      it_behaves_like 'authentication failed'
+      it_behaves_like "authentication failed"
     end
   end
 
   path "/api/v2/platform/#{resource_path}/{id}/ready" do
     patch "Mark Shipment as ready to be shipped" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
+      security [bearer_auth: []]
       description "Marks Shipment as ready to be shipped"
       operationId "ready-shipment"
-      consumes 'application/json'
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
       json_api_include_parameter(options[:include_example])
 
-      it_behaves_like 'record updated'
-      it_behaves_like 'record not found'
-      it_behaves_like 'authentication failed'
+      it_behaves_like "record updated"
+      it_behaves_like "record not found"
+      it_behaves_like "authentication failed"
     end
   end
 
@@ -158,32 +158,32 @@ describe 'Shipments API', swagger: true do
 
     patch "Mark Shipment as shipped" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
+      security [bearer_auth: []]
       description "Marks Shipment as shipped"
       operationId "ship-shipment"
-      consumes 'application/json'
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
       json_api_include_parameter(options[:include_example])
 
-      it_behaves_like 'record updated'
-      it_behaves_like 'record not found'
-      it_behaves_like 'authentication failed'
+      it_behaves_like "record updated"
+      it_behaves_like "record not found"
+      it_behaves_like "authentication failed"
     end
   end
 
   path "/api/v2/platform/#{resource_path}/{id}/cancel" do
     patch "Cancels the Shipment" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
+      security [bearer_auth: []]
       description "Cancels the Shipment"
       operationId "cancel-shipment"
-      consumes 'application/json'
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
       json_api_include_parameter(options[:include_example])
 
-      it_behaves_like 'record updated'
-      it_behaves_like 'record not found'
-      it_behaves_like 'authentication failed'
+      it_behaves_like "record updated"
+      it_behaves_like "record not found"
+      it_behaves_like "authentication failed"
     end
   end
 
@@ -197,16 +197,16 @@ describe 'Shipments API', swagger: true do
 
     patch "Resumes the Shipment" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
+      security [bearer_auth: []]
       description "Resumes previously canceled Shipment"
       operationId "resume-shipment"
-      consumes 'application/json'
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
       json_api_include_parameter(options[:include_example])
 
-      it_behaves_like 'record updated'
-      it_behaves_like 'record not found'
-      it_behaves_like 'authentication failed'
+      it_behaves_like "record updated"
+      it_behaves_like "record not found"
+      it_behaves_like "authentication failed"
     end
   end
 
@@ -215,16 +215,16 @@ describe 'Shipments API', swagger: true do
 
     patch "Moves Shipment back to pending state" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
+      security [bearer_auth: []]
       description "Moves Shipment back to pending state"
       operationId "pend-shipment"
-      consumes 'application/json'
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
       json_api_include_parameter(options[:include_example])
 
-      it_behaves_like 'record updated'
-      it_behaves_like 'record not found'
-      it_behaves_like 'authentication failed'
+      it_behaves_like "record updated"
+      it_behaves_like "record not found"
+      it_behaves_like "authentication failed"
     end
   end
 end

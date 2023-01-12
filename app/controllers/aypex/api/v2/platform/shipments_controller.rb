@@ -64,13 +64,13 @@ module Aypex
             quantity = params.dig(:shipment, :quantity)&.to_i || 1
 
             unless quantity > 0
-              render_error_payload("#{I18n.t('aypex.api.shipment_transfer_errors_occurred')} \n #{I18n.t('aypex.api.negative_quantity')}")
+              render_error_payload("#{I18n.t("aypex.api.shipment_transfer_errors_occurred")} \n #{I18n.t("aypex.api.negative_quantity")}")
               return
             end
 
             transfer = resource.transfer_to_location(@variant, quantity, stock_location)
             if transfer.valid? && transfer.run!
-              render json: { message: I18n.t('aypex.api.shipment_transfer_success') }, status: 201
+              render json: {message: I18n.t("aypex.api.shipment_transfer_success")}, status: 201
             else
               render_error_payload(transfer.errors)
             end
@@ -82,19 +82,19 @@ module Aypex
 
             error =
               if quantity < 0 && target_shipment == resource
-                "#{I18n.t('aypex.api.negative_quantity')}, \n#{I18n.t('aypex.api.wrong_shipment_target')}"
+                "#{I18n.t("aypex.api.negative_quantity")}, \n#{I18n.t("aypex.api.wrong_shipment_target")}"
               elsif target_shipment == resource
-                I18n.t('aypex.api.wrong_shipment_target')
+                I18n.t("aypex.api.wrong_shipment_target")
               elsif quantity < 0
-                I18n.t('aypex.api.negative_quantity')
+                I18n.t("aypex.api.negative_quantity")
               end
 
             if error
-              render_error_payload("#{I18n.t('aypex.api.shipment_transfer_errors_occurred')} \n#{error}")
+              render_error_payload("#{I18n.t("aypex.api.shipment_transfer_errors_occurred")} \n#{error}")
             else
               transfer = resource.transfer_to_shipment(@variant, quantity, target_shipment)
               if transfer.valid? && transfer.run!
-                render json: { message: I18n.t('aypex.api.shipment_transfer_success') }, status: 201
+                render json: {message: I18n.t("aypex.api.shipment_transfer_success")}, status: 201
               else
                 render_error_payload(transfer.errors)
               end

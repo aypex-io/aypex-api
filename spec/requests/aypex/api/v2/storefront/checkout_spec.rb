@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "API V2 Storefront Checkout Spec", type: :request do
+describe "API V2 Storefront Checkout Spec" do
   let(:store) { Aypex::Store.default }
   let(:currency) { store.default_currency }
   let(:user) { create(:user) }
@@ -89,7 +89,7 @@ describe "API V2 Storefront Checkout Spec", type: :request do
           expect(json_response["error"]).to include(I18n.t("aypex.no_payment_found"))
         end
 
-        it "doesnt advance pass payment state" do
+        it "doesn't advance pass payment state" do
           expect(order.reload.state).to eq("payment")
         end
       end
@@ -139,7 +139,7 @@ describe "API V2 Storefront Checkout Spec", type: :request do
         it_behaves_like "returns 200 HTTP status"
         it_behaves_like "returns valid cart JSON"
 
-        it "doesnt advance pass payment state" do
+        it "doesn't advance pass payment state" do
           expect(order.reload.state).to eq("payment")
           expect(json_response["data"]).to have_attribute(:state).with_value("payment")
         end
@@ -195,7 +195,7 @@ describe "API V2 Storefront Checkout Spec", type: :request do
           expect(json_response["error"]).to include(I18n.t("aypex.no_payment_found"))
         end
 
-        it "doesnt completes an order" do
+        it "doesn't completes an order" do
           expect(order.reload.state).not_to eq("complete")
           expect(order.completed_at).to be_nil
         end

@@ -7,8 +7,8 @@ module Aypex
         set_type :store
 
         attributes :name, :url, :meta_description, :meta_keywords, :seo_title, :default_currency,
-                   :default, :supported_currencies, :facebook, :twitter, :instagram, :default_locale,
-                   :customer_support_email, :description, :address, :contact_phone, :supported_locales
+          :default, :supported_currencies, :facebook, :twitter, :instagram, :default_locale,
+          :customer_support_email, :description, :address, :contact_phone, :supported_locales
 
         has_many :menus
         has_many :cms_pages

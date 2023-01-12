@@ -1,4 +1,4 @@
-require 'active_support/cache'
+require "active_support/cache"
 
 module Aypex
   module Api::V2

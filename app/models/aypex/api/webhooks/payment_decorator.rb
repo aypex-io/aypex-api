@@ -10,13 +10,13 @@ module Aypex
 
         def after_void
           super
-          queue_webhooks_requests!('payment.voided')
+          queue_webhooks_requests!("payment.voided")
         end
 
         def after_completed
           super
-          queue_webhooks_requests!('payment.paid')
-          order.queue_webhooks_requests!('order.paid') if order.paid?
+          queue_webhooks_requests!("payment.paid")
+          order.queue_webhooks_requests!("order.paid") if order.paid?
         end
       end
     end

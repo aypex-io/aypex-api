@@ -15,7 +15,7 @@ module Aypex
           yield
           if was_out_of_stock && was_not_backorderable && variant_backorderable?
             reload
-            variant.queue_webhooks_requests!('variant.backorderable')
+            variant.queue_webhooks_requests!("variant.backorderable")
           end
         end
 
@@ -24,7 +24,7 @@ module Aypex
           product_was_not_backorderable = !product_backorderable?
           yield
           if product_was_out_of_stock && product_was_not_backorderable && product_backorderable?
-            variant.product.queue_webhooks_requests!('product.backorderable')
+            variant.product.queue_webhooks_requests!("product.backorderable")
           end
         end
 

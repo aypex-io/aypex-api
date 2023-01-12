@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::BaseCategorySerializer, retry: 3 do
   subject { described_class.new(base_category).serializable_hash }
@@ -46,5 +46,5 @@ describe Aypex::Api::V2::Platform::BaseCategorySerializer, retry: 3 do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

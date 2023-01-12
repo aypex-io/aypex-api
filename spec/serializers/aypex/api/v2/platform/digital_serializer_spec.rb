@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::DigitalSerializer do
   subject { described_class.new(digital).serializable_hash }
@@ -34,7 +34,7 @@ describe Aypex::Api::V2::Platform::DigitalSerializer do
 
   it { expect(subject[:data][:id]).to be_kind_of(String) }
   it { expect(subject[:data][:type]).to be(:digital) }
-  it { expect(subject[:data][:attributes][:url]).to include('thinking-cat.jpg') }
+  it { expect(subject[:data][:attributes][:url]).to include("thinking-cat.jpg") }
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

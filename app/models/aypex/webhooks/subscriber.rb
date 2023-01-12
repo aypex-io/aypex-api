@@ -7,7 +7,7 @@ module Aypex
 
       has_many :events, inverse_of: :subscriber
 
-      validates :url, 'aypex/url': true, presence: true
+      validates :url, "aypex/url": true, presence: true
 
       validate :check_uri_path
 
@@ -22,18 +22,18 @@ module Aypex
       def self.with_urls_for(event)
         where(
           case ActiveRecord::Base.connection.adapter_name
-          when 'Mysql2'
+          when "Mysql2"
             ["('*' MEMBER OF(subscriptions) OR ? MEMBER OF(subscriptions))", event]
-          when 'PostgreSQL'
+          when "PostgreSQL"
             ["subscriptions @> '[\"*\"]' OR subscriptions @> ?", [event].to_json]
           end
         )
       end
 
       def self.supported_events
-        Aypex::Base.descendants.
-          select { |model| model.included_modules.include? Aypex::Webhooks::HasWebhooks }.
-          to_h do |model|
+        Aypex::Base.descendants
+          .select { |model| model.included_modules.include? Aypex::Webhooks::HasWebhooks }
+          .to_h do |model|
           model_name = model.name.demodulize.underscore.to_sym
           [model_name, model.supported_webhook_events]
         end
@@ -48,7 +48,7 @@ module Aypex
           return false
         end
 
-        errors.add(:url, 'the URL must have a path') if uri.blank? || uri.path.blank?
+        errors.add(:url, "the URL must have a path") if uri.blank? || uri.path.blank?
       end
 
       def parse_subscriptions

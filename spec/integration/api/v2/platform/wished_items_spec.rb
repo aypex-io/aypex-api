@@ -1,11 +1,11 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Wished Item API', swagger: true do
-  include_context 'Platform API v2'
+describe "Wished Item API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Wished Item'
+  resource_name = "Wished Item"
   options = {
-    include_example: 'variant'
+    include_example: "variant"
   }
 
   let!(:user) { create(:user) }
@@ -23,9 +23,9 @@ describe 'Wished Item API', swagger: true do
   end
   let(:invalid_param_value) do
     {
-      quantity: ''
+      quantity: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

@@ -18,7 +18,7 @@ module Aypex
           end
 
           def order_token
-            request.headers['X-Aypex-Order-Token'] || params[:order_token]
+            request.headers["X-Aypex-Order-Token"] || params[:order_token]
           end
 
           def aypex_current_order

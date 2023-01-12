@@ -8,7 +8,7 @@ module Aypex
           @execution_time_in_milliseconds = 0
           @url = url
           @webhook_payload_body = webhook_payload_body
-          @webhooks_timeout = ENV['AYPEX_WEBHOOKS_TIMEOUT']
+          @webhooks_timeout = ENV["AYPEX_WEBHOOKS_TIMEOUT"]
         end
 
         def execution_time
@@ -29,14 +29,14 @@ module Aypex
         end
 
         def unprocessable_uri?
-          uri_path == '' && uri_host.nil? && uri_port.nil?
+          uri_path == "" && uri_host.nil? && uri_port.nil?
         end
 
         private
 
         attr_reader :execution_time_in_milliseconds, :url, :webhook_payload_body, :webhooks_timeout
 
-        HEADERS = { 'Content-Type' => 'application/json' }.freeze
+        HEADERS = {"Content-Type" => "application/json"}.freeze
         private_constant :HEADERS
 
         delegate :host, :path, :port, to: :uri, prefix: true
@@ -60,7 +60,7 @@ module Aypex
         rescue Errno::ECONNREFUSED, Net::ReadTimeout, SocketError
           Class.new do
             def self.code
-              '0'
+              "0"
             end
           end
         end

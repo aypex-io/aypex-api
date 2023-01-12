@@ -1,13 +1,13 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::PromotionCategorySerializer do
-  include_context 'API v2 serializers params'
+  include_context "API v2 serializers params"
 
   subject { described_class.new(resource, params: serializer_params) }
 
-  let(:resource) { create(:promotion_category, name: '2021 Promotions', code: '2021-PROMOS') }
-  let!(:promtion_a) { create(:promotion, promotion_category: resource)}
-  let!(:promtion_b) { create(:promotion, promotion_category: resource)}
+  let(:resource) { create(:promotion_category, name: "2021 Promotions", code: "2021-PROMOS") }
+  let!(:promtion_a) { create(:promotion, promotion_category: resource) }
+  let!(:promtion_b) { create(:promotion, promotion_category: resource) }
 
   it { expect(subject.serializable_hash).to be_kind_of(Hash) }
 

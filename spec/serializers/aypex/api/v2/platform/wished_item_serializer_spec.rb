@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::WishedItemSerializer do
   subject { described_class.new(wished_item, params: serializer_params) }
 
-  include_context 'API v2 serializers params'
+  include_context "API v2 serializers params"
 
   let!(:user) { create(:user) }
   let!(:variant) { create(:variant) }
@@ -22,8 +22,8 @@ describe Aypex::Api::V2::Platform::WishedItemSerializer do
             quantity: 3,
             price: variant.price,
             total: variant.price * 3,
-            display_price: '$19.99',
-            display_total: '$59.97',
+            display_price: "$19.99",
+            display_total: "$59.97",
             created_at: wished_item.created_at,
             updated_at: wished_item.updated_at
           },

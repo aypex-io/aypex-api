@@ -1,0 +1,10 @@
+# Auto generated files with errors to ignore.
+# Remove from this list as you refactor files.
+---
+ignore:
+- spec/models/aypex/webhooks/subscriber_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/requests/aypex/oauth/token_spec.rb:
+  - Lint/ConstantDefinitionInBlock
+- spec/services/aypex/api/error_handler_spec.rb:
+  - Lint/ConstantDefinitionInBlock

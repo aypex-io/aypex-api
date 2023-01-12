@@ -1,15 +1,15 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Store Credits API', swagger: true do
-  include_context 'Platform API v2'
+describe "Store Credits API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Store Credit'
+  resource_name = "Store Credit"
   options = {
-    include_example: 'user,created_by,category,credit_type',
-    filter_examples: [{ name: 'filter[user_id_eq]', example: '5' },
-                      { name: 'filter[created_by_id_eq]', example: '2' },
-                      { name: 'filter[amount_gteq]', example: '50.0' },
-                      { name: 'filter[currency_eq]', example: 'USD' }]
+    include_example: "user,created_by,category,credit_type",
+    filter_examples: [{name: "filter[user_id_eq]", example: "5"},
+      {name: "filter[created_by_id_eq]", example: "2"},
+      {name: "filter[amount_gteq]", example: "50.0"},
+      {name: "filter[currency_eq]", example: "USD"}]
   }
 
   let(:user) { create(:user) }
@@ -19,9 +19,9 @@ describe 'Store Credits API', swagger: true do
   let(:valid_update_param_value) do
     {
       amount: 500.0,
-      memo: 'The user is awarded',
-      currency: 'CAD',
-      public_metadata: { loyalty_reward: true }
+      memo: "The user is awarded",
+      currency: "CAD",
+      public_metadata: {loyalty_reward: true}
     }
   end
   let(:invalid_param_value) do
@@ -31,5 +31,5 @@ describe 'Store Credits API', swagger: true do
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end
