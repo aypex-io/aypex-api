@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "API V2 Storefront Checkout Spec", type: :request do
+describe "API V2 Storefront Checkout Spec" do
   let(:store) { Aypex::Store.default }
   let(:currency) { store.default_currency }
   let(:user) { create(:user) }

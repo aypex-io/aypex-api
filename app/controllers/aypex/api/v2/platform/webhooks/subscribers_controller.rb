@@ -11,7 +11,7 @@ module Aypex
             end
 
             def aypex_permitted_attributes
-              super + [{ subscriptions: [] }]
+              super + [{subscriptions: []}]
             end
           end
         end

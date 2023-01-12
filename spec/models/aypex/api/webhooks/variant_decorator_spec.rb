@@ -1,19 +1,19 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::Webhooks::VariantDecorator do
   let(:variant) { create(:variant) }
 
-  context 'emitting variant.discontinued' do
+  context "emitting variant.discontinued" do
     let(:webhook_payload_body) do
       Aypex::Api::V2::Platform::VariantSerializer.new(
         variant,
         include: Aypex::Api::V2::Platform::VariantSerializer.relationships_to_serialize.keys
       ).serializable_hash
     end
-    let(:event_name) { 'variant.discontinued' }
+    let(:event_name) { "variant.discontinued" }
     let!(:webhook_subscriber) { create(:webhook_subscriber, :active, subscriptions: [event_name]) }
 
-    context 'when variant discontinued_on changes' do
+    context "when variant discontinued_on changes" do
       context 'when the new value is "present"' do
         it do
           expect do
@@ -33,7 +33,7 @@ describe Aypex::Api::Webhooks::VariantDecorator do
       end
     end
 
-    context 'when variant discontinued_on does not change' do
+    context "when variant discontinued_on does not change" do
       it do
         expect do
           variant.update(width: 180)

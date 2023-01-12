@@ -1,12 +1,12 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Menu Items API', swagger: true do
-  include_context 'Platform API v2'
+describe "Menu Items API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Menu Item'
+  resource_name = "Menu Item"
   options = {
-    include_example: 'menu,icon,parent,children,linked_resource',
-    filter_examples: [{ name: 'filter[name_eq]', example: 'T-Shirts' }]
+    include_example: "menu,icon,parent,children,linked_resource",
+    filter_examples: [{name: "filter[name_eq]", example: "T-Shirts"}]
   }
 
   let(:menu) { create(:menu, store: store) }
@@ -20,14 +20,14 @@ describe 'Menu Items API', swagger: true do
   let(:valid_update_param_value) do
     {
       menu_item: {
-        name: 'Menu Item One'
+        name: "Menu Item One"
       }
     }
   end
   let(:invalid_param_value) do
     {
       menu_item: {
-        name: ''
+        name: ""
       }
     }
   end
@@ -40,23 +40,23 @@ describe 'Menu Items API', swagger: true do
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 
-  path '/api/v2/platform/menu_items/{id}/reposition' do
-    patch 'Reposition a Menu Item' do
+  path "/api/v2/platform/menu_items/{id}/reposition" do
+    patch "Reposition a Menu Item" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
-      operationId 'reposition-menu-item'
-      description 'Reposition a Menu Item'
-      consumes 'application/json'
+      security [bearer_auth: []]
+      operationId "reposition-menu-item"
+      description "Reposition a Menu Item"
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
-      parameter name: :menu_item, in: :body, schema: { '$ref' => '#/components/schemas/menu_item_reposition' }
+      parameter name: :menu_item, in: :body, schema: {"$ref" => "#/components/schemas/menu_item_reposition"}
 
       let(:menu_item) { valid_update_position_param_value }
 
-      it_behaves_like 'record updated'
-      it_behaves_like 'record not found', :menu_item
-      it_behaves_like 'authentication failed'
+      it_behaves_like "record updated"
+      it_behaves_like "record not found", :menu_item
+      it_behaves_like "authentication failed"
     end
   end
 end

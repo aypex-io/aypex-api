@@ -1,11 +1,11 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Store Credit Categories API', swagger: true do
-  include_context 'Platform API v2'
+describe "Store Credit Categories API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Store Credit Category'
+  resource_name = "Store Credit Category"
   options = {
-    filter_examples: [{ name: 'filter[name_eq]', example: 'refunded' }]
+    filter_examples: [{name: "filter[name_eq]", example: "refunded"}]
   }
 
   let(:id) { create(:store_credit_category).id }
@@ -13,14 +13,14 @@ describe 'Store Credit Categories API', swagger: true do
   let(:valid_create_param_value) { build(:store_credit_category).attributes }
   let(:valid_update_param_value) do
     {
-      name: 'refunded'
+      name: "refunded"
     }
   end
   let(:invalid_param_value) do
     {
-      name: ''
+      name: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

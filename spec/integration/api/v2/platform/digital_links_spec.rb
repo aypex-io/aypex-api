@@ -1,9 +1,9 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Digital Link API', swagger: true do
-  include_context 'Platform API v2'
+describe "Digital Link API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Digital Link'
+  resource_name = "Digital Link"
 
   let(:digital) { create(:digital) }
   let(:variant) { digital.variant }
@@ -21,24 +21,24 @@ describe 'Digital Link API', swagger: true do
 
   let(:invalid_param_value) do
     {
-      access_counter: 'string'
+      access_counter: "string"
     }
   end
 
-  include_examples 'CRUD examples', resource_name
+  include_examples "CRUD examples", resource_name
 
-  path '/api/v2/platform/digital_links/{id}/reset' do
+  path "/api/v2/platform/digital_links/{id}/reset" do
     patch "Reset a #{resource_name}" do
       tags resource_name.pluralize
-      security [ bearer_auth: [] ]
-      operationId 'reset-digital-link'
-      description 'Resets a digital link, allowing further downloads.'
-      consumes 'application/json'
+      security [bearer_auth: []]
+      operationId "reset-digital-link"
+      description "Resets a digital link, allowing further downloads."
+      consumes "application/json"
       parameter name: :id, in: :path, type: :string
 
-      it_behaves_like 'record updated'
-      it_behaves_like 'record not found'
-      it_behaves_like 'authentication failed'
+      it_behaves_like "record updated"
+      it_behaves_like "record not found"
+      it_behaves_like "authentication failed"
     end
   end
 end

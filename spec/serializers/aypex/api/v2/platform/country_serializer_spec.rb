@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::CountrySerializer do
   subject { described_class.new(country) }
@@ -37,7 +37,7 @@ describe Aypex::Api::V2::Platform::CountrySerializer do
                 }
               ]
             }
-          },
+          }
         }
       }
     )

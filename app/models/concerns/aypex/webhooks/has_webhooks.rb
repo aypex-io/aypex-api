@@ -69,11 +69,11 @@ module Aypex
       end
 
       def update_event?(event_name)
-        event_name.end_with?('.update')
+        event_name.end_with?(".update")
       end
 
       def disable_aypex_webhooks?
-        ENV['DISABLE_AYPEX_WEBHOOKS'] == 'true'
+        ENV["DISABLE_AYPEX_WEBHOOKS"] == "true"
       end
 
       def webhooks_request_options

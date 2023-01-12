@@ -1,10 +1,10 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::Webhooks::ShipmentDecorator do
   let(:order) { create(:order) }
   let(:shipment) { create(:shipment) }
 
-  describe '#after_ship' do
+  describe "#after_ship" do
     before do
       # Avoid creating a new state change after transitioning as is defined in the model
       # because after_ship queues the HTTP request before finishing the transition, hence
@@ -15,21 +15,21 @@ describe Aypex::Api::Webhooks::ShipmentDecorator do
       allow_any_instance_of(Aypex::Shipment).to receive(:included_relationships).and_return(Aypex::Api::V2::Platform::ShipmentSerializer.relationships_to_serialize.keys - [:state_changes])
     end
 
-    context 'emitting shipment.shipped' do
+    context "emitting shipment.shipped" do
       let(:webhook_payload_body) do
         Aypex::Api::V2::Platform::ShipmentSerializer.new(
           shipment,
           include: Aypex::Api::V2::Platform::ShipmentSerializer.relationships_to_serialize.keys - [:state_changes]
         ).serializable_hash
       end
-      let(:event_name) { 'shipment.shipped' }
+      let(:event_name) { "shipment.shipped" }
       let!(:webhook_subscriber) { create(:webhook_subscriber, :active, subscriptions: [event_name]) }
 
-      context 'ready -> ship' do
+      context "ready -> ship" do
         let(:shipment) { create(:shipment, order: order) }
 
         before do
-          order.update(state: 'complete', completed_at: Time.current)
+          order.update(state: "complete", completed_at: Time.current)
           shipment.reload
           shipment.ready
         end
@@ -37,14 +37,14 @@ describe Aypex::Api::Webhooks::ShipmentDecorator do
         it { expect { shipment.ship }.to emit_webhook_event(event_name) }
       end
 
-      context 'canceled -> ship' do
+      context "canceled -> ship" do
         before { shipment.cancel }
 
         it { expect { shipment.ship }.to emit_webhook_event(event_name) }
       end
     end
 
-    context 'emitting order.shipped' do
+    context "emitting order.shipped" do
       let(:webhook_payload_body) do
         webhook_payload_body = Aypex::Api::V2::Platform::OrderSerializer.new(
           order.reload,
@@ -53,7 +53,7 @@ describe Aypex::Api::Webhooks::ShipmentDecorator do
         webhook_payload_body[:included].each { |resource_hash| resource_hash[:relationships][:state_changes][:data] = [] if resource_hash[:type] == :shipment }
         webhook_payload_body
       end
-      let(:event_name) { 'order.shipped' }
+      let(:event_name) { "order.shipped" }
       let!(:webhook_subscriber) { create(:webhook_subscriber, :active, subscriptions: [event_name]) }
       let!(:shipments) do
         create_list(
@@ -64,14 +64,14 @@ describe Aypex::Api::Webhooks::ShipmentDecorator do
         )
       end
 
-      context 'ready -> ship' do
+      context "ready -> ship" do
         before do
-          order.update(state: 'complete', completed_at: Time.current)
+          order.update(state: "complete", completed_at: Time.current)
           shipments.each(&:reload) # must reload to make shipments order state see it's complete
           shipments[0].ready
         end
 
-        context 'with all order shipments shipped' do
+        context "with all order shipments shipped" do
           before do
             shipments[0].ship
             shipments[1].ready
@@ -83,15 +83,15 @@ describe Aypex::Api::Webhooks::ShipmentDecorator do
           end
         end
 
-        context 'without all order shipments shipped' do
+        context "without all order shipments shipped" do
           it { expect { shipments[0].ship }.not_to emit_webhook_event(event_name) }
         end
       end
 
-      context 'canceled -> ship' do
+      context "canceled -> ship" do
         before { shipments[0].cancel }
 
-        context 'with all order shipments shipped' do
+        context "with all order shipments shipped" do
           before do
             shipments[0].ship
             shipments[1].cancel
@@ -101,7 +101,7 @@ describe Aypex::Api::Webhooks::ShipmentDecorator do
           it { expect { shipments[1].ship }.to emit_webhook_event(event_name) }
         end
 
-        context 'without all order shipments shipped' do
+        context "without all order shipments shipped" do
           it { expect { shipments[0].ship }.not_to emit_webhook_event(event_name) }
         end
       end

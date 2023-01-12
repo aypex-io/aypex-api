@@ -1,17 +1,17 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::Webhooks::StockItemDecorator do
   let(:webhook_payload_body) do
     Aypex::Api::V2::Platform::VariantSerializer.new(
       variant,
       include: Aypex::Api::V2::Platform::VariantSerializer.relationships_to_serialize.keys
-      ).serializable_hash
+    ).serializable_hash
   end
   let(:variant) { create(:variant) }
   let(:stock_item) { variant.stock_items.first }
   let(:stock_location) { variant.stock_locations.first }
 
-  describe 'emitting product.backorderable' do
+  describe "emitting product.backorderable" do
     subject { stock_item.update(backorderable: backorderable) }
 
     let(:webhook_payload_body) do
@@ -21,31 +21,31 @@ describe Aypex::Api::Webhooks::StockItemDecorator do
       ).serializable_hash
     end
     let(:product) { variant.product }
-    let(:event_name) { 'product.backorderable' }
+    let(:event_name) { "product.backorderable" }
     let!(:webhook_subscriber) { create(:webhook_subscriber, :active, subscriptions: [event_name]) }
     let!(:variant2) { create(:variant, product: product) }
 
     before { Aypex::StockItem.update_all(backorderable: false) }
 
-    context 'when product was out of stock' do
-      context 'when none of the product variants is backorderable' do
-        context 'when one of the variants is made backorderable' do
+    context "when product was out of stock" do
+      context "when none of the product variants is backorderable" do
+        context "when one of the variants is made backorderable" do
           let(:backorderable) { true }
 
           it { expect { subject }.to emit_webhook_event(event_name) }
         end
 
-        context 'when none of the variants is made backorderable' do
+        context "when none of the variants is made backorderable" do
           let(:backorderable) { false }
 
           it { expect { subject }.not_to emit_webhook_event(event_name) }
         end
       end
 
-      context 'when other variant is already backorderable' do
+      context "when other variant is already backorderable" do
         let(:another_stock_item) { variant2.stock_items.first }
 
-        context 'when other variant is made backorderable' do
+        context "when other variant is made backorderable" do
           let(:backorderable) { true }
 
           before do
@@ -57,7 +57,7 @@ describe Aypex::Api::Webhooks::StockItemDecorator do
       end
     end
 
-    context 'when product was in stock' do
+    context "when product was in stock" do
       let(:backorderable) { true }
 
       before do
@@ -72,13 +72,13 @@ describe Aypex::Api::Webhooks::StockItemDecorator do
     end
   end
 
-  describe 'emitting variant.backorderable' do
+  describe "emitting variant.backorderable" do
     subject { stock_item.save }
 
-    let(:event_name) { 'variant.backorderable' }
+    let(:event_name) { "variant.backorderable" }
     let!(:webhook_subscriber) { create(:webhook_subscriber, :active, subscriptions: [event_name]) }
 
-    context 'when variant was out of stock' do
+    context "when variant was out of stock" do
       before do
         stock_location.stock_movements.new.tap do |stock_movement|
           stock_movement.quantity = 0
@@ -87,22 +87,22 @@ describe Aypex::Api::Webhooks::StockItemDecorator do
         end
       end
 
-      context 'when variant was backorderable' do
+      context "when variant was backorderable" do
         before { stock_item.backorderable = true }
 
         it { expect { subject }.not_to emit_webhook_event(event_name) }
       end
 
-      context 'when variant was not backorderable' do
+      context "when variant was not backorderable" do
         before { variant.stock_items.update_all(backorderable: false) }
 
-        context 'when variant is not set as backorderable' do
+        context "when variant is not set as backorderable" do
           before { stock_item.backorderable = false }
 
           it { expect { subject }.not_to emit_webhook_event(event_name) }
         end
 
-        context 'when variant is set as backorderable' do
+        context "when variant is set as backorderable" do
           before { stock_item.backorderable = true }
 
           it { expect { subject }.to emit_webhook_event(event_name) }
@@ -110,7 +110,7 @@ describe Aypex::Api::Webhooks::StockItemDecorator do
       end
     end
 
-    context 'when variant was not out of stock' do
+    context "when variant was not out of stock" do
       before do
         variant.stock_items.update_all(backorderable: false)
         stock_location.stock_movements.new.tap do |stock_movement|

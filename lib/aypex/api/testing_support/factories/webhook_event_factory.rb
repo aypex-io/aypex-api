@@ -3,17 +3,17 @@ FactoryBot.define do
     subscriber
 
     execution_time { rand(1..99_999) }
-    name { 'order.canceled' }
-    request_errors { '' }
+    name { "order.canceled" }
+    request_errors { "" }
     sequence(:url) { |n| "https://www.url#{n}.com/" }
 
     trait :failed do
-      response_code { '500' }
+      response_code { "500" }
       success { false }
     end
 
     trait :successful do
-      response_code { '200' }
+      response_code { "200" }
       success { true }
     end
 

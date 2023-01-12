@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Webhooks::Subscribers::HandleRequest do
-  describe '#call' do
+  describe "#call" do
     subject do
       described_class.new(
         event_name: event_name,
@@ -16,17 +16,17 @@ describe Aypex::Webhooks::Subscribers::HandleRequest do
         include: Aypex::Api::V2::Platform::AddressSerializer.relationships_to_serialize.keys
       ).serializable_hash.to_json
     end
-    let(:event_name) { 'order.canceled' }
+    let(:event_name) { "order.canceled" }
     let(:event) { Aypex::Webhooks::Event.find_by(name: event_name, subscriber_id: subscriber.id, url: url) }
     let(:make_request_double) { instance_double(Aypex::Webhooks::Subscribers::MakeRequest) }
     let(:subscriber) { create(:subscriber, :active, subscriptions: [event_name], url: url) }
-    let(:url) { 'http://google.com/' }
+    let(:url) { "http://google.com/" }
     let(:resource) { create(:address) }
 
-    shared_examples 'logging and creating a webhooks event' do |with_log_level:|
+    shared_examples "logging and creating a webhooks event" do |with_log_level:|
       before { stub_request(:post, url) }
 
-      context 'before making the request' do
+      context "before making the request" do
         let(:body_with_event_metadata) do
           JSON.parse(webhook_payload_body).merge(
             event_created_at: event.created_at,
@@ -35,7 +35,7 @@ describe Aypex::Webhooks::Subscribers::HandleRequest do
           ).to_json
         end
 
-        it 'debug logs' do
+        it "debug logs" do
           allow(Rails.logger).to receive(:debug)
           allow(Aypex::Webhooks::Subscribers::MakeRequest).to receive(:new).and_call_original
           subject.call
@@ -67,7 +67,7 @@ describe Aypex::Webhooks::Subscribers::HandleRequest do
         end
       end
 
-      it 'updates the event record created previously with the missing data' do
+      it "updates the event record created previously with the missing data" do
         expect(Aypex::Webhooks::Subscribers::MakeRequest).to(
           receive(:new).with(hash_including(url: url)).and_return(make_request_double)
         )
@@ -80,10 +80,10 @@ describe Aypex::Webhooks::Subscribers::HandleRequest do
           )
         )
         expect { subject.call }.to change {
-          Aypex::Webhooks::Event.
-          all.
-          as_json(except: %i[id created_at id preferences updated_at]).
-          map(&:values)
+          Aypex::Webhooks::Event
+            .all
+            .as_json(except: %i[id created_at id preferences updated_at])
+            .map(&:values)
         }.from(
           []
         ).to(
@@ -94,17 +94,17 @@ describe Aypex::Webhooks::Subscribers::HandleRequest do
       it { expect(subject.call).to eq(nil) }
     end
 
-    context 'with an unprocessable uri' do
+    context "with an unprocessable uri" do
       let(:execution_time) { 0 }
       let(:log_msg) { "[AYPEX WEBHOOKS] 'order.canceled' can not make a request to 'http://google.com/'" }
       let(:response_code) { 0 }
       let(:success) { false }
       let(:unprocessable_uri) { true }
 
-      it_behaves_like 'logging and creating a webhooks event', with_log_level: :warn
+      it_behaves_like "logging and creating a webhooks event", with_log_level: :warn
     end
 
-    context 'with a processable uri' do
+    context "with a processable uri" do
       let(:unprocessable_uri) { false }
 
       before do
@@ -115,28 +115,28 @@ describe Aypex::Webhooks::Subscribers::HandleRequest do
         )
       end
 
-      context 'with a failed request' do
+      context "with a failed request" do
         let(:execution_time) { 0 }
         let(:failed_request) { true }
         let(:log_msg) { "[AYPEX WEBHOOKS] 'order.canceled' failed for 'http://google.com/'" }
         let(:response_code) { 0 }
         let(:success) { false }
 
-        it_behaves_like 'logging and creating a webhooks event', with_log_level: :warn
+        it_behaves_like "logging and creating a webhooks event", with_log_level: :warn
       end
 
-      context 'without a failed request' do
+      context "without a failed request" do
         let(:execution_time) { rand(1..999999) }
         let(:failed_request) { false }
         let(:log_msg) { "[AYPEX WEBHOOKS] 'order.canceled' success for URL 'http://google.com/'" }
         let(:response_code) { 200 }
         let(:success) { true }
 
-        it_behaves_like 'logging and creating a webhooks event', with_log_level: :debug
+        it_behaves_like "logging and creating a webhooks event", with_log_level: :debug
       end
     end
 
-    context 'full flow' do
+    context "full flow" do
       let(:webhook_payload_body) do
         Aypex::Api::V2::Platform::OrderSerializer.new(
           order.reload,
@@ -144,34 +144,34 @@ describe Aypex::Webhooks::Subscribers::HandleRequest do
         ).serializable_hash
       end
       let(:event) { Aypex::Webhooks::Event.find_by(name: event_name, subscriber_id: subscriber.id, url: url) }
-      let(:event_name) { 'order.placed' }
-      let(:order) { create(:order, email: 'test@example.com') }
+      let(:event_name) { "order.placed" }
+      let(:order) { create(:order, email: "test@example.com") }
 
       before do
         stub_request(:post, url)
         subscriber
       end
 
-      it 'queues a job without event data on the webhook body right after the event is executed', :job do
+      it "queues a job without event data on the webhook body right after the event is executed", :job do
         with_webhooks_enabled do
           order.finalize!
           expect(Aypex::Webhooks::Subscribers::MakeRequestJob).to(
-            have_been_enqueued.
-            on_queue('aypex_webhooks').
-            with(webhook_payload_body.to_json, event_name, subscriber).
-            once
+            have_been_enqueued
+            .on_queue("aypex_webhooks")
+            .with(webhook_payload_body.to_json, event_name, subscriber)
+            .once
           )
         end
       end
 
-      context 'after executing the job' do
+      context "after executing the job" do
         let(:body_with_event_metadata) do
           webhook_payload_body.merge(
             event_created_at: event.created_at, event_id: event.id, event_type: event.name
           ).to_json
         end
 
-        it 'adds the event data to the body' do
+        it "adds the event data to the body" do
           with_webhooks_enabled do
             allow(Aypex::Webhooks::Subscribers::MakeRequest).to receive(:new).and_call_original
             order.finalize!
@@ -183,8 +183,8 @@ describe Aypex::Webhooks::Subscribers::HandleRequest do
       end
     end
 
-    context 'when the event can not be created' do
-      it 'raises ActiveRecord::RecordInvalid'  do
+    context "when the event can not be created" do
+      it "raises ActiveRecord::RecordInvalid" do
         with_webhooks_enabled do
           expect do
             described_class.new(

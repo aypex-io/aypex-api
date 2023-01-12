@@ -3,26 +3,26 @@
 The API pack for Aypex
 
 
-## Usage
-How to use my plugin.
-
-
 ## Installation
+
+Create a new rails app
+```bash
+rails new [app_name] --database=postgresql -a propshaft
+```
+
 Add this line to your application's Gemfile:
 
 ```ruby
+gem "aypex"
 gem "aypex-api"
 ```
 
 And then execute:
 ```bash
-$ bundle
+bundle
 ```
 
-Or install it yourself as:
-```bash
-$ gem install aypex-api
-```
+
 
 ## Testing
 

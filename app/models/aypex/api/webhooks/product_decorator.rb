@@ -5,7 +5,7 @@ module Aypex
         def self.prepended(base)
           def base.custom_webhook_events
             %w[product.back_in_stock product.backorderable product.discontinued
-               product.out_of_stock product.activated product.archived product.drafted]
+              product.out_of_stock product.activated product.archived product.drafted]
           end
 
           def base.ignored_attributes_for_update_webhook_event
@@ -17,17 +17,17 @@ module Aypex
 
         def after_activate
           super
-          queue_webhooks_requests!('product.activated')
+          queue_webhooks_requests!("product.activated")
         end
 
         def after_archive
           super
-          queue_webhooks_requests!('product.archived')
+          queue_webhooks_requests!("product.archived")
         end
 
         def after_draft
           super
-          queue_webhooks_requests!('product.drafted')
+          queue_webhooks_requests!("product.drafted")
         end
 
         private
@@ -36,7 +36,7 @@ module Aypex
           return unless discontinue_on_previously_changed?
           return if (change = discontinue_on_previous_change).blank? || change.last.blank?
 
-          queue_webhooks_requests!('product.discontinued')
+          queue_webhooks_requests!("product.discontinued")
         end
       end
     end

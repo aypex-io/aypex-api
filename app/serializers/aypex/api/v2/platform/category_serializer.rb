@@ -19,18 +19,18 @@ module Aypex
             category.leaf?
           end
 
-          belongs_to :parent,   record_type: :category, serializer: :category
+          belongs_to :parent, record_type: :category, serializer: :category
           belongs_to :base_category, record_type: :base_category
 
-          has_many   :children, record_type: :category, serializer: :category
-          has_many   :products, record_type: :product,
-                                if: proc { |_category, params| params && params[:include_products] == true }
+          has_many :children, record_type: :category, serializer: :category
+          has_many :products, record_type: :product,
+            if: proc { |_category, params| params && params[:include_products] == true }
 
-          has_one    :image,
-                     object_method_name: :icon,
-                     id_method_name: :icon_id,
-                     record_type: :category_image,
-                     serializer: :category_image
+          has_one :image,
+            object_method_name: :icon,
+            id_method_name: :icon_id,
+            record_type: :category_image,
+            serializer: :category_image
         end
       end
     end

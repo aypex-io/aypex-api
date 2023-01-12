@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::OptionValueSerializer do
   subject { described_class.new(option_value).serializable_hash }
@@ -28,12 +28,12 @@ describe Aypex::Api::V2::Platform::OptionValueSerializer do
                 id: option_value.option_type.id.to_s,
                 type: :option_type
               }
-            },
+            }
           }
         }
       }
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

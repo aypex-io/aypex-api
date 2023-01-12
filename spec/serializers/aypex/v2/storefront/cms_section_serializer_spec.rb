@@ -1,11 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
   subject { described_class.new(cms_section) }
 
   let(:cms_section) { create(:cms_section) }
 
-  shared_examples 'returns proper hash' do
+  shared_examples "returns proper hash" do
     it { expect(subject.serializable_hash).to be_kind_of(Hash) }
 
     it do
@@ -35,7 +35,7 @@ describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
               img_three_lg: cms_section.img_three_lg,
               img_three_xl: cms_section.img_three_xl,
               is_fullscreen: false
-              },
+            },
             relationships: {
               linked_resource: {
                 data: cms_section.linked_resource
@@ -47,66 +47,66 @@ describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
     end
   end
 
-  context 'cms_hero_image_section' do
-     let!(:store) { create(:store) }
-     let!(:homepage) { create(:cms_homepage, store: store) }
-     let!(:cms_section) do
-       section = create(:cms_hero_image_section, cms_page: homepage)
-       section.build_image_one
-       section.image_one.attachment.attach(io: file, filename: 't-shirt.png')
-       section
-     end
-     let(:file) { File.open(file_fixture('icon_256x256.jpg')) }
+  context "cms_hero_image_section" do
+    let!(:store) { create(:store) }
+    let!(:homepage) { create(:cms_homepage, store: store) }
+    let!(:cms_section) do
+      section = create(:cms_hero_image_section, cms_page: homepage)
+      section.build_image_one
+      section.image_one.attachment.attach(io: file, filename: "t-shirt.png")
+      section
+    end
+    let(:file) { File.open(file_fixture("icon_256x256.jpg")) }
 
-     it_behaves_like 'returns proper hash'
-   end
-
-  context 'cms_featured_article_section' do
-    let(:homepage) { create(:cms_homepage) }
-    let(:cms_section) { create(:cms_featured_article_section, name: 'Test', linked_resource_type: 'Aypex::Category', cms_page: homepage) }
-
-    it_behaves_like 'returns proper hash'
+    it_behaves_like "returns proper hash"
   end
 
-  context 'cms_side_by_side_images_section' do
+  context "cms_featured_article_section" do
+    let(:homepage) { create(:cms_homepage) }
+    let(:cms_section) { create(:cms_featured_article_section, name: "Test", linked_resource_type: "Aypex::Category", cms_page: homepage) }
+
+    it_behaves_like "returns proper hash"
+  end
+
+  context "cms_side_by_side_images_section" do
     let!(:store) { create(:store) }
     let!(:homepage) { create(:cms_homepage, store: store) }
     let!(:cms_section) do
       section = create(:cms_side_by_side_images_section, cms_page: homepage)
       section.build_image_one
-      section.image_one.attachment.attach(io: file, filename: 't-shirt.png')
+      section.image_one.attachment.attach(io: file, filename: "t-shirt.png")
       section
     end
-    let(:file) { File.open(file_fixture('icon_256x256.jpg')) }
+    let(:file) { File.open(file_fixture("icon_256x256.jpg")) }
 
-    it_behaves_like 'returns proper hash'
+    it_behaves_like "returns proper hash"
   end
 
-  context 'cms_image_gallery_section' do
+  context "cms_image_gallery_section" do
     let!(:store) { create(:store) }
     let!(:homepage) { create(:cms_homepage, store: store) }
     let!(:cms_section) do
       section = create(:cms_image_gallery_section, cms_page: homepage)
       section.build_image_one
-      section.image_one.attachment.attach(io: file, filename: 't-shirt.png')
+      section.image_one.attachment.attach(io: file, filename: "t-shirt.png")
       section
     end
-    let(:file) { File.open(file_fixture('icon_256x256.jpg')) }
+    let(:file) { File.open(file_fixture("icon_256x256.jpg")) }
 
-    it_behaves_like 'returns proper hash'
+    it_behaves_like "returns proper hash"
   end
 
-  context 'cms_product_carousel_section' do
+  context "cms_product_carousel_section" do
     let(:homepage) { create(:cms_homepage) }
-    let(:cms_section) { create(:cms_product_carousel_section, name: 'Test', linked_resource_type: 'Aypex::Category', cms_page: homepage) }
+    let(:cms_section) { create(:cms_product_carousel_section, name: "Test", linked_resource_type: "Aypex::Category", cms_page: homepage) }
 
-    it_behaves_like 'returns proper hash'
+    it_behaves_like "returns proper hash"
   end
 
-  context 'cms_rich_text_content_section' do
+  context "cms_rich_text_content_section" do
     let(:homepage) { create(:cms_homepage) }
     let(:cms_section) { create(:cms_rich_text_content_section, cms_page: homepage) }
 
-    it_behaves_like 'returns proper hash'
+    it_behaves_like "returns proper hash"
   end
 end

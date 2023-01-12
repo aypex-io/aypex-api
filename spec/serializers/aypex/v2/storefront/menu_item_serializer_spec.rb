@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Storefront::MenuItemSerializer do
   subject { described_class.new(menu_item) }

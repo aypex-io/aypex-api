@@ -19,8 +19,8 @@ module Aypex
             serializer_params,
             params[:sort]&.strip,
             params[:page]&.to_s&.strip,
-            params[:per_page]&.to_s&.strip,
-          ].flatten.join('-')
+            params[:per_page]&.to_s&.strip
+          ].flatten.join("-")
 
           Digest::MD5.hexdigest(cache_key_parts)
         end
@@ -28,7 +28,7 @@ module Aypex
         def collection_cache_opts
           {
             namespace: Aypex::Api::Config.api_v2_collection_cache_namespace,
-            expires_in: Aypex::Api::Config.api_v2_collection_cache_ttl,
+            expires_in: Aypex::Api::Config.api_v2_collection_cache_ttl
           }
         end
       end

@@ -1,11 +1,11 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::ShippingMethodSerializer do
-  include_context 'API v2 serializers params'
+  include_context "API v2 serializers params"
 
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:shipping_category) {create(:shipping_category) }
+  let(:shipping_category) { create(:shipping_category) }
   let(:tax_category) { create(:tax_category) }
 
   let(:resource) { create(:shipping_method, shipping_categories: [shipping_category], tax_category: tax_category) }
@@ -52,8 +52,7 @@ describe Aypex::Api::V2::Platform::ShippingMethodSerializer do
               ]
             },
             shipping_rates: {
-              data: [
-              ]
+              data: []
             }
           }
         }
@@ -61,5 +60,5 @@ describe Aypex::Api::V2::Platform::ShippingMethodSerializer do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

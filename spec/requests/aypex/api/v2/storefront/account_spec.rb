@@ -1,6 +1,6 @@
 require "spec_helper"
 
-describe "Storefront API v2 Account spec", type: :request do
+describe "Storefront API v2 Account spec" do
   include_context "API v2 tokens"
 
   let!(:user) { create(:user_with_addresses) }

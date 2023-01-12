@@ -16,7 +16,7 @@ module Aypex
           end
 
           def aypex_permitted_attributes
-            conditional_params = action_name == 'update' ? [:id] : []
+            conditional_params = (action_name == "update") ? [:id] : []
 
             super + [{
               promotion_action_line_items_attributes: Aypex::PromotionActionLineItem.json_api_permitted_attributes.concat(conditional_params),

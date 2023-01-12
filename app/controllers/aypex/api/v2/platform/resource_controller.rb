@@ -46,7 +46,7 @@ module Aypex
           protected
 
           def resource_serializer
-            serializer_base_name = model_class.to_s.sub('Aypex::', '')
+            serializer_base_name = model_class.to_s.sub("Aypex::", "")
             "Aypex::Api::V2::Platform::#{serializer_base_name}Serializer".constantize
           end
 
@@ -93,13 +93,13 @@ module Aypex
             return if aypex_current_user.nil?
 
             case action_name
-            when 'create'
+            when "create"
               aypex_authorize! :create, model_class
-            when 'destroy'
+            when "destroy"
               aypex_authorize! :destroy, resource
-            when 'index'
+            when "index"
               aypex_authorize! :read, model_class
-            when 'show'
+            when "show"
               aypex_authorize! :read, resource
             else
               aypex_authorize! :update, resource
@@ -112,17 +112,17 @@ module Aypex
 
           def aypex_permitted_attributes
             store_ids = if model_class.method_defined?(:stores)
-                          [{ store_ids: [] }]
-                        else
-                          []
-                        end
+              [{store_ids: []}]
+            else
+              []
+            end
 
             model_class.json_api_permitted_attributes + store_ids + metadata_params
           end
 
           def metadata_params
             if model_class.include?(Metadata)
-              [{ public_metadata: {}, private_metadata: {} }]
+              [{public_metadata: {}, private_metadata: {}}]
             else
               []
             end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::AddressSerializer do
   subject { described_class.new(address).serializable_hash }
@@ -54,5 +54,5 @@ describe Aypex::Api::V2::Platform::AddressSerializer do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

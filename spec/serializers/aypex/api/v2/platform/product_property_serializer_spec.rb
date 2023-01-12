@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::ProductPropertySerializer do
   subject { described_class.new(product_property) }

@@ -1,7 +1,7 @@
 module Aypex
   module Webhooks
     def self.table_name_prefix
-      'aypex_webhooks_'
+      "aypex_webhooks_"
     end
 
     class Base < Aypex::Base

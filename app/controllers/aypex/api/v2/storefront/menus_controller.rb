@@ -26,7 +26,7 @@ module Aypex
           end
 
           def scope_includes
-            { menu_items: [:children, :parent, :icon] }
+            {menu_items: [:children, :parent, :icon]}
           end
         end
       end

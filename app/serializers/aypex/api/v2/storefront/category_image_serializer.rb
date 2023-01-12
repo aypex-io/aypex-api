@@ -4,7 +4,7 @@ module Aypex
       class CategoryImageSerializer < BaseSerializer
         include ::Aypex::Api::V2::CategoryImageTransformationConcern
 
-        set_type   :category_image
+        set_type :category_image
 
         attributes :styles, :alt, :original_url
       end

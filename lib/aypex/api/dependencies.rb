@@ -88,21 +88,21 @@ module Aypex
         @storefront_payment_create_service = Aypex::Dependency.payment_create_service
 
         # serializers
-        @storefront_address_serializer = 'Aypex::Api::V2::Storefront::AddressSerializer'
-        @storefront_cart_serializer = 'Aypex::Api::V2::Storefront::CartSerializer'
-        @storefront_cms_page_serializer = 'Aypex::Api::V2::Storefront::CmsPageSerializer'
-        @storefront_credit_card_serializer = 'Aypex::Api::V2::Storefront::CreditCardSerializer'
-        @storefront_country_serializer = 'Aypex::Api::V2::Storefront::CountrySerializer'
-        @storefront_menu_serializer = 'Aypex::Api::V2::Storefront::MenuSerializer'
-        @storefront_user_serializer = 'Aypex::Api::V2::Storefront::UserSerializer'
-        @storefront_shipment_serializer = 'Aypex::Api::V2::Storefront::ShipmentSerializer'
-        @storefront_category_serializer = 'Aypex::Api::V2::Storefront::CategorySerializer'
-        @storefront_payment_method_serializer = 'Aypex::Api::V2::Storefront::PaymentMethodSerializer'
-        @storefront_payment_serializer = 'Aypex::Api::V2::Storefront::PaymentSerializer'
-        @storefront_product_serializer = 'Aypex::Api::V2::Storefront::ProductSerializer'
-        @storefront_estimated_shipment_serializer = 'Aypex::Api::V2::Storefront::EstimatedShippingRateSerializer'
-        @storefront_store_serializer = 'Aypex::Api::V2::Storefront::StoreSerializer'
-        @storefront_order_serializer = 'Aypex::Api::V2::Storefront::OrderSerializer'
+        @storefront_address_serializer = "Aypex::Api::V2::Storefront::AddressSerializer"
+        @storefront_cart_serializer = "Aypex::Api::V2::Storefront::CartSerializer"
+        @storefront_cms_page_serializer = "Aypex::Api::V2::Storefront::CmsPageSerializer"
+        @storefront_credit_card_serializer = "Aypex::Api::V2::Storefront::CreditCardSerializer"
+        @storefront_country_serializer = "Aypex::Api::V2::Storefront::CountrySerializer"
+        @storefront_menu_serializer = "Aypex::Api::V2::Storefront::MenuSerializer"
+        @storefront_user_serializer = "Aypex::Api::V2::Storefront::UserSerializer"
+        @storefront_shipment_serializer = "Aypex::Api::V2::Storefront::ShipmentSerializer"
+        @storefront_category_serializer = "Aypex::Api::V2::Storefront::CategorySerializer"
+        @storefront_payment_method_serializer = "Aypex::Api::V2::Storefront::PaymentMethodSerializer"
+        @storefront_payment_serializer = "Aypex::Api::V2::Storefront::PaymentSerializer"
+        @storefront_product_serializer = "Aypex::Api::V2::Storefront::ProductSerializer"
+        @storefront_estimated_shipment_serializer = "Aypex::Api::V2::Storefront::EstimatedShippingRateSerializer"
+        @storefront_store_serializer = "Aypex::Api::V2::Storefront::StoreSerializer"
+        @storefront_order_serializer = "Aypex::Api::V2::Storefront::OrderSerializer"
 
         # sorters
         @storefront_collection_sorter = Aypex::Dependency.collection_sorter
@@ -125,12 +125,12 @@ module Aypex
         @storefront_products_finder = Aypex::Dependency.products_finder
         @storefront_category_finder = Aypex::Dependency.category_finder
 
-        @error_handler = 'Aypex::Api::ErrorHandler'
+        @error_handler = "Aypex::Api::ErrorHandler"
       end
 
       def set_platform_defaults
         # serializers
-        @platform_admin_user_serializer = 'Aypex::Api::V2::Platform::UserSerializer'
+        @platform_admin_user_serializer = "Aypex::Api::V2::Platform::UserSerializer"
 
         # coupon code handler
         @platform_coupon_handler = Aypex::Dependency.coupon_handler

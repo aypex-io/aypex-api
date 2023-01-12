@@ -1,13 +1,13 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::StoreSerializer do
   subject { described_class.new(store).serializable_hash }
 
   let!(:store) { Aypex::Store.default }
-  let!(:menus) { [create(:menu, store: store), create(:menu, location: 'Footer', store: store)] }
+  let!(:menus) { [create(:menu, store: store), create(:menu, location: "Footer", store: store)] }
   let!(:logo) do
     store.build_logo
-    store.logo.attachment.attach(io: File.new(Aypex::Engine.root + 'spec/fixtures' + 'thinking-cat.jpg'), filename: 'thinking-cat.jpg')
+    store.logo.attachment.attach(io: File.new(Aypex::Engine.root + "spec/fixtures" + "thinking-cat.jpg"), filename: "thinking-cat.jpg")
     store.save
     store.logo
   end
@@ -70,11 +70,11 @@ describe Aypex::Api::V2::Platform::StoreSerializer do
                 }
               ]
             }
-          },
+          }
         }
       }
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

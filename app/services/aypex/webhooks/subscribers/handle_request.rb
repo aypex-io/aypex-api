@@ -41,12 +41,12 @@ module Aypex
           @request ||=
             Aypex::Webhooks::Subscribers::MakeRequest.new(webhook_payload_body: body_with_event_metadata, url: url)
         end
-        alias make_request request
+        alias_method :make_request, :request
 
         def body_with_event_metadata
-          webhook_payload_body.
-            merge(event_created_at: event_created_at, event_id: event_id, event_type: event.name).
-            to_json
+          webhook_payload_body
+            .merge(event_created_at: event_created_at, event_id: event_id, event_type: event.name)
+            .to_json
         end
 
         def event

@@ -15,7 +15,7 @@ module Aypex
             private
 
             def resource
-              params[:id].eql?('default') ? scope.default.first! : scope.find(params[:id])
+              params[:id].eql?("default") ? scope.default.first! : scope.find(params[:id])
             end
 
             def model_class

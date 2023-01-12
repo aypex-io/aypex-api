@@ -1,11 +1,11 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Categories API', swagger: true do
-  include_context 'Platform API v2'
+describe "Categories API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Shipping Category'
+  resource_name = "Shipping Category"
   options = {
-    filter_examples: [{ name: 'filter[name_i_cont]', example: 'default' }]
+    filter_examples: [{name: "filter[name_i_cont]", example: "default"}]
   }
 
   let(:id) { create(:shipping_category).id }
@@ -13,14 +13,14 @@ describe 'Categories API', swagger: true do
   let(:valid_create_param_value) { build(:shipping_category).attributes }
   let(:valid_update_param_value) do
     {
-      name: 'Default'
+      name: "Default"
     }
   end
   let(:invalid_param_value) do
     {
-      name: '',
+      name: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

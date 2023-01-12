@@ -12,7 +12,6 @@ module Aypex
           before_action :load_variant, only: :add_item
           before_action :require_aypex_current_user, only: :associate
 
-
           def create
             aypex_authorize! :create, Aypex::Order
 
@@ -21,10 +20,10 @@ module Aypex
               store: current_store,
               currency: current_currency,
               public_metadata: add_item_params[:public_metadata],
-              private_metadata: add_item_params[:private_metadata],
+              private_metadata: add_item_params[:private_metadata]
             }
 
-            order   = aypex_current_order if aypex_current_order.present?
+            order = aypex_current_order if aypex_current_order.present?
             order ||= create_service.call(create_cart_params).value
 
             render_serialized_payload(201) { serialize_resource(order) }
@@ -115,9 +114,9 @@ module Aypex
 
             coupon_codes = select_coupon_codes
 
-            return render_error_payload(I18n.t('aypex.api.v2.cart.no_coupon_code')) if coupon_codes.empty?
+            return render_error_payload(I18n.t("aypex.api.v2.cart.no_coupon_code")) if coupon_codes.empty?
 
-            result_errors = coupon_codes.count > 1 ? select_errors(coupon_codes) : select_error(coupon_codes)
+            result_errors = (coupon_codes.count > 1) ? select_errors(coupon_codes) : select_error(coupon_codes)
 
             if result_errors.blank?
               render_serialized_payload { serialized_current_order }
@@ -221,7 +220,7 @@ module Aypex
           end
 
           def render_error_item_quantity
-            render json: { error: I18n.t(:wrong_quantity, scope: 'aypex.api.v2.cart') }, status: 422
+            render json: {error: I18n.t(:wrong_quantity, scope: "aypex.api.v2.cart")}, status: 422
           end
 
           def estimate_shipping_rates_serializer

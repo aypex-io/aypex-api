@@ -101,8 +101,8 @@ module Aypex
 
           def allowed_sort_attributes
             super.push(:available_on, :make_active_at, :total, :payment_total, :item_total, :shipment_total,
-                       :adjustment_total, :promo_total, :included_tax_total, :additional_tax_total,
-                       :item_count, :tax_total, :completed_at)
+              :adjustment_total, :promo_total, :included_tax_total, :additional_tax_total,
+              :item_count, :tax_total, :completed_at)
           end
 
           def update_service

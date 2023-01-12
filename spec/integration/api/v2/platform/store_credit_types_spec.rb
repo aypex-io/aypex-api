@@ -1,9 +1,9 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Store Credit Types API', swagger: true do
-  include_context 'Platform API v2'
+describe "Store Credit Types API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Store Credit Type'
+  resource_name = "Store Credit Type"
   options = {}
 
   let(:id) { create(:store_credit_type).id }
@@ -11,15 +11,15 @@ describe 'Store Credit Types API', swagger: true do
   let(:valid_create_param_value) { build(:store_credit_type).attributes }
   let(:valid_update_param_value) do
     {
-      name: 'default',
+      name: "default",
       priority: 1
     }
   end
   let(:invalid_param_value) do
     {
-      name: ''
+      name: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

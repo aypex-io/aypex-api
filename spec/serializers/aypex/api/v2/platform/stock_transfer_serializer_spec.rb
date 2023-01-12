@@ -1,9 +1,9 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::StockTransferSerializer do
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  include_context 'API v2 serializers params'
+  include_context "API v2 serializers params"
 
   let(:destination_location) { create(:stock_location) }
   let(:resource) { create(type, destination_location: destination_location, source_location: source_location) }
@@ -47,10 +47,10 @@ describe Aypex::Api::V2::Platform::StockTransferSerializer do
             }
           }
         },
-        type: type,
+        type: type
       }
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

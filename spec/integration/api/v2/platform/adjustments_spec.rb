@@ -1,12 +1,12 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-describe 'Adjustments API', swagger: true do
-  include_context 'Platform API v2'
+describe "Adjustments API", swagger: true do
+  include_context "Platform API v2"
 
-  resource_name = 'Adjustment'
+  resource_name = "Adjustment"
   options = {
-    include_example: 'order,adjustable',
-    filter_examples: [{ name: 'filter[order_id]', example: '1234' }]
+    include_example: "order,adjustable",
+    filter_examples: [{name: "filter[order_id]", example: "1234"}]
   }
 
   let(:line_item) { create(:line_item, order: order) }
@@ -17,14 +17,14 @@ describe 'Adjustments API', swagger: true do
   let(:valid_update_param_value) do
     {
       amount: 15.0,
-      label: 'New label'
+      label: "New label"
     }
   end
   let(:invalid_param_value) do
     {
-      label: ''
+      label: ""
     }
   end
 
-  include_examples 'CRUD examples', resource_name, options
+  include_examples "CRUD examples", resource_name, options
 end

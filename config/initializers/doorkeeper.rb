@@ -2,8 +2,8 @@ Doorkeeper.configure do
   orm :active_record
   use_refresh_token
   api_only
-  base_controller 'Aypex::Api::V2::BaseController'
-  base_metal_controller 'Aypex::Api::V2::BaseController'
+  base_controller "Aypex::Api::V2::BaseController"
+  base_metal_controller "Aypex::Api::V2::BaseController"
 
   # FIXME: we should only skip this for Storefront API until v5
   # we should not skip this for Platform API
@@ -38,11 +38,11 @@ Doorkeeper.configure do
 
   optional_scopes :admin, :write, :read
 
-  access_token_class 'Aypex::OauthAccessToken'
-  access_grant_class 'Aypex::OauthAccessGrant'
-  application_class 'Aypex::OauthApplication'
+  access_token_class "Aypex::OauthAccessToken"
+  access_grant_class "Aypex::OauthAccessGrant"
+  application_class "Aypex::OauthApplication"
 
   # using BCrypt for token secrets is currently not supported by Doorkeeper
   hash_token_secrets fallback: :plain
-  hash_application_secrets fallback: :plain, using: '::Doorkeeper::SecretStoring::BCrypt'
+  hash_application_secrets fallback: :plain, using: "::Doorkeeper::SecretStoring::BCrypt"
 end

@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Storefront::WishlistSerializer do
   subject { described_class.new(wishlist).serializable_hash }
@@ -36,5 +36,5 @@ describe Aypex::Api::V2::Storefront::WishlistSerializer do
     )
   end
 
-  it_behaves_like 'an ActiveJob serializable hash'
+  it_behaves_like "an ActiveJob serializable hash"
 end

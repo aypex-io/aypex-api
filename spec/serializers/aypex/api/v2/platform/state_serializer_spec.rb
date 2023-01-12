@@ -1,4 +1,4 @@
-require 'spec_helper'
+require "spec_helper"
 
 describe Aypex::Api::V2::Platform::StateSerializer do
   subject { described_class.new(state) }
@@ -26,8 +26,8 @@ describe Aypex::Api::V2::Platform::StateSerializer do
                 id: country.id.to_s,
                 type: :country
               }
-            },
-          },
+            }
+          }
         }
       }
     )
