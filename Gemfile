@@ -61,10 +61,10 @@ group :development do
 end
 
 group :test do
-  gem 'jsonapi-rspec'
-  gem 'multi_json'
+  gem "jsonapi-rspec"
+  gem "multi_json"
 end
 
-gem 'aypex', path: '../aypex'
+gem "aypex", github: "aypex-io/aypex"
 
 gemspec
