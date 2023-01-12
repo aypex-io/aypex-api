@@ -210,7 +210,7 @@ RSpec.describe Aypex::Api::V2::Storefront::WishlistsController do
         expect(json_response["data"]["attributes"]["quantity"]).to eql(1)
       end
 
-      it "return the existing wished_item - quantity attribute ommited" do
+      it "return the existing wished_item - quantity attribute omitted" do
         post "/api/v2/storefront/wishlists/#{user.wishlists.first.token}/add_item", headers: headers_bearer,
           params: {
             variant_id: set_variant.id.to_s

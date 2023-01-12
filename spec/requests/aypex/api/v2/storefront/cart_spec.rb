@@ -206,7 +206,7 @@ describe "API V2 Storefront Cart Spec" do
       end
     end
 
-    shared_examples "doesnt add item with quantity unnavailble" do
+    shared_examples "doesn't add item with quantity unnavailble" do
       before do
         variant.stock_items.first.update(backorderable: false)
         params[:quantity] = 11
@@ -220,7 +220,7 @@ describe "API V2 Storefront Cart Spec" do
       end
     end
 
-    shared_examples "doesnt add item from different store" do
+    shared_examples "doesn't add item from different store" do
       before do
         variant.product.stores = [create(:store)]
         execute
@@ -233,7 +233,7 @@ describe "API V2 Storefront Cart Spec" do
       end
     end
 
-    shared_examples "doesnt add non-existing item" do
+    shared_examples "doesn't add non-existing item" do
       before do
         variant.destroy
         execute
@@ -246,7 +246,7 @@ describe "API V2 Storefront Cart Spec" do
       end
     end
 
-    shared_examples "doesnt add item if metadata is not a hash" do
+    shared_examples "doesn't add item if metadata is not a hash" do
       before do
         params[:public_metadata] = [1, 2, 3]
         execute
@@ -264,10 +264,10 @@ describe "API V2 Storefront Cart Spec" do
 
       context "with existing order" do
         it_behaves_like "adds item"
-        it_behaves_like "doesnt add item with quantity unnavailble"
-        it_behaves_like "doesnt add item from different store"
-        it_behaves_like "doesnt add non-existing item"
-        it_behaves_like "doesnt add item if metadata is not a hash"
+        it_behaves_like "doesn't add item with quantity unnavailble"
+        it_behaves_like "doesn't add item from different store"
+        it_behaves_like "doesn't add non-existing item"
+        it_behaves_like "doesn't add item if metadata is not a hash"
       end
 
       it_behaves_like "no current order"
@@ -278,10 +278,10 @@ describe "API V2 Storefront Cart Spec" do
 
       context "with existing order" do
         it_behaves_like "adds item"
-        it_behaves_like "doesnt add item with quantity unnavailble"
-        it_behaves_like "doesnt add item from different store"
-        it_behaves_like "doesnt add non-existing item"
-        it_behaves_like "doesnt add item if metadata is not a hash"
+        it_behaves_like "doesn't add item with quantity unnavailble"
+        it_behaves_like "doesn't add item from different store"
+        it_behaves_like "doesn't add non-existing item"
+        it_behaves_like "doesn't add item if metadata is not a hash"
       end
 
       it_behaves_like "no current order"
