@@ -3,21 +3,26 @@ require "spec_helper"
 describe "Platform API v2 Categories API" do
   include_context "Platform API v2"
 
-  let(:base_category) { create(:base_category, store: store) }
   let(:store_2) { create(:store) }
+  let(:base_category_1) { create(:base_category, store: store, name: "Women") }
+  let(:base_category_2) { create(:base_category, store: store_2, name: "Men") }
+
   let(:bearer_token) { {"Authorization" => valid_authorization} }
 
   describe "categories#index" do
-    let!(:category) { create(:category, name: "T-Shirts", base_category: base_category) }
-    let!(:category_2) { create(:category, name: "Pants", base_category: base_category) }
-    let!(:category_3) { create(:category, name: "T-Shirts", base_category: create(:base_category, store: store_2)) }
+    let!(:category_1) { create(:category, name: "Zips", base_category: base_category_1) }
+    let!(:category_2) { create(:category, name: "Pants", base_category: base_category_1) }
+
+    let!(:category_3) { create(:category, name: "Shorts", base_category: base_category_2) }
+    let!(:category_4) { create(:category, name: "Pants", base_category: base_category_2) }
 
     context "filtering" do
-      before { get "/api/v2/platform/categories?filter[name_i_cont]=shirt", headers: bearer_token }
+      before { get "/api/v2/platform/categories?filter[name_i_cont]=pants", headers: bearer_token }
 
       it "returns categories with matching name" do
         expect(json_response["data"].count).to eq 1
-        expect(json_response["data"].first).to have_id(category.id.to_s)
+        expect(json_response["data"].first).to have_id(category_2.id.to_s)
+
         expect(json_response["data"].first).to have_relationships(:base_category, :parent, :children, :image)
       end
     end
@@ -25,15 +30,18 @@ describe "Platform API v2 Categories API" do
     context "sorting" do
       before { get "/api/v2/platform/categories?sort=name", headers: bearer_token }
 
+      it "returns 3 items" do
+        expect(json_response["data"].count).to eq base_category_1.categories.count
+      end
+
       it "returns categories sorted by name" do
-        expect(json_response["data"].count).to eq base_category.categories.count
         expect(json_response["data"].first).to have_id(category_2.id.to_s)
       end
     end
   end
 
   describe "categories#show" do
-    let!(:category) { create(:category, name: "T-Shirts", base_category: base_category) }
+    let!(:category) { create(:category, name: "T-Shirts", base_category: base_category_1) }
 
     context "with valid id" do
       before { get "/api/v2/platform/categories/#{category.id}", headers: bearer_token }
@@ -142,7 +150,7 @@ describe "Platform API v2 Categories API" do
   end
 
   describe "categories#update for metadata" do
-    let!(:category) { create(:category, name: "T-Shirts", base_category: base_category) }
+    let!(:category) { create(:category, name: "T-Shirts", base_category: base_category_1) }
 
     before do
       patch "/api/v2/platform/categories/#{category.id}",
@@ -160,8 +168,8 @@ describe "Platform API v2 Categories API" do
         params: {
           category: {
             name: "Tires",
-            base_category_id: base_category.id,
-            parent_id: base_category.root.id
+            base_category_id: base_category_1.id,
+            parent_id: base_category_1.root.id
           }.merge(metadata_params)
         }
     end
@@ -170,9 +178,9 @@ describe "Platform API v2 Categories API" do
   end
 
   describe "categories#reposition" do
-    let!(:category_a) { create(:category, name: "T-Shirts", base_category: base_category) }
-    let!(:category_b) { create(:category, name: "Shorts", base_category: base_category) }
-    let!(:category_c) { create(:category, name: "Pants", base_category: base_category) }
+    let!(:category_a) { create(:category, name: "T-Shirts", base_category: base_category_1) }
+    let!(:category_b) { create(:category, name: "Shorts", base_category: base_category_1) }
+    let!(:category_c) { create(:category, name: "Pants", base_category: base_category_1) }
 
     context "with no params" do
       let(:params) do
@@ -227,7 +235,7 @@ describe "Platform API v2 Categories API" do
       it "category_a can be nested inside another category_c" do
         reload_categories
 
-        expect(category_a.permalink).to eq("#{base_category.root.permalink}/pants/t-shirts")
+        expect(category_a.permalink).to eq("#{base_category_1.root.permalink}/pants/t-shirts")
         expect(category_a.parent_id).to eq(category_c.id)
         expect(category_a.depth).to eq(2)
       end
