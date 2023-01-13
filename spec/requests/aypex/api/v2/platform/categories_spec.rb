@@ -8,7 +8,7 @@ describe "Platform API v2 Categories API" do
   let(:bearer_token) { {"Authorization" => valid_authorization} }
 
   describe "categories#index" do
-    let!(:category) { create(:category, name: "T-Shirts", base_category: base_category) }
+    let!(:category) { create(:category, name: "Trousers", base_category: base_category) }
     let!(:category_2) { create(:category, name: "Pants", base_category: base_category) }
     let!(:category_3) { create(:category, name: "T-Shirts", base_category: create(:base_category, store: store_2)) }
 
