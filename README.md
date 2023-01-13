@@ -1,3 +1,6 @@
+[![AYPEX API CI](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml)
+[![Standard RB](https://github.com/aypex-io/aypex-api/actions/workflows/standard_rb_core.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/standard_rb_core.yml)
+
 # Aypex::Api
 
 The API pack for Aypex
