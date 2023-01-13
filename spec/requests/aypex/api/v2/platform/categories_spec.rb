@@ -30,6 +30,7 @@ describe "Platform API v2 Categories API" do
       end
 
       it "returns categories sorted by name" do
+        puts json_response["data"]
         expect(json_response["data"].first).to have_id(category_2.id.to_s)
       end
     end
