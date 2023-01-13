@@ -1,4 +1,4 @@
-[![AYPEX API CI](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml)
+[![Aypex::Api CI](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml)
 [![Standard RB](https://github.com/aypex-io/aypex-api/actions/workflows/standard_rb_core.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/standard_rb_core.yml)
 
 # Aypex::Api
@@ -44,8 +44,5 @@ bundle exec rspec spec
 bundle exec rake rswag:specs:swaggerize
 ```
 
-## Contributing
-Contribution directions go here.
-
 ## License
-The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+The gem is available as open source under the terms of the [MIT License](https://github.com/aypex-io/aypex-api/blob/main/MIT-LICENSE).

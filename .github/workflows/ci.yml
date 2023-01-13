@@ -1,5 +1,5 @@
 ---
-name: AYPEX API CI
+name: Aypex::Api CI
 on:
   pull_request:
     branches:
