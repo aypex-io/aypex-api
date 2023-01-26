@@ -28,10 +28,10 @@ module Aypex
                 end
               end
             else
-              Rails.logger.error I18n.t("aypex.api.v2.digitals.missing_file")
+              Rails.logger.error I18n.t("aypex.api.missing_file")
             end
 
-            render json: {error: I18n.t("aypex.api.v2.digitals.unauthorized")}, status: 403
+            render json: {error: I18n.t("aypex.api.unauthorized")}, status: 403
           end
 
           private

@@ -45,7 +45,7 @@ module Aypex
             if resource.destroy
               head 204
             else
-              render_error_payload(I18n.t("aypex.api.v2.wishlist.errors.the_wishlist_could_not_be_destroyed"))
+              render_error_payload(I18n.t("aypex.api.the_wishlist_could_not_be_destroyed"))
             end
           end
 
@@ -152,7 +152,7 @@ module Aypex
           end
 
           def render_error_item_quantity
-            render json: {error: I18n.t("aypex.api.v2.wishlist.wrong_quantity")}, status: 422
+            render json: {error: I18n.t("aypex.api.wrong_quantity")}, status: 422
           end
 
           def ensure_valid_quantity
