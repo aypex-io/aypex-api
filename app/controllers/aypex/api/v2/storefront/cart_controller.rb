@@ -114,7 +114,7 @@ module Aypex
 
             coupon_codes = select_coupon_codes
 
-            return render_error_payload(I18n.t("aypex.api.v2.cart.no_coupon_code")) if coupon_codes.empty?
+            return render_error_payload(I18n.t("aypex.api.no_coupon_code")) if coupon_codes.empty?
 
             result_errors = (coupon_codes.count > 1) ? select_errors(coupon_codes) : select_error(coupon_codes)
 
@@ -220,7 +220,7 @@ module Aypex
           end
 
           def render_error_item_quantity
-            render json: {error: I18n.t(:wrong_quantity, scope: "aypex.api.v2.cart")}, status: 422
+            render json: {error: I18n.t("aypex.api.wrong_quantity")}, status: 422
           end
 
           def estimate_shipping_rates_serializer

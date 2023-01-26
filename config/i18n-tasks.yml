@@ -8,33 +8,5 @@ data:
 # Find translate calls
 search:
   paths:
-    - '../api/app'
-    - '../api/lib'
-
-#### For API v1 only, START ####
-  exclude:
-    - '../api/app/controllers/aypex/api/v1/*'
-    - '../api/app/views/*'
-
-ignore_unused:
-  - 'aypex.api.gateway_error'
-  - 'aypex.api.invalid_api_key'
-  - 'aypex.api.invalid_resource'
-  - 'aypex.api.invalid_base_category_id'
-  - 'aypex.api.must_specify_api_key'
-  - 'aypex.api.negative_quantity'
-  - 'aypex.api.order.could_not_transition'
-  - 'aypex.api.order.insufficient_quantity'
-  - 'aypex.api.order.invalid_shipping_method'
-  - 'aypex.api.payment.credit_over_limit'
-  - 'aypex.api.payment.update_forbidden'
-  - 'aypex.api.shipment.cannot_ready'
-  - 'aypex.api.shipment_transfer_errors_occurred'
-  - 'aypex.api.shipment_transfer_success'
-  - 'aypex.api.stock_location_required'
-  - 'aypex.api.unauthorized'
-  - 'aypex.api.wrong_shipment_target'
-#### For API v1 only, END ####
-
-# The PatternMapper for Aypex.t
-<% I18n::Tasks.add_scanner 'I18n::Tasks::Scanners::PatternMapper', patterns: [['\bAypex\.t[( ]\s*%{key}', 'aypex.%{key}']] %>
+    - 'app'
+    - 'lib'

@@ -255,7 +255,7 @@ describe "API V2 Storefront Cart Spec" do
       it_behaves_like "returns 422 HTTP status"
 
       it "return an error" do
-        expect(json_response[:error]).to eq(I18n.t(:invalid_params, scope: "aypex.api.v2.metadata"))
+        expect(json_response[:error]).to eq(I18n.t("aypex.api.invalid_params"))
       end
     end
 

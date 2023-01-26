@@ -142,7 +142,7 @@ module Aypex
         end
 
         def record_not_found
-          render_error_payload(I18n.t(:resource_not_found, scope: "aypex.api"), 404)
+          render_error_payload(I18n.t("aypex.api.resource_not_found"), 404)
         end
 
         def access_denied(exception)
