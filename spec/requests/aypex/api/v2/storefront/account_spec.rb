@@ -87,7 +87,7 @@ describe "Storefront API v2 Account spec" do
   end
 
   describe "users#create" do
-    let(:store) {create(:store)}
+    let(:store) { create(:store) }
     let(:default_bill_address) { create(:address) }
     let(:default_ship_address) { create(:address) }
     let(:new_attributes) do
