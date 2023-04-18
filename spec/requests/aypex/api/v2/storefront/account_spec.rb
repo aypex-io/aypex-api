@@ -87,6 +87,7 @@ describe "Storefront API v2 Account spec" do
   end
 
   describe "users#create" do
+    let(:store) {create(:store)}
     let(:default_bill_address) { create(:address) }
     let(:default_ship_address) { create(:address) }
     let(:new_attributes) do
@@ -98,6 +99,7 @@ describe "Storefront API v2 Account spec" do
         ship_address_id: default_ship_address.id.to_s,
         first_name: "Peter",
         last_name: "Parker",
+        store_id: store.id,
         public_metadata: {"has_other_account" => "true"},
         private_metadata: {"shops_in_other_stores" => "false"}
       }
