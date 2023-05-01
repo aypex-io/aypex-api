@@ -132,7 +132,7 @@ describe "Storefront API v2 CMS Pages spec" do
             .and(
               have_id(cms_section.id.to_s)
               .and(have_relationship(:cms_components))
-              .and(have_jsonapi_attributes(:settings, :position, :is_fullscreen, :has_gutters))
+              .and(have_jsonapi_attributes(:settings, :position))
             )
         )
       end

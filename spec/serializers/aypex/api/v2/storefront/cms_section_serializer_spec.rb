@@ -18,9 +18,7 @@ describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
               name: cms_section.name,
               settings: cms_section.settings,
               type: cms_section.type,
-              position: cms_section.position,
-              is_fullscreen: false,
-              has_gutters: true
+              position: cms_section.position
             },
             relationships: {
               cms_components: {
