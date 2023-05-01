@@ -960,7 +960,7 @@ describe "API V2 Storefront Products Spec" do
         end
       end
 
-      let!(:image) { create(:image, viewable: product.master) }
+      let!(:image) { create(:image, viewable: product) }
       let(:image_json_data) { json_response["included"].first["attributes"] }
 
       before { get "/api/v2/storefront/products/#{product.slug}?include=images#{image_transformation_params}" }
@@ -977,7 +977,7 @@ describe "API V2 Storefront Products Spec" do
       end
 
       context "when product image json returned" do
-        let(:image_transformation_params) { "&image_transformation[size]=100x50&image_transformation[quality]=50" }
+        let(:image_transformation_params) { "&image_transformation[width]=100&image_transformation[quality]=50" }
 
         it_behaves_like "returns 200 HTTP status"
         it_behaves_like "returns product image data"

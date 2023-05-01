@@ -26,11 +26,7 @@ module Aypex
         has_many :products, record_type: :product,
           if: proc { |_category, params| params && params[:include_products] == true }
 
-        has_one :image,
-          object_method_name: :icon,
-          id_method_name: :icon_id,
-          record_type: :category_image,
-          serializer: :category_image
+        has_one :image
       end
     end
   end

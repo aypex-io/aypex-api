@@ -22,11 +22,7 @@ module Aypex
           menu_item.leaf?
         end
 
-        has_one :icon,
-          object_method_name: :icon,
-          id_method_name: :icon_id,
-          record_type: :icon,
-          serializer: :icon
+        has_one :image
 
         belongs_to :menu, serializer: :menu
         belongs_to :parent, record_type: :menu_item, serializer: :menu_item

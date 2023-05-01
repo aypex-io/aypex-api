@@ -47,7 +47,6 @@ module Aypex
           belongs_to :product
           belongs_to :tax_category
           has_many :digitals
-          has_many :images
           has_many :option_values
           has_many :stock_items
           has_many :stock_locations

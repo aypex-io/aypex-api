@@ -8,11 +8,11 @@ describe "Platform API v2 CmsSections" do
   let!(:page) { create(:cms_homepage, store: store) }
 
   let!(:resource_a) { create(:cms_hero_image_section, cms_page: page) }
-  let!(:resource_b) { create(:cms_featured_article_section, cms_page: page) }
-  let!(:resource_c) { create(:cms_product_carousel_section, cms_page: page) }
-  let!(:resource_d) { create(:cms_image_gallery_section, cms_page: page) }
+  let!(:resource_b) { create(:cms_hero_image_section, cms_page: page) }
+  let!(:resource_c) { create(:cms_hero_image_section, cms_page: page) }
+  let!(:resource_d) { create(:cms_side_by_side_images_section, cms_page: page) }
   let!(:resource_e) { create(:cms_side_by_side_images_section, cms_page: page) }
-  let!(:resource_f) { create(:cms_rich_text_content_section, cms_page: page) }
+  let!(:resource_f) { create(:cms_side_by_side_images_section, cms_page: page) }
 
   let(:bearer_token) { {"Authorization" => valid_authorization} }
 

@@ -7,7 +7,7 @@ module Aypex
 
           set_type :image
 
-          attributes :styles, :position, :alt, :created_at, :updated_at, :original_url
+          attributes :position, :alt, :created_at, :updated_at, :original_url
 
           belongs_to :viewable, polymorphic: true
         end

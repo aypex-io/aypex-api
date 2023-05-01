@@ -40,10 +40,10 @@ describe Aypex::Api::V2::Platform::MenuItemSerializer do
             updated_at: menu_item.updated_at
           },
           relationships: {
-            icon: {
+            image: {
               data: {
-                id: menu_item.icon.id.to_s,
-                type: :icon
+                id: menu_item.image.id.to_s,
+                type: :image
               }
             },
             menu: {

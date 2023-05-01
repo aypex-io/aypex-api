@@ -10,7 +10,11 @@ module Aypex
           end
 
           def scope_includes
-            [:cms_sections]
+            {
+              cms_sections: [
+                :cms_components
+              ]
+            }
           end
         end
       end

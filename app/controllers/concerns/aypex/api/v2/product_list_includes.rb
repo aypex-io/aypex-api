@@ -6,7 +6,7 @@ module Aypex
           {
             product_properties: [],
             option_types: [],
-            variant_images: [],
+            images: [],
             master: product_variant_includes,
             variants: product_variant_includes
           }
@@ -15,8 +15,7 @@ module Aypex
         def product_variant_includes
           {
             prices: [],
-            option_values: :option_type,
-            images: []
+            option_values: :option_type
           }
         end
       end

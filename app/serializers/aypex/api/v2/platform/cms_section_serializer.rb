@@ -6,11 +6,8 @@ module Aypex
           include ResourceSerializerConcern
 
           belongs_to :cms_page, serializer: :cms_page
-          belongs_to :linked_resource, polymorphic: {
-            Aypex::Cms::Pages::StandardPage => :cms_page,
-            Aypex::Cms::Pages::FeaturePage => :cms_page,
-            Aypex::Cms::Pages::Homepage => :cms_page
-          }
+
+          has_many :cms_components, serializer: :cms_component
         end
       end
     end

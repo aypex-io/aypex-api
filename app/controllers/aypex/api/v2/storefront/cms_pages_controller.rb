@@ -31,7 +31,7 @@ module Aypex
 
           def scope_includes
             {
-              cms_sections: :linked_resource
+              cms_sections: :cms_components
             }
           end
         end

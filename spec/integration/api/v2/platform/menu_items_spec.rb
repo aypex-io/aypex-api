@@ -5,7 +5,7 @@ describe "Menu Items API", swagger: true do
 
   resource_name = "Menu Item"
   options = {
-    include_example: "menu,icon,parent,children,linked_resource",
+    include_example: "menu,image,parent,children,linked_resource",
     filter_examples: [{name: "filter[name_eq]", example: "T-Shirts"}]
   }
 

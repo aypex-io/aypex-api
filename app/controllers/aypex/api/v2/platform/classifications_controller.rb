@@ -12,7 +12,7 @@ module Aypex
           def scope_includes
             [
               category: [],
-              product: [:variants_including_master, :variant_images, :master, {variants: [:prices]}]
+              product: [:variants_including_master, :images, :master, {variants: [:prices]}]
             ]
           end
         end

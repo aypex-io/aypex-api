@@ -5,7 +5,7 @@ describe Aypex::Api::V2::Platform::VariantSerializer do
 
   include_context "API v2 serializers params"
 
-  let!(:variant) { create(:variant, price: 10, compare_at_price: 15, images: create_list(:image, 2), tax_category: create(:tax_category)) }
+  let!(:variant) { create(:variant, price: 10, compare_at_price: 15, tax_category: create(:tax_category)) }
   let!(:digital) { create(:digital, variant: variant) }
 
   it { expect(subject).to be_kind_of(Hash) }
@@ -72,18 +72,6 @@ describe Aypex::Api::V2::Platform::VariantSerializer do
                 {
                   id: variant.digitals.first.id.to_s,
                   type: :digital
-                }
-              ]
-            },
-            images: {
-              data: [
-                {
-                  id: variant.images.first.id.to_s,
-                  type: :image
-                },
-                {
-                  id: variant.images.second.id.to_s,
-                  type: :image
                 }
               ]
             },

@@ -3,13 +3,14 @@ require "spec_helper"
 describe Aypex::Webhooks::HasWebhooks do
   let(:images) { create_list(:image, 2) }
   let(:store) { create(:store) }
-  let(:variant_with_images) { create(:variant, images: images) }
+  let(:variant_2) { create(:variant) }
   let(:variant) { build(:variant) }
   let(:product) do
     build(
       :product_in_stock,
-      variants_including_master: [variant_with_images, variant],
-      stores: [store]
+      variants_including_master: [variant_2, variant],
+      stores: [store],
+      images: images
     )
   end
   let(:store) { create(:store) }

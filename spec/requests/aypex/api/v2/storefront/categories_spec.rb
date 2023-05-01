@@ -223,17 +223,17 @@ describe "Categories Spec" do
       shared_examples "returns category image data" do
         it "returns category image data" do
           expect(json_response["included"].count).to eq(1)
-          expect(json_response["included"].first["type"]).to eq("category_image")
+          expect(json_response["included"].first["type"]).to eq("image")
         end
       end
 
-      let!(:image) { create(:category_image, viewable: category) }
+      let!(:image) { create(:image, viewable: category) }
       let(:image_json_data) { json_response["included"].first["attributes"] }
 
-      before { get "/api/v2/storefront/categories/#{category.id}?include=image#{category_image_transformation_params}" }
+      before { get "/api/v2/storefront/categories/#{category.id}?include=image#{image_transformation_params}" }
 
       context "when no image transformation params are passed" do
-        let(:category_image_transformation_params) { "" }
+        let(:image_transformation_params) { "" }
 
         it_behaves_like "returns 200 HTTP status"
         it_behaves_like "returns category image data"
@@ -244,7 +244,7 @@ describe "Categories Spec" do
       end
 
       context "when category image json returned" do
-        let(:category_image_transformation_params) { "&category_image_transformation[size]=100x50&category_image_transformation[quality]=50" }
+        let(:image_transformation_params) { "&image_transformation[width]=100&image_transformation[quality]=50" }
 
         it_behaves_like "returns 200 HTTP status"
         it_behaves_like "returns category image data"

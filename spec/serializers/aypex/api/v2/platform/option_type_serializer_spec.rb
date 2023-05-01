@@ -20,6 +20,7 @@ describe Aypex::Api::V2::Platform::OptionTypeSerializer do
             created_at: option_type.created_at,
             updated_at: option_type.updated_at,
             filterable: option_type.filterable,
+            image_filterable: option_type.image_filterable,
             public_metadata: {},
             private_metadata: {}
           },
