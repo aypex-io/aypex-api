@@ -65,6 +65,6 @@ group :test do
   gem "multi_json"
 end
 
-gem "aypex", path: "../aypex" #, branch: "main"
+gem "aypex", github: "aypex-io/aypex"
 
 gemspec

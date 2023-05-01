@@ -41,7 +41,7 @@ describe "CMS Section API", swagger: true do
     {
       name: "Super Hero",
       position: 1,
-      type: "Aypex::Cms::Sections::HeroImage"
+      type: "Aypex::Cms::Section::HeroImage"
     }
   end
 

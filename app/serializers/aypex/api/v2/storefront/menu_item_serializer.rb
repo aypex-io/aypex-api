@@ -27,9 +27,9 @@ module Aypex
         belongs_to :menu, serializer: :menu
         belongs_to :parent, record_type: :menu_item, serializer: :menu_item
         belongs_to :linked_resource, polymorphic: {
-          Aypex::Cms::Pages::StandardPage => :cms_page,
-          Aypex::Cms::Pages::FeaturePage => :cms_page,
-          Aypex::Cms::Pages::Homepage => :cms_page
+          Aypex::Cms::Page::StandardPage => :cms_page,
+          Aypex::Cms::Page::FeaturePage => :cms_page,
+          Aypex::Cms::Page::Homepage => :cms_page
         }
 
         has_many :children, record_type: :menu_item, serializer: :menu_item

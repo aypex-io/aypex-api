@@ -2224,7 +2224,7 @@ paths:
       - name: filter[type_eq]
         in: query
         description: ''
-        example: Aypex::Cms::Pages::FeaturePage
+        example: Aypex::Cms::Page::FeaturePage
         schema:
           type: string
       - name: filter[locale_eq]
@@ -2257,7 +2257,7 @@ paths:
                         meta_description:
                         visible: true
                         slug: omnis-neque-totam-ad-sunt-autem
-                        type: Aypex::Cms::Pages::StandardPage
+                        type: Aypex::Cms::Page::StandardPage
                         locale: en
                         deleted_at:
                         created_at: '2023-01-14T17:24:48.389Z'
@@ -2275,7 +2275,7 @@ paths:
                         meta_description:
                         visible: true
                         slug: corporis-aut-pariatur-omnis-aliquam-inventore-deleniti-soluta
-                        type: Aypex::Cms::Pages::StandardPage
+                        type: Aypex::Cms::Page::StandardPage
                         locale: en
                         deleted_at:
                         created_at: '2023-01-14T17:24:48.393Z'
@@ -2340,7 +2340,7 @@ paths:
                         meta_description:
                         visible: true
                         slug: nulla-sapiente-soluta-veritatis-culpa-quod-cupiditate-doloremque
-                        type: Aypex::Cms::Pages::StandardPage
+                        type: Aypex::Cms::Page::StandardPage
                         locale: en
                         deleted_at:
                         created_at: '2023-01-14T17:24:48.916Z'
@@ -2416,7 +2416,7 @@ paths:
                         meta_description:
                         visible: true
                         slug: velit-non-vel-sequi-placeat-quaerat
-                        type: Aypex::Cms::Pages::StandardPage
+                        type: Aypex::Cms::Page::StandardPage
                         locale: en
                         deleted_at:
                         created_at: '2023-01-14T17:24:49.181Z'
@@ -2485,7 +2485,7 @@ paths:
                         meta_description:
                         visible: true
                         slug: facere-dolore-atque-quia-laborum-ut-distinctio
-                        type: Aypex::Cms::Pages::StandardPage
+                        type: Aypex::Cms::Page::StandardPage
                         locale: en
                         deleted_at:
                         created_at: '2023-01-14T17:24:49.694Z'
@@ -2624,7 +2624,7 @@ paths:
                           gutters: No Gutters
                         fit: Screen
                         destination:
-                        type: Aypex::Cms::Sections::HeroImage
+                        type: Aypex::Cms::Section::HeroImage
                         position: 1
                         linked_resource_type: Aypex::Category
                         created_at: '2023-01-14T17:24:51.013Z'
@@ -2649,7 +2649,7 @@ paths:
                           layout_style: Default
                         fit: Container
                         destination:
-                        type: Aypex::Cms::Sections::ImageGallery
+                        type: Aypex::Cms::Section::ImageGallery
                         position: 2
                         linked_resource_type:
                         created_at: '2023-01-14T17:24:51.017Z'
@@ -2670,7 +2670,7 @@ paths:
                           gutters: No Gutters
                         fit: Screen
                         destination:
-                        type: Aypex::Cms::Sections::FeaturedArticle
+                        type: Aypex::Cms::Section::FeaturedArticle
                         position: 3
                         linked_resource_type: Aypex::Category
                         created_at: '2023-01-14T17:24:51.023Z'
@@ -2692,7 +2692,7 @@ paths:
                           gutters: No Gutters
                         fit: Screen
                         destination:
-                        type: Aypex::Cms::Sections::HeroImage
+                        type: Aypex::Cms::Section::HeroImage
                         position: 4
                         linked_resource_type: Aypex::Product
                         created_at: '2023-01-14T17:24:51.028Z'
@@ -2716,7 +2716,7 @@ paths:
                           gutters: No Gutters
                         fit: Screen
                         destination:
-                        type: Aypex::Cms::Sections::HeroImage
+                        type: Aypex::Cms::Section::HeroImage
                         position: 5
                         linked_resource_type: Aypex::Product
                         created_at: '2023-01-14T17:24:51.033Z'
@@ -2787,7 +2787,7 @@ paths:
                           gutters: No Gutters
                         fit: Screen
                         destination:
-                        type: Aypex::Cms::Sections::HeroImage
+                        type: Aypex::Cms::Section::HeroImage
                         position: 3
                         linked_resource_type: Aypex::Product
                         created_at: '2023-01-14T17:24:51.657Z'
@@ -2872,7 +2872,7 @@ paths:
                           gutters: No Gutters
                         fit: Screen
                         destination:
-                        type: Aypex::Cms::Sections::HeroImage
+                        type: Aypex::Cms::Section::HeroImage
                         position: 4
                         linked_resource_type: Aypex::Product
                         created_at: '2023-01-14T17:24:52.033Z'
@@ -2947,7 +2947,7 @@ paths:
                           gutters: No Gutters
                         fit: Screen
                         destination:
-                        type: Aypex::Cms::Sections::HeroImage
+                        type: Aypex::Cms::Section::HeroImage
                         position: 1
                         linked_resource_type: Aypex::Product
                         created_at: '2023-01-14T17:24:52.697Z'
@@ -18001,7 +18001,7 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Pages::StandardPage
+              - Aypex::Cms::Page::StandardPage
               description: Set the type of page.
             meta_title:
               type: string
@@ -18057,7 +18057,7 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Pages::Homepage
+              - Aypex::Cms::Page::Homepage
               description: Set the type of page.
             meta_title:
               type: string
@@ -18102,7 +18102,7 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Pages::FeaturePage
+              - Aypex::Cms::Page::FeaturePage
               description: Set the type of page.
             meta_title:
               type: string
@@ -18149,9 +18149,9 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Pages::StandardPage
-              - Aypex::Cms::Pages::Homepage
-              - Aypex::Cms::Pages::FeaturePage
+              - Aypex::Cms::Page::StandardPage
+              - Aypex::Cms::Page::Homepage
+              - Aypex::Cms::Page::FeaturePage
               description: Change the type of page.
             meta_title:
               type: string
@@ -18203,9 +18203,9 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Pages::StandardPage
-              - Aypex::Cms::Pages::Homepage
-              - Aypex::Cms::Pages::FeaturePage
+              - Aypex::Cms::Page::StandardPage
+              - Aypex::Cms::Page::Homepage
+              - Aypex::Cms::Page::FeaturePage
               description: Change the type of page.
             meta_title:
               type: string
@@ -18246,9 +18246,9 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Pages::StandardPage
-              - Aypex::Cms::Pages::Homepage
-              - Aypex::Cms::Pages::FeaturePage
+              - Aypex::Cms::Page::StandardPage
+              - Aypex::Cms::Page::Homepage
+              - Aypex::Cms::Page::FeaturePage
               description: Change the type of page.
             meta_title:
               type: string
@@ -18301,8 +18301,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::HeroImage
-              example: Aypex::Cms::Sections::HeroImage
+              - Aypex::Cms::Section::HeroImage
+              example: Aypex::Cms::Section::HeroImage
               description: Set the section type.
             linked_resource_type:
               type: string
@@ -18377,8 +18377,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::ProductCarousel
-              example: Aypex::Cms::Sections::ProductCarousel
+              - Aypex::Cms::Section::ProductCarousel
+              example: Aypex::Cms::Section::ProductCarousel
               description: Set the section type.
             position:
               type: integer
@@ -18415,8 +18415,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::SideBySideImages
-              example: Aypex::Cms::Sections::SideBySideImages
+              - Aypex::Cms::Section::SideBySideImages
+              example: Aypex::Cms::Section::SideBySideImages
               description: Set the section type.
             position:
               type: integer
@@ -18516,8 +18516,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::ImageGallery
-              example: Aypex::Cms::Sections::ImageGallery
+              - Aypex::Cms::Section::ImageGallery
+              example: Aypex::Cms::Section::ImageGallery
               description: Set the section type.
             position:
               type: integer
@@ -18636,8 +18636,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::FeaturedArticle
-              example: Aypex::Cms::Sections::FeaturedArticle
+              - Aypex::Cms::Section::FeaturedArticle
+              example: Aypex::Cms::Section::FeaturedArticle
               description: Set the section type.
             position:
               type: integer
@@ -18716,8 +18716,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::RichTextContent
-              example: Aypex::Cms::Sections::RichTextContent
+              - Aypex::Cms::Section::RichTextContent
+              example: Aypex::Cms::Section::RichTextContent
               description: Set the section type.
             position:
               type: integer
@@ -18754,13 +18754,13 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::HeroImage
-              - Aypex::Cms::Sections::FeaturedArticle
-              - Aypex::Cms::Sections::ProductCarousel
-              - Aypex::Cms::Sections::ImageGallery
-              - Aypex::Cms::Sections::SideBySideImages
-              - Aypex::Cms::Sections::RichTextContent
-              example: Aypex::Cms::Sections::ProductCarousel
+              - Aypex::Cms::Section::HeroImage
+              - Aypex::Cms::Section::FeaturedArticle
+              - Aypex::Cms::Section::ProductCarousel
+              - Aypex::Cms::Section::ImageGallery
+              - Aypex::Cms::Section::SideBySideImages
+              - Aypex::Cms::Section::RichTextContent
+              example: Aypex::Cms::Section::ProductCarousel
               description: Change the section type.
             linked_resource_type:
               type: string
@@ -18828,13 +18828,13 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::HeroImage
-              - Aypex::Cms::Sections::FeaturedArticle
-              - Aypex::Cms::Sections::ProductCarousel
-              - Aypex::Cms::Sections::ImageGallery
-              - Aypex::Cms::Sections::SideBySideImages
-              - Aypex::Cms::Sections::RichTextContent
-              example: Aypex::Cms::Sections::ProductCarousel
+              - Aypex::Cms::Section::HeroImage
+              - Aypex::Cms::Section::FeaturedArticle
+              - Aypex::Cms::Section::ProductCarousel
+              - Aypex::Cms::Section::ImageGallery
+              - Aypex::Cms::Section::SideBySideImages
+              - Aypex::Cms::Section::RichTextContent
+              example: Aypex::Cms::Section::ProductCarousel
               description: Change the section type.
             position:
               type: integer
@@ -18864,13 +18864,13 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::HeroImage
-              - Aypex::Cms::Sections::FeaturedArticle
-              - Aypex::Cms::Sections::ProductCarousel
-              - Aypex::Cms::Sections::ImageGallery
-              - Aypex::Cms::Sections::SideBySideImages
-              - Aypex::Cms::Sections::RichTextContent
-              example: Aypex::Cms::Sections::ProductCarousel
+              - Aypex::Cms::Section::HeroImage
+              - Aypex::Cms::Section::FeaturedArticle
+              - Aypex::Cms::Section::ProductCarousel
+              - Aypex::Cms::Section::ImageGallery
+              - Aypex::Cms::Section::SideBySideImages
+              - Aypex::Cms::Section::RichTextContent
+              example: Aypex::Cms::Section::ProductCarousel
               description: Change the section type.
             position:
               type: integer
@@ -18963,13 +18963,13 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::HeroImage
-              - Aypex::Cms::Sections::FeaturedArticle
-              - Aypex::Cms::Sections::ProductCarousel
-              - Aypex::Cms::Sections::ImageGallery
-              - Aypex::Cms::Sections::SideBySideImages
-              - Aypex::Cms::Sections::RichTextContent
-              example: Aypex::Cms::Sections::ProductCarousel
+              - Aypex::Cms::Section::HeroImage
+              - Aypex::Cms::Section::FeaturedArticle
+              - Aypex::Cms::Section::ProductCarousel
+              - Aypex::Cms::Section::ImageGallery
+              - Aypex::Cms::Section::SideBySideImages
+              - Aypex::Cms::Section::RichTextContent
+              example: Aypex::Cms::Section::ProductCarousel
               description: Change the section type.
             position:
               type: integer
@@ -19081,13 +19081,13 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::HeroImage
-              - Aypex::Cms::Sections::FeaturedArticle
-              - Aypex::Cms::Sections::ProductCarousel
-              - Aypex::Cms::Sections::ImageGallery
-              - Aypex::Cms::Sections::SideBySideImages
-              - Aypex::Cms::Sections::RichTextContent
-              example: Aypex::Cms::Sections::ProductCarousel
+              - Aypex::Cms::Section::HeroImage
+              - Aypex::Cms::Section::FeaturedArticle
+              - Aypex::Cms::Section::ProductCarousel
+              - Aypex::Cms::Section::ImageGallery
+              - Aypex::Cms::Section::SideBySideImages
+              - Aypex::Cms::Section::RichTextContent
+              example: Aypex::Cms::Section::ProductCarousel
               description: Change the section type.
             position:
               type: integer
@@ -19159,13 +19159,13 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Sections::HeroImage
-              - Aypex::Cms::Sections::FeaturedArticle
-              - Aypex::Cms::Sections::ProductCarousel
-              - Aypex::Cms::Sections::ImageGallery
-              - Aypex::Cms::Sections::SideBySideImages
-              - Aypex::Cms::Sections::RichTextContent
-              example: Aypex::Cms::Sections::ProductCarousel
+              - Aypex::Cms::Section::HeroImage
+              - Aypex::Cms::Section::FeaturedArticle
+              - Aypex::Cms::Section::ProductCarousel
+              - Aypex::Cms::Section::ImageGallery
+              - Aypex::Cms::Section::SideBySideImages
+              - Aypex::Cms::Section::RichTextContent
+              example: Aypex::Cms::Section::ProductCarousel
               description: Change the section type.
             position:
               type: integer
