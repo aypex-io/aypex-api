@@ -47,9 +47,9 @@ describe Aypex::Api::V2::Platform::StoreSerializer do
             supported_locales: store.supported_locales,
             deleted_at: store.deleted_at,
             settings: store.settings,
-            logo: url_helpers.rails_blob_path(logo.attachment),
-            mailer_logo: nil,
-            favicon_path: nil
+            logo: url_helpers.rails_blob_path(store.logo.attachment),
+            mailer_logo: url_helpers.rails_blob_path(store.mailer_logo.attachment),
+            favicon_path: url_helpers.rails_blob_path(store.favicon_image.attachment)
           },
           relationships: {
             default_country: {

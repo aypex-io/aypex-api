@@ -156,7 +156,7 @@ describe Aypex::Api::V2::BaseController, type: :controller do
       let(:serializer_params) { dummy_controller.send(:serializer_params) }
 
       it "contains the expected hash serializer keys" do
-        expect(serializer_params.keys).to match_array(%i[currency image_transformation locale price_options store category_image_transformation user])
+        expect(serializer_params.keys).to match_array(%i[currency image_transformation locale price_options store user])
       end
 
       it do
@@ -167,8 +167,7 @@ describe Aypex::Api::V2::BaseController, type: :controller do
             price_options: price_options,
             user: user,
             locale: locale,
-            image_transformation: nil,
-            category_image_transformation: nil
+            image_transformation: nil
           }
         )
       end

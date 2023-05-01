@@ -242,7 +242,7 @@ RSpec.configure do |config|
                 required: %w[title locale type],
                 properties: {
                   title: {type: :string, example: "About Us", description: "Give your page a title."},
-                  type: {type: :string, enum: ["Aypex::Cms::Pages::StandardPage"], description: "Set the type of page."},
+                  type: {type: :string, enum: ["Aypex::Cms::Page::StandardPage"], description: "Set the type of page."},
                   meta_title: {type: :string, nullable: true, example: "Learn More About Super-Shop", description: "Set the meta title for this page, this appears in the title bar of the browser."},
                   content: {type: :string, nullable: true, example: "Lot's of text..", description: "The text content of a standard page, this can be HTML from a rich text editor."},
                   meta_description: {type: :string, nullable: true, example: "Learn more about us on this page here...", description: "Set a meta description, used for SEO and displayed in search results."},
@@ -264,7 +264,7 @@ RSpec.configure do |config|
                 required: %w[title locale type],
                 properties: {
                   title: {type: :string, example: "Our Flash Homepage", description: "Give your page a title."},
-                  type: {type: :string, enum: ["Aypex::Cms::Pages::Homepage"], description: "Set the type of page."},
+                  type: {type: :string, enum: ["Aypex::Cms::Page::Homepage"], description: "Set the type of page."},
                   meta_title: {type: :string, nullable: true, example: "Visit Our Store - Great Deals", description: "Set the meta title for this page, this appears in the title bar of the browser."},
                   meta_description: {type: :string, nullable: true, example: "Discover great new products that we sell in this store...", description: "Set a meta description, used for SEO and displayed in search results."},
                   visible: {type: :boolean, enum: [true, false], description: "This page is publicly visible when set to `true`."},
@@ -284,7 +284,7 @@ RSpec.configure do |config|
                 required: %w[title locale type],
                 properties: {
                   title: {type: :string, example: "Featured Product", description: "Give your page a title."},
-                  type: {type: :string, enum: ["Aypex::Cms::Pages::FeaturePage"], description: "Set the type of page."},
+                  type: {type: :string, enum: ["Aypex::Cms::Page::FeaturePage"], description: "Set the type of page."},
                   meta_title: {type: :string, nullable: true, example: "Learn More About This Featured Product", description: "Set the meta title for this page, this appears in the title bar of the browser."},
                   meta_description: {type: :string, nullable: true, example: "Learn more about us this amazing product that we sell right here...", description: "Set a meta description, used for SEO and displayed in search results."},
                   visible: {type: :boolean, enum: [true, false], description: "This page is publicly visible when set to `true`."},
@@ -304,7 +304,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   title: {type: :string, example: "About Us", description: "Update the page title."},
-                  type: {type: :string, enum: ["Aypex::Cms::Pages::StandardPage", "Aypex::Cms::Pages::Homepage", "Aypex::Cms::Pages::FeaturePage"], description: "Change the type of page."},
+                  type: {type: :string, enum: ["Aypex::Cms::Page::StandardPage", "Aypex::Cms::Page::Homepage", "Aypex::Cms::Page::FeaturePage"], description: "Change the type of page."},
                   meta_title: {type: :string, nullable: true, example: "Learn More About Super-Shop", description: "Update the meta title for this page, this appears in the title bar of the browser."},
                   content: {type: :string, nullable: true, example: "Lot's of text..", description: "Update the text content of a standard page, this can be HTML from a rich text editor."},
                   meta_description: {type: :string, nullable: true, example: "Learn more about us on this page here...", description: "Update the meta description, used for SEO and displayed in search results."},
@@ -325,7 +325,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   title: {type: :string, example: "Our Flash Homepage", description: "Update the page title."},
-                  type: {type: :string, enum: ["Aypex::Cms::Pages::StandardPage", "Aypex::Cms::Pages::Homepage", "Aypex::Cms::Pages::FeaturePage"], description: "Change the type of page."},
+                  type: {type: :string, enum: ["Aypex::Cms::Page::StandardPage", "Aypex::Cms::Page::Homepage", "Aypex::Cms::Page::FeaturePage"], description: "Change the type of page."},
                   meta_title: {type: :string, nullable: true, example: "Visit Our Store - Great Deals", description: "Update the meta title for this page, this appears in the title bar of the browser."},
                   meta_description: {type: :string, nullable: true, example: "Discover great new products that we sell in this store...", description: "Update the meta description, used for SEO and displayed in search results."},
                   visible: {type: :boolean, enum: [true, false], description: "This page is publicly visible when set to `true`."},
@@ -344,7 +344,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   title: {type: :string, example: "Featured Product", description: "Update the page title."},
-                  type: {type: :string, enum: ["Aypex::Cms::Pages::StandardPage", "Aypex::Cms::Pages::Homepage", "Aypex::Cms::Pages::FeaturePage"], description: "Change the type of page."},
+                  type: {type: :string, enum: ["Aypex::Cms::Page::StandardPage", "Aypex::Cms::Page::Homepage", "Aypex::Cms::Page::FeaturePage"], description: "Change the type of page."},
                   meta_title: {type: :string, nullable: true, example: "Learn More About This Featured Product", description: "Update the meta title for this page, this appears in the title bar of the browser."},
                   meta_description: {type: :string, nullable: true, example: "Learn more about us this amazing product that we sell right here...", description: "Update the meta description, used for SEO and displayed in search results."},
                   visible: {type: :boolean, enum: [true, false], description: "This page is publicly visible when set to `true`."},
@@ -368,7 +368,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage"], example: "Aypex::Cms::Sections::HeroImage", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::HeroImage"], example: "Aypex::Cms::Section::HeroImage", description: "Set the section type."},
                   linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
@@ -393,7 +393,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::ProductCarousel"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::ProductCarousel"], example: "Aypex::Cms::Section::ProductCarousel", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the Category that you would like displayed as a Product Carousel."}
                 }
@@ -412,7 +412,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::SideBySideImages"], example: "Aypex::Cms::Sections::SideBySideImages", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::SideBySideImages"], example: "Aypex::Cms::Section::SideBySideImages", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image one links to."},
                   link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image two links to."},
@@ -442,7 +442,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::ImageGallery"], example: "Aypex::Cms::Sections::ImageGallery", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::ImageGallery"], example: "Aypex::Cms::Section::ImageGallery", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image one links to."},
                   link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image two links to."},
@@ -475,7 +475,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::FeaturedArticle"], example: "Aypex::Cms::Sections::FeaturedArticle", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::FeaturedArticle"], example: "Aypex::Cms::Section::FeaturedArticle", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
@@ -501,7 +501,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::RichTextContent", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::RichTextContent", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
                   rte_content: {type: :string, example: "Lots of text and content goes here.", description: "Set the content, here, this can be rich text editor content."}
@@ -519,7 +519,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::HeroImage", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
                   linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Update the resource type that this section links to."},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
@@ -543,7 +543,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   name: {type: :string, description: "Change this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::HeroImage", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Update the ID of the Category that you would like displayed as a Product Carousel."}
                 }
@@ -560,7 +560,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::HeroImage", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image one links to."},
                   link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image two links to."},
@@ -588,7 +588,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::HeroImage", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image one links to."},
                   link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image two links to."},
@@ -619,7 +619,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::HeroImage", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Change the ID of the resource that you would like this section to link to."},
@@ -643,7 +643,7 @@ RSpec.configure do |config|
                 type: :object,
                 properties: {
                   name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Sections::HeroImage", "Aypex::Cms::Sections::FeaturedArticle", "Aypex::Cms::Sections::ProductCarousel", "Aypex::Cms::Sections::ImageGallery", "Aypex::Cms::Sections::SideBySideImages", "Aypex::Cms::Sections::RichTextContent"], example: "Aypex::Cms::Sections::ProductCarousel", description: "Change the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::HeroImage", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
                   rte_content: {type: :string, example: "Lots of text and content goes here.", description: "Update the content, here, this can be rich text editor content."}

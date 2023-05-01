@@ -5,7 +5,7 @@ describe "CMS Section API", swagger: true do
 
   resource_name = "CMS Section"
   options = {
-    include_example: "product",
+    include_example: "cms_components",
     filter_examples: [{name: "filter[name_eq]", example: "Hero"}],
     custom_create_params: {
       oneOf: [
@@ -30,21 +30,18 @@ describe "CMS Section API", swagger: true do
   }
 
   let!(:store) { Aypex::Store.default }
-  let!(:product) { create(:product) }
   let!(:cms_page) { create(:cms_feature_page, store: store) }
-  let!(:cms_section) { create(:cms_hero_image_section, cms_page: cms_page) }
-  let!(:cms_image_gallery_section) { create(:cms_image_gallery_section, cms_page: cms_page) }
-  let!(:cms_featured_article_section) { create(:cms_featured_article_section, cms_page: cms_page) }
+  let(:cms_section) { create(:cms_hero_image_section, cms_page: cms_page) }
 
-  let(:id) { create(:cms_hero_image_section, cms_page: cms_page, linked_resource: product).id }
-  let(:records_list) { create_list(:cms_hero_image_section, 2, cms_page: cms_page, linked_resource: product) }
+  let(:id) { create(:cms_hero_image_section, cms_page: cms_page).id }
+  let(:records_list) { create_list(:cms_hero_image_section, 2, cms_page: cms_page) }
 
-  let(:valid_create_param_value) { build(:cms_hero_image_section, cms_page: cms_page, linked_resource: product).attributes }
+  let(:valid_create_param_value) { build(:cms_hero_image_section, cms_page: cms_page).attributes }
   let(:valid_update_param_value) do
     {
       name: "Super Hero",
       position: 1,
-      type: "Aypex::Cms::Sections::HeroImage"
+      type: "Aypex::Cms::Section::HeroImage"
     }
   end
 

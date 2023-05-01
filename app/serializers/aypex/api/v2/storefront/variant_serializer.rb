@@ -41,7 +41,6 @@ module Aypex
         end
 
         belongs_to :product
-        has_many :images
         has_many :option_values
       end
     end

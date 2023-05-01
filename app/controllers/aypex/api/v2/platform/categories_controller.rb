@@ -31,13 +31,13 @@ module Aypex
           end
 
           def scope_includes
-            node_includes = %i[icon parent base_category]
+            node_includes = %i[image parent base_category]
 
             {
               parent: node_includes,
               children: node_includes,
               base_category: [root: node_includes],
-              icon: [attachment_attachment: :blob]
+              image: [attachment_attachment: :blob]
             }
           end
 

@@ -68,8 +68,8 @@ module Aypex
           end
 
           has_many :images,
-            object_method_name: :variant_images,
-            id_method_name: :variant_image_ids,
+            object_method_name: :images,
+            id_method_name: :image_ids,
             record_type: :image,
             serializer: :image
 

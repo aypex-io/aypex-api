@@ -2,11 +2,11 @@ module Aypex
   module Api
     module V2
       module Platform
-        class CmsSectionsController < ResourceController
+        class CmsComponentsController < ResourceController
           private
 
           def model_class
-            Aypex::CmsSection
+            Aypex::CmsComponent
           end
         end
       end

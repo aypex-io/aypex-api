@@ -3,8 +3,8 @@ require "spec_helper"
 describe Aypex::Api::V2::Platform::ImageSerializer do
   subject { described_class.new(image) }
 
-  let(:variant) { create(:variant) }
-  let(:image) { create(:image, viewable: variant) }
+  let(:product) { create(:product) }
+  let(:image) { create(:image, viewable: product) }
 
   it { expect(subject.serializable_hash).to be_kind_of(Hash) }
 
@@ -15,19 +15,18 @@ describe Aypex::Api::V2::Platform::ImageSerializer do
           id: image.id.to_s,
           type: :image,
           attributes: {
-            styles: image.styles,
             position: image.position,
             alt: image.alt,
             created_at: image.created_at,
             updated_at: image.updated_at,
-            transformed_url: image.generate_url(size: ""),
+            transformed_url: nil,
             original_url: image.original_url
           },
           relationships: {
             viewable: {
               data: {
-                id: variant.id.to_s,
-                type: :variant
+                id: product.id.to_s,
+                type: :product
               }
             }
           }

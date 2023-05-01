@@ -32,10 +32,10 @@ describe Aypex::Api::V2::Storefront::MenuItemSerializer do
             item_type: menu_item.item_type
           },
           relationships: {
-            icon: {
+            image: {
               data: {
-                id: menu_item.icon.id.to_s,
-                type: :icon
+                id: menu_item.image.id.to_s,
+                type: :image
               }
             },
             menu: {

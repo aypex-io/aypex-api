@@ -6,7 +6,7 @@ module Aypex
 
         set_type :image
 
-        attributes :styles, :position, :alt, :original_url
+        attributes :position, :alt, :original_url
       end
     end
   end

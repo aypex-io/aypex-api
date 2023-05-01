@@ -2238,7 +2238,7 @@ components:
               nullable: true
             type:
               type: string
-              example: 'Aypex::Cms::Pages::StandardPage'
+              example: 'Aypex::Cms::Page::StandardPage'
         relationships:
           type: object
           properties:
@@ -2296,7 +2296,7 @@ components:
               example: Screen
             type:
               type: string
-              example: 'Aypex::Cms::Sections::HeroImage'
+              example: 'Aypex::Cms::Section::HeroImage'
             position:
               type: integer
               example: 1
@@ -5323,7 +5323,7 @@ components:
                     meta_description: null
                     meta_title: null
                     slug: about-us
-                    type: 'Aypex::Cms::Pages::StandardPage'
+                    type: 'Aypex::Cms::Page::StandardPage'
                   relationships:
                     cms_sections:
                       data: []
@@ -5339,7 +5339,7 @@ components:
                     meta_description: null
                     meta_title: null
                     slug: feature-page
-                    type: 'Aypex::Cms::Pages::FeaturePage'
+                    type: 'Aypex::Cms::Page::FeaturePage'
                   relationships:
                     cms_sections:
                       data:
@@ -5367,7 +5367,7 @@ components:
                     meta_description: null
                     meta_title: null
                     slug: feature-page
-                    type: 'Aypex::Cms::Pages::FeaturePage'
+                    type: 'Aypex::Cms::Page::FeaturePage'
                   relationships:
                     cms_sections:
                       data:
@@ -5395,7 +5395,7 @@ components:
                         gutters: No Gutters
                       link: /t/categories/new-collection/summer-2021
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::HeroImage'
+                      type: 'Aypex::Cms::Section::HeroImage'
                       position: 1
                       img_one_sm: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRZd01IZ3lOVEErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--5e6c4239964577906b395aaaea2b5b33fd26e5f3/main_banner_3.jpg
                       img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRGpFeU1EQjROVEF3UGdZN0JsUT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--8f3058de34a7771ea1f07ef6e64153f565cbdb1d/main_banner_3.jpg
@@ -5434,7 +5434,7 @@ components:
                         display_labels: Show
                       link: null
                       fit: Container
-                      type: 'Aypex::Cms::Sections::ImageGallery'
+                      type: 'Aypex::Cms::Section::ImageGallery'
                       position: 2
                       img_one_sm: null
                       img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--74de5b2afe48f629a8e16d5b2d8944b3d3417bef/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRJM01IZ3hPVFUrQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--da678788156c69df71d3b9aef47b2381b97c0fe1/category_banner_upper-bf1d79fc1d5da2ba796d5cdacb2e65a5a89285c6f12d0fd3c4d1a50c635b8f49.jpg
@@ -5460,7 +5460,7 @@ components:
                       settings: null
                       link: /t/categories/bestsellers
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::ProductCarousel'
+                      type: 'Aypex::Cms::Section::ProductCarousel'
                       position: 3
                       img_one_sm: null
                       img_one_md: null
@@ -5493,7 +5493,7 @@ components:
                         gutters: No Gutters
                       link: /t/categories/trending
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::FeaturedArticle'
+                      type: 'Aypex::Cms::Section::FeaturedArticle'
                       position: 4
                       img_one_sm: null
                       img_one_md: null
@@ -5521,7 +5521,7 @@ components:
                       settings: null
                       link: /t/categories/trending
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::ProductCarousel'
+                      type: 'Aypex::Cms::Section::ProductCarousel'
                       position: 5
                       img_one_sm: null
                       img_one_md: null
@@ -5558,7 +5558,7 @@ components:
                         gutters: Gutters
                       link: null
                       fit: Container
-                      type: 'Aypex::Cms::Sections::SideBySideImages'
+                      type: 'Aypex::Cms::Section::SideBySideImages'
                       position: 6
                       img_one_sm: null
                       img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBFZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bdd435f1da7adb1dfc741a7200d5e22b2fe1797d/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRNNE4zZ3lOVEErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b3e83aeec90291ac43c84e93512729c510db19cc/streetstyle.jpg
@@ -5612,7 +5612,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: about-us
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []
@@ -5625,7 +5625,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: privacy-policy
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []
@@ -5638,7 +5638,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: shipping-policy
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []
@@ -5651,7 +5651,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: returns-policy
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []
@@ -5664,7 +5664,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: null
-                      type: 'Aypex::Cms::Pages::Homepage'
+                      type: 'Aypex::Cms::Page::Homepage'
                     relationships:
                       cms_sections:
                         data:
@@ -5689,7 +5689,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: feature-page
-                      type: 'Aypex::Cms::Pages::FeaturePage'
+                      type: 'Aypex::Cms::Page::FeaturePage'
                     relationships:
                       cms_sections:
                         data:
@@ -5727,7 +5727,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: about-us
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []
@@ -5740,7 +5740,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: privacy-policy
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []
@@ -5753,7 +5753,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: shipping-policy
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []
@@ -5766,7 +5766,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: returns-policy
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []
@@ -5779,7 +5779,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: null
-                      type: 'Aypex::Cms::Pages::Homepage'
+                      type: 'Aypex::Cms::Page::Homepage'
                     relationships:
                       cms_sections:
                         data:
@@ -5804,7 +5804,7 @@ components:
                       meta_description: null
                       meta_title: null
                       slug: feature-page
-                      type: 'Aypex::Cms::Pages::FeaturePage'
+                      type: 'Aypex::Cms::Page::FeaturePage'
                     relationships:
                       cms_sections:
                         data:
@@ -5832,7 +5832,7 @@ components:
                         gutters: No Gutters
                       link: /t/categories/new-collection/summer-2021
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::HeroImage'
+                      type: 'Aypex::Cms::Section::HeroImage'
                       position: 1
                       img_one_sm: null
                       img_one_md: null
@@ -5870,7 +5870,7 @@ components:
                         layout_style: Default
                       link: null
                       fit: Container
-                      type: 'Aypex::Cms::Sections::ImageGallery'
+                      type: 'Aypex::Cms::Section::ImageGallery'
                       position: 2
                       img_one_sm: null
                       img_one_md: null
@@ -5896,7 +5896,7 @@ components:
                       settings: null
                       link: /t/categories/bestsellers
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::ProductCarousel'
+                      type: 'Aypex::Cms::Section::ProductCarousel'
                       position: 3
                       img_one_sm: null
                       img_one_md: null
@@ -5929,7 +5929,7 @@ components:
                         gutters: No Gutters
                       link: /t/categories/trending
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::FeaturedArticle'
+                      type: 'Aypex::Cms::Section::FeaturedArticle'
                       position: 4
                       img_one_sm: null
                       img_one_md: null
@@ -5957,7 +5957,7 @@ components:
                       settings: null
                       link: /t/categories/trending
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::ProductCarousel'
+                      type: 'Aypex::Cms::Section::ProductCarousel'
                       position: 5
                       img_one_sm: null
                       img_one_md: null
@@ -5994,7 +5994,7 @@ components:
                         gutters: Gutters
                       link: null
                       fit: Container
-                      type: 'Aypex::Cms::Sections::SideBySideImages'
+                      type: 'Aypex::Cms::Section::SideBySideImages'
                       position: 6
                       img_one_sm: null
                       img_one_md: null
@@ -6023,7 +6023,7 @@ components:
                         gutters: No Gutters
                       link: /t/categories/new-collection/summer-2021
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::HeroImage'
+                      type: 'Aypex::Cms::Section::HeroImage'
                       position: 1
                       img_one_sm: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRZd01IZ3lOVEErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--5e6c4239964577906b395aaaea2b5b33fd26e5f3/main_banner_3.jpg
                       img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRGpFeU1EQjROVEF3UGdZN0JsUT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--8f3058de34a7771ea1f07ef6e64153f565cbdb1d/main_banner_3.jpg
@@ -6062,7 +6062,7 @@ components:
                         display_labels: Show
                       link: null
                       fit: Container
-                      type: 'Aypex::Cms::Sections::ImageGallery'
+                      type: 'Aypex::Cms::Section::ImageGallery'
                       position: 2
                       img_one_sm: null
                       img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--74de5b2afe48f629a8e16d5b2d8944b3d3417bef/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRJM01IZ3hPVFUrQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--da678788156c69df71d3b9aef47b2381b97c0fe1/category_banner_upper-bf1d79fc1d5da2ba796d5cdacb2e65a5a89285c6f12d0fd3c4d1a50c635b8f49.jpg
@@ -6088,7 +6088,7 @@ components:
                       settings: null
                       link: /t/categories/bestsellers
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::ProductCarousel'
+                      type: 'Aypex::Cms::Section::ProductCarousel'
                       position: 3
                       img_one_sm: null
                       img_one_md: null
@@ -6121,7 +6121,7 @@ components:
                         gutters: No Gutters
                       link: /t/categories/trending
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::FeaturedArticle'
+                      type: 'Aypex::Cms::Section::FeaturedArticle'
                       position: 4
                       img_one_sm: null
                       img_one_md: null
@@ -6149,7 +6149,7 @@ components:
                       settings: null
                       link: /t/categories/trending
                       fit: Screen
-                      type: 'Aypex::Cms::Sections::ProductCarousel'
+                      type: 'Aypex::Cms::Section::ProductCarousel'
                       position: 5
                       img_one_sm: null
                       img_one_md: null
@@ -6186,7 +6186,7 @@ components:
                         gutters: Gutters
                       link: null
                       fit: Container
-                      type: 'Aypex::Cms::Sections::SideBySideImages'
+                      type: 'Aypex::Cms::Section::SideBySideImages'
                       position: 6
                       img_one_sm: null
                       img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBFZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--bdd435f1da7adb1dfc741a7200d5e22b2fe1797d/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRNNE4zZ3lOVEErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--b3e83aeec90291ac43c84e93512729c510db19cc/streetstyle.jpg
@@ -8678,7 +8678,7 @@ components:
                       meta_description: ''
                       meta_title: ''
                       slug: returns-policy
-                      type: 'Aypex::Cms::Pages::StandardPage'
+                      type: 'Aypex::Cms::Page::StandardPage'
                     relationships:
                       cms_sections:
                         data: []

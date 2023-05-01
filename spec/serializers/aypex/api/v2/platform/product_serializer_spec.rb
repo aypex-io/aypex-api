@@ -11,10 +11,11 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
       name: "Test Product",
       price: 10.00,
       compare_at_price: 15.00,
-      variants_including_master: [create(:variant, images: images), create(:variant)],
+      variants_including_master: [create(:variant), create(:variant)],
       option_types: create_list(:option_type, 2),
       product_properties: create_list(:product_property, 2),
       categories: create_list(:category, 2),
+      images: images,
       tax_category: create(:tax_category))
   end
   let(:serializable_hash) do
@@ -119,11 +120,11 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
           images: {
             data: [
               {
-                id: product.variant_images.first.id.to_s,
+                id: product.images.first.id.to_s,
                 type: :image
               },
               {
-                id: product.variant_images.second.id.to_s,
+                id: product.images.second.id.to_s,
                 type: :image
               }
             ]

@@ -111,10 +111,9 @@ describe "Storefront API v2 CMS Pages spec" do
 
     context "including cms sections with linked resources" do
       let(:base_category) { create(:base_category, store: store) }
-      let(:category) { create(:category, base_category: base_category) }
-      let!(:cms_section) { create(:cms_hero_image_section, cms_page: home_en, linked_resource: category) }
+      let!(:cms_section) { create(:cms_hero_image_section, cms_page: home_en) }
 
-      before { get "/api/v2/storefront/cms_pages?include=cms_sections.linked_resource" }
+      before { get "/api/v2/storefront/cms_pages?include=cms_sections.cms_components" }
 
       it_behaves_like "returns 200 HTTP status"
       it_behaves_like "returns proper JSON structure"
@@ -122,17 +121,18 @@ describe "Storefront API v2 CMS Pages spec" do
       it "returns sections and their associations" do
         page.reload
 
-        expect(json_response["included"]).to include(have_type("category").and(have_id(category.id.to_s)))
+        expect(json_response["included"]).to include(
+          have_type("cms_component")
+            .and(have_id(cms_section.cms_components.first.id.to_s))
+            .and(have_jsonapi_attributes(:settings, :position))
+        )
+
         expect(json_response["included"]).to include(
           have_type("cms_section")
             .and(
               have_id(cms_section.id.to_s)
-              .and(have_relationship(:linked_resource))
-              .and(have_jsonapi_attributes(
-                :name, :content, :settings, :link, :fit, :type, :position, :is_fullscreen,
-                :img_one_sm, :img_one_md, :img_one_lg, :img_two_sm, :img_two_md, :img_two_lg,
-                :img_three_sm, :img_three_md, :img_three_lg
-              ))
+              .and(have_relationship(:cms_components))
+              .and(have_jsonapi_attributes(:settings, :position, :is_fullscreen, :has_gutters))
             )
         )
       end
@@ -144,18 +144,16 @@ describe "Storefront API v2 CMS Pages spec" do
       let!(:page) { create(:cms_standard_page, store: store) }
       let(:base_category) { create(:base_category, store: store) }
       let(:category) { create(:category, base_category: base_category) }
-      let!(:page_item) { create(:cms_hero_image_section, cms_page: page, linked_resource: category) }
+      let!(:page_item) { create(:cms_hero_image_section, cms_page: page) }
 
-      before { get "/api/v2/storefront/cms_pages/#{page.id}?include=cms_sections.linked_resource" }
+      before { get "/api/v2/storefront/cms_pages/#{page.id}?include=cms_sections.cms_components" }
 
       it_behaves_like "returns 200 HTTP status"
 
       it "returns page attributes and relationships" do
         expect(json_response["data"]["id"]).to eq(page.id.to_s)
         expect(json_response["data"]["attributes"]["title"]).to eq page.title
-
-        expect(json_response["included"]).to include(have_type("category").and(have_id(category.id.to_s)))
-        expect(json_response["included"]).to include(have_type("cms_section").and(have_id(page_item.id.to_s).and(have_relationship(:linked_resource))))
+        expect(json_response["included"]).to include(have_type("cms_section").and(have_id(page_item.id.to_s).and(have_relationship(:cms_components))))
       end
     end
 

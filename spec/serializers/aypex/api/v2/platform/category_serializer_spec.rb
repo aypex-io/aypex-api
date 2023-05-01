@@ -54,8 +54,8 @@ describe Aypex::Api::V2::Platform::CategorySerializer do
               },
               image: {
                 data: {
-                  id: category.icon.id.to_s,
-                  type: :category_image
+                  id: category.image.id.to_s,
+                  type: :image
                 }
               },
               children: {
@@ -124,8 +124,8 @@ describe Aypex::Api::V2::Platform::CategorySerializer do
               },
               image: {
                 data: {
-                  id: category.icon.id.to_s,
-                  type: :category_image
+                  id: category.image.id.to_s,
+                  type: :image
                 }
               },
               products: {
