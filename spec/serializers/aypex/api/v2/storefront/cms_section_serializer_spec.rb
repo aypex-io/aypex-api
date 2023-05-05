@@ -3,7 +3,7 @@ require "spec_helper"
 describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
   subject { described_class.new(cms_section) }
 
-  let(:cms_section) { create(:cms_section) }
+  let(:cms_section) { create(:cms_featured_article_section) }
 
   shared_examples "returns proper hash" do
     it { expect(subject.serializable_hash).to be_a(Hash) }
@@ -36,11 +36,11 @@ describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
     end
   end
 
-  context "cms_hero_section" do
+  context "cms_featured_article_section" do
     let!(:store) { create(:store) }
     let!(:homepage) { create(:cms_homepage, store: store) }
     let(:cms_section) do
-      create(:cms_hero_section, cms_page: homepage)
+      create(:cms_featured_article_section, cms_page: homepage)
     end
 
     it_behaves_like "returns proper hash"
