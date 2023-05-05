@@ -372,8 +372,8 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Section::Hero"], example: "Aypex::Cms::Section::Hero", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  is_full_screen: { type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
-                  has_gutters: { type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -521,8 +521,8 @@ RSpec.configure do |config|
                   linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
                   fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  is_full_screen: { type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
-                  has_gutters: { type: :boolean, enum: [true, false], example: false, default: true, description: "This value is used by frontend developers to style the section."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: false, default: true, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
