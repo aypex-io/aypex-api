@@ -117,7 +117,23 @@ module Aypex
               []
             end
 
-            model_class.json_api_permitted_attributes + store_ids + metadata_params
+            model_class.json_api_permitted_attributes + store_ids + metadata_params + settings_params
+          end
+
+          def settings_params
+            if action_name == "create" && params[model_param_name.to_sym][:type].present?
+              type_class = params[model_param_name.to_sym][:type].constantize
+
+              if type_class.stored_attributes[:settings].nil?
+                []
+              else
+                type_class.stored_attributes[:settings]
+              end
+            elsif action_name == "update" && resource.class.method_defined?(:settings) && !resource.class.stored_attributes[:settings].nil?
+              resource.class.stored_attributes[:settings]
+            else
+              []
+            end
           end
 
           def metadata_params

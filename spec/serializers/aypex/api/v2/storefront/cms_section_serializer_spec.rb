@@ -36,11 +36,11 @@ describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
     end
   end
 
-  context "cms_hero_image_section" do
+  context "cms_hero_section" do
     let!(:store) { create(:store) }
     let!(:homepage) { create(:cms_homepage, store: store) }
     let(:cms_section) do
-      create(:cms_hero_image_section, cms_page: homepage)
+      create(:cms_hero_section, cms_page: homepage)
     end
 
     it_behaves_like "returns proper hash"

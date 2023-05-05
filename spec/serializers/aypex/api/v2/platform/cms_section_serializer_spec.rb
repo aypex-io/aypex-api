@@ -4,7 +4,7 @@ describe Aypex::Api::V2::Platform::CmsSectionSerializer do
   subject { described_class.new(cms_section) }
 
   let(:cms_page) { create(:cms_feature_page) }
-  let(:cms_section) { create(:cms_hero_image_section, cms_page: cms_page) }
+  let(:cms_section) { create(:cms_hero_section, cms_page: cms_page) }
 
   it { expect(subject.serializable_hash).to be_kind_of(Hash) }
 

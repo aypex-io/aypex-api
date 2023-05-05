@@ -3,7 +3,7 @@ require "spec_helper"
 describe Aypex::Api::V2::Platform::CmsPageSerializer do
   subject { described_class.new(cms_page).serializable_hash }
 
-  let(:cms_page) { create(:cms_feature_page, cms_sections: create_list(:cms_hero_image_section, 2)) }
+  let(:cms_page) { create(:cms_feature_page, cms_sections: create_list(:cms_hero_section, 2)) }
 
   it { expect(subject).to be_kind_of(Hash) }
 

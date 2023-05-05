@@ -111,7 +111,7 @@ describe "Storefront API v2 CMS Pages spec" do
 
     context "including cms sections with linked resources" do
       let(:base_category) { create(:base_category, store: store) }
-      let!(:cms_section) { create(:cms_hero_image_section, cms_page: home_en) }
+      let!(:cms_section) { create(:cms_hero_section, cms_page: home_en) }
 
       before { get "/api/v2/storefront/cms_pages?include=cms_sections.cms_components" }
 
@@ -144,7 +144,7 @@ describe "Storefront API v2 CMS Pages spec" do
       let!(:page) { create(:cms_standard_page, store: store) }
       let(:base_category) { create(:base_category, store: store) }
       let(:category) { create(:category, base_category: base_category) }
-      let!(:page_item) { create(:cms_hero_image_section, cms_page: page) }
+      let!(:page_item) { create(:cms_hero_section, cms_page: page) }
 
       before { get "/api/v2/storefront/cms_pages/#{page.id}?include=cms_sections.cms_components" }
 
