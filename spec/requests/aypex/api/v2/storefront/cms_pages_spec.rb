@@ -111,7 +111,7 @@ describe "Storefront API v2 CMS Pages spec" do
 
     context "including cms sections with linked resources" do
       let(:base_category) { create(:base_category, store: store) }
-      let!(:cms_section) { create(:cms_hero_section, cms_page: home_en) }
+      let!(:cms_section) { create(:cms_featured_article_section, cms_page: home_en) }
 
       before { get "/api/v2/storefront/cms_pages?include=cms_sections.cms_components" }
 
