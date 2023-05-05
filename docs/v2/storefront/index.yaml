@@ -2296,7 +2296,7 @@ components:
               example: Screen
             type:
               type: string
-              example: 'Aypex::Cms::Section::HeroImage'
+              example: 'Aypex::Cms::Section::Hero'
             position:
               type: integer
               example: 1
@@ -5388,47 +5388,25 @@ components:
                     type: cms_section
                     attributes:
                       name: Hero Image
-                      content:
-                        title: Summer Collection
-                        button_text: Shop Now
-                      settings:
-                        gutters: No Gutters
-                      link: /t/categories/new-collection/summer-2021
-                      fit: Screen
-                      type: 'Aypex::Cms::Section::HeroImage'
+                      type: 'Aypex::Cms::Section::Hero'
                       position: 1
-                      img_one_sm: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRZd01IZ3lOVEErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--5e6c4239964577906b395aaaea2b5b33fd26e5f3/main_banner_3.jpg
-                      img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRGpFeU1EQjROVEF3UGdZN0JsUT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--8f3058de34a7771ea1f07ef6e64153f565cbdb1d/main_banner_3.jpg
-                      img_one_lg: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRHpJME1EQjRNVEF3TUQ0R093WlUiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--caf0125f9a50b49f356feec7152d61264d0f2a53/main_banner_3.jpg
-                      img_one_xl: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRHpRNE1EQjRNakF3TUQ0R093WlUiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--f924ce193445aeae4c45f1f3841c0adf9d26db9b/main_banner_3.jpg
-                      img_two_sm: null
-                      img_two_md: null
-                      img_two_lg: null
-                      img_two_xl: null
-                      img_three_sm: null
-                      img_three_md: null
-                      img_three_lg: null
-                      img_three_xl: null
-                      is_fullscreen: true
+                      settings:
+                        is_full_screen: false
+                        has_gutters: true
                     relationships:
-                      linked_resource:
+                      cms_page:
                         data:
                           id: '24'
-                          type: category
+                          type: cms_page
+                      cms_component:
+                        data:
+                          id: '1'
+                          type: cms_component
+
                   - id: '16'
                     type: cms_section
                     attributes:
                       name: Main Categories
-                      content:
-                        link_type_one: 'Aypex::Category'
-                        link_type_two: 'Aypex::Category'
-                        link_type_three: 'Aypex::Category'
-                        link_one: categories/men
-                        link_two: categories/women
-                        link_three: categories/sportswear
-                        title_one: Men
-                        title_two: Women
-                        title_three: Sportswear
                       settings:
                         layout_style: Default
                         display_labels: Show
@@ -5436,18 +5414,6 @@ components:
                       fit: Container
                       type: 'Aypex::Cms::Section::ImageGallery'
                       position: 2
-                      img_one_sm: null
-                      img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--74de5b2afe48f629a8e16d5b2d8944b3d3417bef/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRJM01IZ3hPVFUrQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--da678788156c69df71d3b9aef47b2381b97c0fe1/category_banner_upper-bf1d79fc1d5da2ba796d5cdacb2e65a5a89285c6f12d0fd3c4d1a50c635b8f49.jpg
-                      img_one_lg: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--74de5b2afe48f629a8e16d5b2d8944b3d3417bef/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRVME1IZ3pPVEErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--02e56f1fb10afeb8bc7364c98c73e3645b516d9b/category_banner_upper-bf1d79fc1d5da2ba796d5cdacb2e65a5a89285c6f12d0fd3c4d1a50c635b8f49.jpg
-                      img_one_xl: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDUT09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--74de5b2afe48f629a8e16d5b2d8944b3d3417bef/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRGpFd09EQjROemd3UGdZN0JsUT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--16c4f4dbd2b4eada16a7c32ea369def68e06ec45/category_banner_upper-bf1d79fc1d5da2ba796d5cdacb2e65a5a89285c6f12d0fd3c4d1a50c635b8f49.jpg
-                      img_two_sm: null
-                      img_two_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--3d636cee0e2ffe82cb99718d0676daa7a3da6c72/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRJM01IZzBNREErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--483b55f9c18aa91cde294027bdf11e70c6de031b/big_category_banner-5308e3f568f948a5d71eb27746b573e0b3559200b1b21bb72dbc6bf69d2ce6de.jpg
-                      img_two_lg: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--3d636cee0e2ffe82cb99718d0676daa7a3da6c72/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRVME1IZzRNREErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--9c77e106262988ecd2dc8f79220e4f5c7219a6f8/big_category_banner-5308e3f568f948a5d71eb27746b573e0b3559200b1b21bb72dbc6bf69d2ce6de.jpg
-                      img_two_xl: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--3d636cee0e2ffe82cb99718d0676daa7a3da6c72/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRHpFd09EQjRNVFl3TUQ0R093WlUiLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--0f0060f3bf83404f48792c1187ec2b15743378ab/big_category_banner-5308e3f568f948a5d71eb27746b573e0b3559200b1b21bb72dbc6bf69d2ce6de.jpg
-                      img_three_sm: null
-                      img_three_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b365318aa440b93e148b22ded1d0ab26b9115580/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRJM01IZ3hPVFUrQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--da678788156c69df71d3b9aef47b2381b97c0fe1/category_banner_lower-b0e4f3ef4fca77de099754d8b23ffd0410c31d127ad228116de7ff54235745dc.jpg
-                      img_three_lg: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b365318aa440b93e148b22ded1d0ab26b9115580/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRVME1IZ3pPVEErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--02e56f1fb10afeb8bc7364c98c73e3645b516d9b/category_banner_lower-b0e4f3ef4fca77de099754d8b23ffd0410c31d127ad228116de7ff54235745dc.jpg
-                      img_three_xl: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBDdz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--b365318aa440b93e148b22ded1d0ab26b9115580/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRGpFd09EQjROemd3UGdZN0JsUT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--16c4f4dbd2b4eada16a7c32ea369def68e06ec45/category_banner_lower-b0e4f3ef4fca77de099754d8b23ffd0410c31d127ad228116de7ff54235745dc.jpg
                       is_fullscreen: false
                     relationships:
                       linked_resource:
@@ -5832,7 +5798,7 @@ components:
                         gutters: No Gutters
                       link: /t/categories/new-collection/summer-2021
                       fit: Screen
-                      type: 'Aypex::Cms::Section::HeroImage'
+                      type: 'Aypex::Cms::Section::Hero'
                       position: 1
                       img_one_sm: null
                       img_one_md: null
@@ -6023,7 +5989,7 @@ components:
                         gutters: No Gutters
                       link: /t/categories/new-collection/summer-2021
                       fit: Screen
-                      type: 'Aypex::Cms::Section::HeroImage'
+                      type: 'Aypex::Cms::Section::Hero'
                       position: 1
                       img_one_sm: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRFRZd01IZ3lOVEErQmpzR1ZBPT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--5e6c4239964577906b395aaaea2b5b33fd26e5f3/main_banner_3.jpg
                       img_one_md: /rails/active_storage/representations/redirect/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaHBCZz09IiwiZXhwIjpudWxsLCJwdXIiOiJibG9iX2lkIn19--67eaa93fa73d2f928bab365d457bab4c213237ee/eyJfcmFpbHMiOnsibWVzc2FnZSI6IkJBaDdCem9MWm05eWJXRjBTU0lJYW5CbkJqb0dSVlE2QzNKbGMybDZaVWtpRGpFeU1EQjROVEF3UGdZN0JsUT0iLCJleHAiOm51bGwsInB1ciI6InZhcmlhdGlvbiJ9fQ==--8f3058de34a7771ea1f07ef6e64153f565cbdb1d/main_banner_3.jpg

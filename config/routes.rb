@@ -180,6 +180,7 @@ Aypex::Engine.add_routes do
         # CMS
         resources :cms_pages
         resources :cms_sections
+        resources :cms_components
 
         # Wishlists API
         resources :wishlists

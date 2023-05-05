@@ -7,9 +7,9 @@ describe "Platform API v2 CmsSections" do
   let!(:store) { Aypex::Store.default }
   let!(:page) { create(:cms_homepage, store: store) }
 
-  let!(:resource_a) { create(:cms_hero_image_section, cms_page: page) }
-  let!(:resource_b) { create(:cms_hero_image_section, cms_page: page) }
-  let!(:resource_c) { create(:cms_hero_image_section, cms_page: page) }
+  let!(:resource_a) { create(:cms_hero_section, cms_page: page) }
+  let!(:resource_b) { create(:cms_hero_section, cms_page: page) }
+  let!(:resource_c) { create(:cms_hero_section, cms_page: page) }
   let!(:resource_d) { create(:cms_side_by_side_images_section, cms_page: page) }
   let!(:resource_e) { create(:cms_side_by_side_images_section, cms_page: page) }
   let!(:resource_f) { create(:cms_side_by_side_images_section, cms_page: page) }
