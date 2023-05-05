@@ -378,7 +378,7 @@ RSpec.configure do |config|
               }
             },
             required: %w[cms_section],
-            title: "Create a Hero Image Section",
+            title: "Create a Hero Section",
             "x-internal": false
           },
           create_product_carousel_cms_section_params: {
@@ -392,7 +392,8 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Section::ProductCarousel"], example: "Aypex::Cms::Section::ProductCarousel", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the Category that you would like displayed as a Product Carousel."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -411,18 +412,8 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Section::SideBySideImages"], example: "Aypex::Cms::Section::SideBySideImages", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image one links to."},
-                  link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image two links to."},
-                  link_one: {type: :string, example: "men/shirts", nullable: true, description: "Set the slug or path that image two links to."},
-                  link_two: {type: :string, example: "white-shirt", nullable: true, description: "Set the slug or path that image two links to."},
-                  title_one: {type: :string, example: "Shop Men's Shirts", nullable: true, description: "Set the title used in image one."},
-                  title_two: {type: :string, example: "Buy This Men's Shirt", nullable: true, description: "Set the title used in image two."},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
-                  subtitle_one: {type: :string, example: "Save 50% today", nullable: true, description: "Set the subtitle used in image one."},
-                  subtitle_two: {type: :string, example: "Save 50% today", nullable: true, description: "Set the subtitle used in image two."},
-                  gutters: {type: :string, example: "No Gutters", enum: ["Gutters", "No Gutters"], description: "This value is used by front end developers for styling the section padding."},
-                  "cms_section[image_one]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."},
-                  "cms_section[image_two]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -441,21 +432,8 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Section::ImageGallery"], example: "Aypex::Cms::Section::ImageGallery", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image one links to."},
-                  link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image two links to."},
-                  link_type_three: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Set the resource type that image three links to."},
-                  link_one: {type: :string, example: "men/shirts", nullable: true, description: "Set the slug or path that image two links to."},
-                  link_two: {type: :string, example: "white-shirt", nullable: true, description: "Set the slug or path that image two links to."},
-                  link_three: {type: :string, example: "red-shirt", nullable: true, description: "Set the slug or path that image three links to."},
-                  title_one: {type: :string, example: "Shop Men's Shirts", nullable: true, description: "Set the title used in image one."},
-                  title_two: {type: :string, example: "Buy This Men's Shirt", nullable: true, description: "Set the title used in image two."},
-                  title_three: {type: :string, example: "Buy This Women's Skirt", nullable: true, description: "Set the title used in image three."},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
-                  layout_style: {type: :string, example: "Default", enum: ["Default", "Reversed"], description: "This value is used by front end developers for styling the order the images appear."},
-                  display_labels: {type: :string, example: "Show", enum: ["Show", "Hide"], description: "This value is used by front end developers for showing and hiding the label on the images."},
-                  "cms_section[image_one]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."},
-                  "cms_section[image_two]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."},
-                  "cms_section[image_three]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -474,14 +452,8 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Section::FeaturedArticle"], example: "Aypex::Cms::Section::FeaturedArticle", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
-                  gutters: {type: :string, example: "No Gutters", enum: ["Gutters", "No Gutters"], description: "This value is used by front end developers for styling the section padding."},
-                  button_text: {type: :string, example: "Click Here", description: "Set the text value of the button used in this section."},
-                  title: {type: :string, example: "Shop Today", description: "Create a title for the Section."},
-                  subtitle: {type: :string, example: "Save Big!", description: "Create a subtitle for the Section."},
-                  rte_content: {type: :string, example: "Lots of text and content goes here.", description: "Set the content, here, this can be rich text editor content."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -500,8 +472,8 @@ RSpec.configure do |config|
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   type: {type: :string, enum: ["Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::RichTextContent", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
-                  rte_content: {type: :string, example: "Lots of text and content goes here.", description: "Set the content, here, this can be rich text editor content."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -515,14 +487,11 @@ RSpec.configure do |config|
               cms_section: {
                 type: :object,
                 properties: {
-                  name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::Hero", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
-                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Update the resource type that this section links to."},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this section to link to."},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
+                  name: {type: :string, description: "Give this section a name."},
+                  cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
-                  has_gutters: {type: :boolean, enum: [true, false], example: false, default: true, description: "This value is used by frontend developers to style the section."}
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -536,10 +505,10 @@ RSpec.configure do |config|
               cms_section: {
                 type: :object,
                 properties: {
-                  name: {type: :string, description: "Change this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::Hero", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
+                  name: {type: :string, description: "Update the Section name"},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Update the ID of the Category that you would like displayed as a Product Carousel."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -553,21 +522,10 @@ RSpec.configure do |config|
               cms_section: {
                 type: :object,
                 properties: {
-                  name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::Hero", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
+                  name: {type: :string, description: "Update the Section name"},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image one links to."},
-                  link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image two links to."},
-                  link_one: {type: :string, example: "men/shirts", nullable: true, description: "Update the slug or path that image two links to."},
-                  link_two: {type: :string, example: "white-shirt", nullable: true, description: "Update the slug or path that image two links to."},
-                  title_one: {type: :string, example: "Shop Men's Shirts", nullable: true, description: "Update the title used in image one."},
-                  title_two: {type: :string, example: "Buy This Men's Shirt", nullable: true, description: "Update the title used in image two."},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
-                  subtitle_one: {type: :string, example: "Save 50% today", nullable: true, description: "Update the subtitle used in image one."},
-                  subtitle_two: {type: :string, example: "Save 50% today", nullable: true, description: "Update the subtitle used in image two."},
-                  gutters: {type: :string, example: "No Gutters", enum: ["Gutters", "No Gutters"], description: "This value is used by front end developers for styling the section padding."},
-                  "cms_section[image_one]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."},
-                  "cms_section[image_two]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -581,24 +539,10 @@ RSpec.configure do |config|
               cms_section: {
                 type: :object,
                 properties: {
-                  name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::Hero", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
+                  name: {type: :string, description: "Update the Section name"},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  link_type_one: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image one links to."},
-                  link_type_two: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image two links to."},
-                  link_type_three: {type: :string, example: "Aypex::Category", enum: ["Aypex::Category", "Aypex::Product"], description: "Update the resource type that image three links to."},
-                  link_one: {type: :string, example: "men/shirts", nullable: true, description: "Update the slug or path that image two links to."},
-                  link_two: {type: :string, example: "white-shirt", nullable: true, description: "Update the slug or path that image two links to."},
-                  link_three: {type: :string, example: "red-shirt", nullable: true, description: "Update the slug or path that image three links to."},
-                  title_one: {type: :string, example: "Shop Men's Shirts", nullable: true, description: "Update the title used in image one."},
-                  title_two: {type: :string, example: "Buy This Men's Shirt", nullable: true, description: "Update the title used in image two."},
-                  title_three: {type: :string, example: "Buy This Women's Skirt", nullable: true, description: "Update the title used in image three."},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
-                  layout_style: {type: :string, example: "Default", enum: ["Default", "Reversed"], description: "This value is used by front end developers for styling the order the images appear."},
-                  display_labels: {type: :string, example: "Show", enum: ["Show", "Hide"], description: "This value is used by front end developers for showing and hiding the label on the images."},
-                  "cms_section[image_one]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."},
-                  "cms_section[image_two]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."},
-                  "cms_section[image_three]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -612,17 +556,10 @@ RSpec.configure do |config|
               cms_section: {
                 type: :object,
                 properties: {
-                  name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::Hero", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
+                  name: {type: :string, description: "Update the Section name"},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this section links to."},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Change the ID of the resource that you would like this section to link to."},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
-                  gutters: {type: :string, example: "No Gutters", enum: ["Gutters", "No Gutters"], description: "This value is used by front end developers for styling the section padding."},
-                  button_text: {type: :string, example: "Click Here", description: "Update the text value of the button used in this section."},
-                  title: {type: :string, example: "Shop Today", description: "Update the title for the Section."},
-                  subtitle: {type: :string, example: "Save Big!", description: "Update the subtitle for the Section."},
-                  rte_content: {type: :string, example: "Lots of text and content goes here.", description: "Update the content here, this can be rich text editor content."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },
@@ -636,11 +573,10 @@ RSpec.configure do |config|
               cms_section: {
                 type: :object,
                 properties: {
-                  name: {type: :string, description: "Update this section name."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::Hero", "Aypex::Cms::Section::FeaturedArticle", "Aypex::Cms::Section::ProductCarousel", "Aypex::Cms::Section::ImageGallery", "Aypex::Cms::Section::SideBySideImages", "Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::ProductCarousel", description: "Change the section type."},
+                  name: {type: :string, description: "Update the Section name"},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  fit: {type: :string, example: "Screen", enum: ["Screen", "Container"], description: "This value is used by front end developers to set CSS classes for content that fits the screen edge-to-edge, or stays within the boundaries of the central container."},
-                  rte_content: {type: :string, example: "Lots of text and content goes here.", description: "Update the content, here, this can be rich text editor content."}
+                  is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
+                  has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
                 }
               }
             },

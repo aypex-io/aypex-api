@@ -9,7 +9,7 @@ describe "CMS Section API", swagger: true do
     filter_examples: [{name: "filter[name_eq]", example: "Hero"}],
     custom_create_params: {
       oneOf: [
-        {"$ref" => "#/components/schemas/create_hero_image_cms_section_params"},
+        {"$ref" => "#/components/schemas/create_hero_cms_section_params"},
         {"$ref" => "#/components/schemas/create_product_carousel_cms_section_params"},
         {"$ref" => "#/components/schemas/create_side_by_side_images_cms_section_params"},
         {"$ref" => "#/components/schemas/create_featured_article_cms_section_params"},
@@ -19,7 +19,7 @@ describe "CMS Section API", swagger: true do
     },
     custom_update_params: {
       oneOf: [
-        {"$ref" => "#/components/schemas/update_hero_image_cms_section_params"},
+        {"$ref" => "#/components/schemas/update_hero_cms_section_params"},
         {"$ref" => "#/components/schemas/update_product_carousel_cms_section_params"},
         {"$ref" => "#/components/schemas/update_side_by_side_images_cms_section_params"},
         {"$ref" => "#/components/schemas/update_featured_article_cms_section_params"},
