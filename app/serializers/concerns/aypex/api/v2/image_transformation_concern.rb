@@ -9,8 +9,8 @@ module Aypex
 
         def self.included(base)
           base.attribute :transformed_url, if: proc { |record, params|
-                                            params && params.dig(:image_transformation).present?
-                                          } do |object, params|
+                                                 params && params.dig(:image_transformation).present?
+                                               } do |object, params|
             object.generate_url(
               width: params.dig(:image_transformation, :width),
               height: params.dig(:image_transformation, :height),
@@ -26,8 +26,8 @@ module Aypex
           # with just a single API request.
           FIXED_IMAGE_SIZES.each do |size|
             base.attribute "img_#{size}".to_sym, if: proc { |record, params|
-                                              params && params.dig(:images_transformed_to).present?
-                                            } do |object, params|
+                                                       params && params.dig(:images_transformed_to).present?
+                                                     } do |object, params|
               object.generate_url(
                 quality: params.dig(:images_transformed_to, :quality),
                 format: params.dig(:images_transformed_to, :format)
