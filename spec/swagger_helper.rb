@@ -40,7 +40,7 @@ RSpec.configure do |config|
         }
       ],
       tags: [
-        {name: "Addresses"},
+        {name: "Addresses", description: "Platform API Addresses"},
         {name: "Adjustments"},
         {name: "Base Categories"},
         {name: "Categories"},
@@ -682,13 +682,7 @@ RSpec.configure do |config|
                 required: %w[cms_section_id type],
                 properties: {
                   cms_section_id: {type: :string, description: "Set the `cms_section` ID that this component belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Component::Hero"], example: "Aypex::Cms::Component::Hero", description: "Set the component type."},
-                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this component links to."},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this component to link to."},
-                  position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  button_text: {type: :string, example: "Click Here", description: "Set the text value of the button used in this section."},
-                  title: {type: :string, example: "Shop Today", description: "Create a title for the Hero Component."},
-                  "cms_component[image]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."}
+                  type: {type: :string, enum: ["Aypex::Cms::Component::Hero"], example: "Aypex::Cms::Component::Hero", description: "Set the CMS Component type."}
                 }
               }
             },
@@ -701,13 +695,12 @@ RSpec.configure do |config|
             properties: {
               cms_component: {
                 type: :object,
-                required: %w[],
                 properties: {
-                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this component links to."},
-                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this component to link to."},
-                  position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  button_text: {type: :string, example: "Click Here", description: "Set the text value of the button used in this section."},
-                  title: {type: :string, example: "Shop Today", description: "Create a title for the Hero Section."},
+                  linked_resource_type: {type: :string, example: "Aypex::Category", nullable: true, enum: ["Aypex::Category", "Aypex::Product", "Aypex::CmsPage"], description: "Set the resource type that this CMS Component links to."},
+                  linked_resource_id: {type: :string, example: "1", nullable: true, description: "Set the ID of the resource that you would like this CMS Component to link to."},
+                  position: {type: :integer, example: 2, description: "Pass the position that you want this CMS Component to appear in. NOTE: (The list is not zero indexed, so the first item is position: `1`)"},
+                  button_text: {type: :string, example: "Click Here", description: "Set the text value of the button used in this CMS Component."},
+                  title: {type: :string, example: "Shop Today", description: "Create a title for the CMS Component"},
                   "cms_component[image]": {type: :string, format: :binary, description: "Use a `multipart/form-data` request to upload assets."}
                 }
               }
