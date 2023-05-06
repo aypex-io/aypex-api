@@ -9,8 +9,8 @@ module Aypex
 
         def self.included(base)
           base.attribute :transformed_url, if: proc { |record, params|
-                                            params && params.dig(:image_transformation).present?
-                                          } do |object, params|
+                                                 params && params.dig(:image_transformation).present?
+                                               } do |object, params|
             object.generate_url(
               width: params.dig(:image_transformation, :width),
               height: params.dig(:image_transformation, :height),
@@ -19,15 +19,15 @@ module Aypex
             )
           end
 
-          # Creates an asset pack of pre-sized images of any determined quality.
+          # Creates an asset pack of pre-sized images of a determined quality and/or format.
           #
-          # This looks very messy on the API JSON response but it offers the chance to
-          # work with modern build in browser lazy loading <img src="" srcset="" sizes="" loading="lazy" />
+          # This looks messy on the API JSON response but it offers the chance to work with modern
+          # build in browser lazy loading <img src="" srcset="" sizes="" loading="lazy" />
           # with just a single API request.
           FIXED_IMAGE_SIZES.each do |size|
             base.attribute "img_#{size}".to_sym, if: proc { |record, params|
-                                              params && params.dig(:images_transformed_to).present?
-                                            } do |object, params|
+                                                       params && params.dig(:images_transformed_to).present?
+                                                     } do |object, params|
               object.generate_url(
                 quality: params.dig(:images_transformed_to, :quality),
                 format: params.dig(:images_transformed_to, :format)
