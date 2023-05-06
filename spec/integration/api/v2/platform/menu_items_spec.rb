@@ -50,7 +50,7 @@ describe "Menu Items API", swagger: true do
       description "Reposition a Menu Item"
       consumes "application/json"
       parameter name: :id, in: :path, type: :string
-      parameter name: :menu_item, in: :body, schema: {"$ref" => "#/components/schemas/menu_item_reposition"}
+      parameter name: :menu_item, in: :body, schema: {"$ref" => "#/components/schemas/menu_item_reposition_params"}
 
       let(:menu_item) { valid_update_position_param_value }
 
