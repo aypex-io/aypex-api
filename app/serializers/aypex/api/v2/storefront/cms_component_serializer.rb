@@ -13,6 +13,7 @@ module Aypex
         }
 
         belongs_to :cms_section
+        has_one :image
       end
     end
   end

@@ -31,7 +31,12 @@ module Aypex
 
           def scope_includes
             {
-              cms_sections: :cms_components
+              cms_sections: {
+                cms_components: [
+                  :linked_resource,
+                  :image
+                ]
+              }
             }
           end
         end
