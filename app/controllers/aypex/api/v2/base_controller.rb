@@ -136,7 +136,8 @@ module Aypex
             price_options: current_price_options,
             store: current_store,
             user: aypex_current_user,
-            image_transformation: params[:image_transformation]
+            image_transformation: params[:image_transformation],
+            images_transformed_to: params[:images_transformed_to]
           }
         end
 
