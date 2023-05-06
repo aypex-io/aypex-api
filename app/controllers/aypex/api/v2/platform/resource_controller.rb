@@ -121,19 +121,15 @@ module Aypex
           end
 
           def settings_params
-            if action_name == "create" && params[model_param_name.to_sym][:type].present?
-              type_class = params[model_param_name.to_sym][:type].constantize
+            result = []
 
-              if type_class.stored_attributes[:settings].nil?
-                []
-              else
-                type_class.stored_attributes[:settings]
+            if action_name == "update" && resource.class.stored_attributes.any?
+              resource.class.stored_attributes.each do |hash|
+                result << hash
               end
-            elsif action_name == "update" && resource.class.method_defined?(:settings) && !resource.class.stored_attributes[:settings].nil?
-              resource.class.stored_attributes[:settings]
-            else
-              []
             end
+
+            result
           end
 
           def metadata_params

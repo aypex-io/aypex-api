@@ -19,9 +19,9 @@ describe "CMS Component API", swagger: true do
     }
   }
 
-  let!(:store) { Aypex::Store.default }
-  let!(:cms_page) { create(:cms_feature_page, store: store) }
-  let!(:cms_section) { create(:cms_hero_section, cms_page: cms_page) }
+  let(:store) { Aypex::Store.default }
+  let(:cms_page) { create(:cms_feature_page, store: store) }
+  let(:cms_section) { create(:cms_hero_section, cms_page: cms_page) }
   let(:cms_component) { create(:cms_hero_component, cms_section: cms_section) }
 
   let(:id) { create(:cms_hero_component, cms_section: cms_section).id }
@@ -31,9 +31,7 @@ describe "CMS Component API", swagger: true do
     {
       cms_component: {
         cms_section_id: cms_section.id,
-        type: "Aypex::Cms::Component::Hero",
-        title: "This Hero is New",
-        button_text: "Click Here"
+        type: "Aypex::Cms::Component::Hero"
       }
     }
   end
