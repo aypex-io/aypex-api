@@ -19,10 +19,10 @@ module Aypex
             )
           end
 
-          # Creates an asset pack of pre-sized images of any determined quality.
+          # Creates an asset pack of pre-sized images of a determined quality and/or format.
           #
-          # This looks very messy on the API JSON response but it offers the chance to
-          # work with modern build in browser lazy loading <img src="" srcset="" sizes="" loading="lazy" />
+          # This looks messy on the API JSON response but it offers the chance to work with modern
+          # build in browser lazy loading <img src="" srcset="" sizes="" loading="lazy" />
           # with just a single API request.
           FIXED_IMAGE_SIZES.each do |size|
             base.attribute "img_#{size}".to_sym, if: proc { |record, params|
