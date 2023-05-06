@@ -43,8 +43,8 @@ RSpec.configure do |config|
         {name: "Addresses"},
         {name: "Adjustments"},
         {name: "Base Categories"},
-        {name: "Classifications"},
         {name: "Categories"},
+        {name: "Classifications"},
         {name: "Countries"},
         {name: "CMS Pages"},
         {name: "CMS Sections"},
@@ -199,6 +199,94 @@ RSpec.configure do |config|
               }
             },
             required: %w[adjustment],
+            "x-internal": false
+          },
+
+          # Base Categories
+          create_base_category_params: {
+            type: :object,
+            properties: {
+              base_category: {
+                type: :object,
+                required: %w[name],
+                properties: {
+                  name: {type: :string},
+                  position: {type: :integer, example: 2, description: "Pass the position that you want this Base Category to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
+                  public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
+                  private_metadata: {type: :object, example: {"profitability" => 2}}
+                }
+              }
+            },
+            required: %w[base_category],
+            "x-internal": false
+          },
+          update_base_category_params: {
+            type: :object,
+            properties: {
+              base_category: {
+                type: :object,
+                properties: {
+                  name: {type: :string},
+                  position: {type: :integer, example: 2, description: "Pass the position that you want this Base Category to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
+                  public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
+                  private_metadata: {type: :object, example: {"profitability" => 2}}
+                }
+              }
+            },
+            required: %w[base_category],
+            "x-internal": false
+          },
+
+          # Category
+          create_category_params: {
+            type: :object,
+            properties: {
+              category: {
+                type: :object,
+                required: %w[name base_category_id],
+                properties: {
+                  base_category_id: {type: :string},
+                  parent_id: {type: :string},
+                  name: {type: :string},
+                  public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
+                  private_metadata: {type: :object, example: {"profitability" => 2}}
+                }
+              }
+            },
+            required: %w[category],
+            "x-internal": false
+          },
+          update_category_params: {
+            type: :object,
+            properties: {
+              category: {
+                type: :object,
+                properties: {
+                  base_category_id: {type: :string},
+                  parent_id: {type: :string},
+                  name: {type: :string},
+                  public_metadata: {type: :object},
+                  private_metadata: {type: :object}
+                }
+              }
+            },
+            required: %w[category],
+            "x-internal": false
+          },
+          category_reposition: {
+            type: :object,
+            properties: {
+              category: {
+                type: :object,
+                required: %w[new_parent_id new_position_idx],
+                properties: {
+                  new_parent_id: {type: :integer, example: 1, description: "The ID of the new target parent Category."},
+                  new_position_idx: {type: :integer, example: 1, description: "The new index position of the Category within the parent Category."}
+                }
+              }
+            },
+            required: %w[category],
+            title: "Reposition a Category",
             "x-internal": false
           },
 
@@ -796,7 +884,7 @@ RSpec.configure do |config|
             title: "Update a Menu Item",
             "x-internal": false
           },
-          menu_item_reposition: {
+          menu_item_reposition_params: {
             type: :object,
             properties: {
               menu_item: {
@@ -1478,7 +1566,7 @@ RSpec.configure do |config|
             "x-internal": false
           },
 
-          # Shopment
+          # Shipment
           create_shipment_params: {
             type: :object,
             properties: {
@@ -1539,6 +1627,7 @@ RSpec.configure do |config|
             required: %w[shipping_category],
             "x-internal": false
           },
+
           # Shipping Category
           create_shipping_category_params: {
             type: :object,
@@ -1943,94 +2032,6 @@ RSpec.configure do |config|
             "x-internal": false
           },
 
-          # Category
-          create_category_params: {
-            type: :object,
-            properties: {
-              category: {
-                type: :object,
-                required: %w[name base_category_id],
-                properties: {
-                  base_category_id: {type: :string},
-                  parent_id: {type: :string},
-                  name: {type: :string},
-                  public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
-                  private_metadata: {type: :object, example: {"profitability" => 2}}
-                }
-              }
-            },
-            required: %w[category],
-            "x-internal": false
-          },
-          update_category_params: {
-            type: :object,
-            properties: {
-              category: {
-                type: :object,
-                properties: {
-                  base_category_id: {type: :string},
-                  parent_id: {type: :string},
-                  name: {type: :string},
-                  public_metadata: {type: :object},
-                  private_metadata: {type: :object}
-                }
-              }
-            },
-            required: %w[category],
-            "x-internal": false
-          },
-          category_reposition: {
-            type: :object,
-            properties: {
-              category: {
-                type: :object,
-                required: %w[new_parent_id new_position_idx],
-                properties: {
-                  new_parent_id: {type: :integer, example: 1, description: "The ID of the new target parent Category."},
-                  new_position_idx: {type: :integer, example: 1, description: "The new index position of the Category within the parent Category."}
-                }
-              }
-            },
-            required: %w[category],
-            title: "Reposition a Category",
-            "x-internal": false
-          },
-
-          # BaseCategories
-          create_base_category_params: {
-            type: :object,
-            properties: {
-              base_category: {
-                type: :object,
-                required: %w[name],
-                properties: {
-                  name: {type: :string},
-                  position: {type: :integer, example: 2, description: "Pass the position that you want this Base Category to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
-                  private_metadata: {type: :object, example: {"profitability" => 2}}
-                }
-              }
-            },
-            required: %w[base_category],
-            "x-internal": false
-          },
-          update_base_category_params: {
-            type: :object,
-            properties: {
-              base_category: {
-                type: :object,
-                properties: {
-                  name: {type: :string},
-                  position: {type: :integer, example: 2, description: "Pass the position that you want this Base Category to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
-                  public_metadata: {type: :object, example: {"ability_to_recycle" => "90%"}},
-                  private_metadata: {type: :object, example: {"profitability" => 2}}
-                }
-              }
-            },
-            required: %w[base_category],
-            "x-internal": false
-          },
-
           # User
           create_user_params: {
             type: :object,
@@ -2246,7 +2247,6 @@ RSpec.configure do |config|
             },
             "x-internal": false
           },
-
           coupon_code_param: {
             type: :object,
             properties: {
