@@ -457,7 +457,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::Hero"], example: "Aypex::Cms::Section::Hero", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::ImageHero"], example: "Aypex::Cms::Section::ImageHero", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
                   has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
@@ -517,7 +517,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::ImageGallery"], example: "Aypex::Cms::Section::ImageGallery", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::Mosaic"], example: "Aypex::Cms::Section::Mosaic", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
                   has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
@@ -557,7 +557,7 @@ RSpec.configure do |config|
                 properties: {
                   name: {type: :string, description: "Give this section a name."},
                   cms_page_id: {type: :string, description: "Set the `cms_page` ID that this section belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Section::RichTextContent"], example: "Aypex::Cms::Section::RichTextContent", description: "Set the section type."},
+                  type: {type: :string, enum: ["Aypex::Cms::Section::RichText"], example: "Aypex::Cms::Section::RichText", description: "Set the section type."},
                   position: {type: :integer, example: 2, description: "Pass the position that you want this section to appear in. (The list is not zero indexed, so the first item is position: `1`)"},
                   is_full_screen: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."},
                   has_gutters: {type: :boolean, enum: [true, false], example: true, default: false, description: "This value is used by frontend developers to style the section."}
@@ -681,7 +681,7 @@ RSpec.configure do |config|
                 required: %w[cms_section_id type],
                 properties: {
                   cms_section_id: {type: :string, description: "Set the `cms_section` ID that this component belongs to."},
-                  type: {type: :string, enum: ["Aypex::Cms::Component::Hero"], example: "Aypex::Cms::Component::Hero", description: "Set the CMS Component type."}
+                  type: {type: :string, enum: ["Aypex::Cms::Component::ImageHero"], example: "Aypex::Cms::Component::ImageHero", description: "Set the CMS Component type."}
                 }
               }
             },

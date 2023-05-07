@@ -9,8 +9,10 @@ module Aypex
           model_klazz = "Aypex::#{serializer_base_name}".constantize
 
           base.set_type model_klazz.json_api_type
+
           # include standard attributes
           base.attributes(*model_klazz.json_api_columns)
+
           # include money attributes
           display_getter_methods(model_klazz).each do |method_name|
             base.attribute(method_name) do |object|

@@ -2224,7 +2224,7 @@ paths:
       - name: filter[type_eq]
         in: query
         description: ''
-        example: Aypex::Cms::Component::Hero
+        example: Aypex::Cms::Component::ImageHero
         schema:
           type: string
       responses:
@@ -2239,7 +2239,7 @@ paths:
                     - id: '1'
                       type: cms_component
                       attributes:
-                        type: Aypex::Cms::Component::Hero
+                        type: Aypex::Cms::Component::ImageHero
                         destination:
                         position: 1
                         linked_resource_type:
@@ -2258,7 +2258,7 @@ paths:
                     - id: '2'
                       type: cms_component
                       attributes:
-                        type: Aypex::Cms::Component::Hero
+                        type: Aypex::Cms::Component::ImageHero
                         destination:
                         position: 2
                         linked_resource_type:
@@ -2324,7 +2324,7 @@ paths:
                       id: '5'
                       type: cms_component
                       attributes:
-                        type: Aypex::Cms::Component::Hero
+                        type: Aypex::Cms::Component::ImageHero
                         destination:
                         position: 1
                         linked_resource_type:
@@ -2397,7 +2397,7 @@ paths:
                       id: '6'
                       type: cms_component
                       attributes:
-                        type: Aypex::Cms::Component::Hero
+                        type: Aypex::Cms::Component::ImageHero
                         destination:
                         position: 1
                         linked_resource_type:
@@ -2468,7 +2468,7 @@ paths:
                       id: '8'
                       type: cms_component
                       attributes:
-                        type: Aypex::Cms::Component::Hero
+                        type: Aypex::Cms::Component::ImageHero
                         destination:
                         position: 1
                         linked_resource_type:
@@ -2989,7 +2989,7 @@ paths:
                       type: cms_section
                       attributes:
                         name: Ullam voluptatum optio omnis sit qui voluptatibus aperiam.
-                        type: Aypex::Cms::Section::Hero
+                        type: Aypex::Cms::Section::ImageHero
                         position: 1
                         created_at: '2023-05-06T14:12:37.488Z'
                         updated_at: '2023-05-06T14:12:37.488Z'
@@ -3007,7 +3007,7 @@ paths:
                       type: cms_section
                       attributes:
                         name: Nesciunt dicta veritatis ab repellendus a nostrum quidem.
-                        type: Aypex::Cms::Section::Hero
+                        type: Aypex::Cms::Section::ImageHero
                         position: 2
                         created_at: '2023-05-06T14:12:37.490Z'
                         updated_at: '2023-05-06T14:12:37.490Z'
@@ -3072,7 +3072,7 @@ paths:
                       type: cms_section
                       attributes:
                         name: Harum ullam reiciendis officiis praesentium.
-                        type: Aypex::Cms::Section::Hero
+                        type: Aypex::Cms::Section::ImageHero
                         position: 1
                         created_at: '2023-05-06T14:12:37.993Z'
                         updated_at: '2023-05-06T14:12:37.993Z'
@@ -3152,7 +3152,7 @@ paths:
                       type: cms_section
                       attributes:
                         name: Aut vel nihil ratione alias ad eius.
-                        type: Aypex::Cms::Section::Hero
+                        type: Aypex::Cms::Section::ImageHero
                         position: 1
                         created_at: '2023-05-06T14:12:38.256Z'
                         updated_at: '2023-05-06T14:12:38.256Z'
@@ -3222,7 +3222,7 @@ paths:
                       type: cms_section
                       attributes:
                         name: Super Hero
-                        type: Aypex::Cms::Section::Hero
+                        type: Aypex::Cms::Section::ImageHero
                         position: 1
                         created_at: '2023-05-06T14:12:38.763Z'
                         updated_at: '2023-05-06T14:12:38.994Z'
@@ -18729,8 +18729,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Section::Hero
-              example: Aypex::Cms::Section::Hero
+              - Aypex::Cms::Section::ImageHero
+              example: Aypex::Cms::Section::ImageHero
               description: Set the section type.
             position:
               type: integer
@@ -18879,8 +18879,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Section::ImageGallery
-              example: Aypex::Cms::Section::ImageGallery
+              - Aypex::Cms::Section::Mosaic
+              example: Aypex::Cms::Section::Mosaic
               description: Set the section type.
             position:
               type: integer
@@ -18979,8 +18979,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Section::RichTextContent
-              example: Aypex::Cms::Section::RichTextContent
+              - Aypex::Cms::Section::RichText
+              example: Aypex::Cms::Section::RichText
               description: Set the section type.
             position:
               type: integer
@@ -19250,8 +19250,8 @@ components:
             type:
               type: string
               enum:
-              - Aypex::Cms::Component::Hero
-              example: Aypex::Cms::Component::Hero
+              - Aypex::Cms::Component::ImageHero
+              example: Aypex::Cms::Component::ImageHero
               description: Set the CMS Component type.
       required:
       - cms_component

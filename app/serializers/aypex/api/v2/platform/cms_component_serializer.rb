@@ -5,6 +5,10 @@ module Aypex
         class CmsComponentSerializer < BaseSerializer
           include ResourceSerializerConcern
 
+          attribute :content, if: proc { |record| record.content? } do |object|
+            object.content.to_s
+          end
+
           belongs_to :cms_section
 
           belongs_to :linked_resource, polymorphic: {
@@ -13,7 +17,7 @@ module Aypex
             Aypex::Cms::Page::Homepage => :cms_page
           }
 
-          has_one :image
+          has_one :image, serializer: :image
         end
       end
     end

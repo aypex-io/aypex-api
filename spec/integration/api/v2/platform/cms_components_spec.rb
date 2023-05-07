@@ -6,7 +6,7 @@ describe "CMS Component API", swagger: true do
   resource_name = "CMS Component"
   options = {
     include_example: "image",
-    filter_examples: [{name: "filter[type_eq]", example: "Aypex::Cms::Component::Hero"}],
+    filter_examples: [{name: "filter[type_eq]", example: "Aypex::Cms::Component::ImageHero"}],
     custom_create_params: {
       oneOf: [
         {"$ref" => "#/components/schemas/create_hero_cms_component_params"}
@@ -21,17 +21,17 @@ describe "CMS Component API", swagger: true do
 
   let(:store) { Aypex::Store.default }
   let(:cms_page) { create(:cms_feature_page, store: store) }
-  let(:cms_section) { create(:cms_hero_section, cms_page: cms_page) }
-  let(:cms_component) { create(:cms_hero_component, cms_section: cms_section) }
+  let(:cms_section) { create(:cms_section_image_hero, cms_page: cms_page) }
+  let(:cms_component) { create(:cms_component_image_hero, cms_section: cms_section) }
 
-  let(:id) { create(:cms_hero_component, cms_section: cms_section).id }
-  let(:records_list) { create_list(:cms_hero_component, 2, cms_section: cms_section) }
+  let(:id) { create(:cms_component_image_hero, cms_section: cms_section).id }
+  let(:records_list) { create_list(:cms_component_image_hero, 2, cms_section: cms_section) }
 
   let(:valid_create_param_value) do
     {
       cms_component: {
         cms_section_id: cms_section.id,
-        type: "Aypex::Cms::Component::Hero"
+        type: "Aypex::Cms::Component::ImageHero"
       }
     }
   end
