@@ -2330,7 +2330,6 @@ components:
           example: '1'
         type:
           type: string
-          default: cms_section
         attributes:
           type: object
           properties:
@@ -2339,7 +2338,7 @@ components:
               nullable: true
             type:
               type: string
-              example: 'Aypex::Cms::Section::ImageHero'
+              example: 'Aypex::Cms::Component::ImageHero'
             position:
               type: integer
               example: 1
