@@ -20,8 +20,8 @@ module Aypex
           # The images will be returned as an array.
           #
           # Options
-          # width | pass comma separated integer values
-          # images_transformed_to[width]=150,378
+          # Widths | pass comma separated integer values
+          # images_transformed_to[widths]=150,378,550,987,1200
           #
           # Quality | pass a single integer value
           # images_transformed_to[quality]=20
@@ -30,13 +30,13 @@ module Aypex
           # images_transformed_to[format]=webp
           #
           # An example request below.
-          # include=image&images_transformed_to[width]=150,378&images_transformed_to[quality]=20
+          # include=image&images_transformed_to[widths]=150,378,550,987,1200&images_transformed_to[quality]=20&images_transformed_to[format]=webp
           base.attribute :images_transformed_to, if: proc { |record, params|
-            params && params.dig(:images_transformed_to).present? && params.dig(:images_transformed_to, :width).present?
+            params && params.dig(:images_transformed_to).present? && params.dig(:images_transformed_to, :widths).present?
           } do |object, params|
             rquested_quality = params.dig(:images_transformed_to, :quality) || "100"
             rquested_format = params.dig(:images_transformed_to, :format) || "webp"
-            requested_widths = params.dig(:images_transformed_to, :width).split(",")
+            requested_widths = params.dig(:images_transformed_to, :widths).split(",")
             resulting_array = []
 
             requested_widths.each do |width|
