@@ -8,6 +8,10 @@ module Aypex
           def model_class
             Aypex::CmsComponent
           end
+
+          def aypex_permitted_attributes
+            super + [:content]
+          end
         end
       end
     end

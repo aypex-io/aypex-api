@@ -4,9 +4,6 @@ module Aypex
       module ImageTransformationConcern
         extend ActiveSupport::Concern
 
-        FIXED_IMAGE_SIZES = [50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650,
-          700, 750, 800, 850, 900, 950, 1000, 1100, 1200, 1300, 1400, 1600, 1800, 2000, 2200, 2400, 2600, 2800, 3000]
-
         def self.included(base)
           base.attribute :transformed_url, if: proc { |record, params|
                                                  params && params.dig(:image_transformation).present?
@@ -19,20 +16,34 @@ module Aypex
             )
           end
 
-          # Creates an asset pack of pre-sized images of a determined quality and/or format.
+          # Allows the API to request an array of pre sized images in one request.
+          # The images will be returned as an array.
           #
-          # This looks messy on the API JSON response but it offers the chance to work with modern
-          # build in browser lazy loading <img src="" srcset="" sizes="" loading="lazy" />
-          # with just a single API request.
-          FIXED_IMAGE_SIZES.each do |size|
-            base.attribute "img_#{size}".to_sym, if: proc { |record, params|
-                                                       params && params.dig(:images_transformed_to).present?
-                                                     } do |object, params|
-              object.generate_url(
-                quality: params.dig(:images_transformed_to, :quality),
-                format: params.dig(:images_transformed_to, :format)
-              )
+          # Options
+          # Widths | pass comma separated integer values
+          # images_transformed_to[widths]=150,378,550,987,1200
+          #
+          # Quality | pass a single integer value
+          # images_transformed_to[quality]=20
+          #
+          # Format | pass a single integer value
+          # images_transformed_to[format]=webp
+          #
+          # An example request below.
+          # include=image&images_transformed_to[widths]=150,378,550,987,1200&images_transformed_to[quality]=20&images_transformed_to[format]=webp
+          base.attribute :images_transformed_to, if: proc { |record, params|
+            params && params.dig(:images_transformed_to).present? && params.dig(:images_transformed_to, :widths).present?
+          } do |object, params|
+            rquested_quality = params.dig(:images_transformed_to, :quality) || "100"
+            rquested_format = params.dig(:images_transformed_to, :format) || "webp"
+            requested_widths = params.dig(:images_transformed_to, :widths).split(",")
+            resulting_array = []
+
+            requested_widths.each do |width|
+              resulting_array << {width: width, quality: rquested_quality, format: rquested_format, url: object.generate_url(width: width, quality: rquested_quality, format: rquested_format)}
             end
+
+            resulting_array
           end
         end
       end

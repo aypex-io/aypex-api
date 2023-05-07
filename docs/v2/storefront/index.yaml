@@ -2291,7 +2291,7 @@ components:
               example: Screen
             type:
               type: string
-              example: 'Aypex::Cms::Section::Hero'
+              example: 'Aypex::Cms::Section::ImageHero'
             position:
               type: integer
               example: 1
@@ -2330,7 +2330,6 @@ components:
           example: '1'
         type:
           type: string
-          default: cms_component
         attributes:
           type: object
           properties:
@@ -2339,7 +2338,7 @@ components:
               nullable: true
             type:
               type: string
-              example: 'Aypex::Cms::Component::Hero'
+              example: 'Aypex::Cms::Component::ImageHero'
             position:
               type: integer
               example: 1
@@ -5337,7 +5336,7 @@ components:
                     type: cms_section
                     attributes:
                       name: Big Hero
-                      type: 'Aypex::Cms::Section::Hero'
+                      type: 'Aypex::Cms::Section::ImageHero'
                       position: 1
                       settings:
                         is_full_screen: false
