@@ -13,7 +13,7 @@ describe "Storefront API v2 CMS Pages spec" do
     let!(:home_fr) { create(:cms_homepage, store: store, locale: "fr") }
     let!(:standard_fr) { create(:cms_standard_page, store: store, locale: "fr") }
     let!(:home_store_2) { create(:cms_homepage, store: create(:store)) }
-    let(:page) { home_en }
+    let!(:page) { home_en }
 
     shared_examples "returns proper JSON structure" do
       it "with page attributes and relationships" do

@@ -48,17 +48,6 @@ describe "API V2 Platform Variants Spec" do
           expect(json_response["data"].first["id"]).to eq variant.id.to_s
         end
       end
-
-      xcontext "by price" do
-        let!(:variant) { create(:variant, price: 100) }
-
-        before { get "/api/v2/platform/variants?filter[product_price_between]=100,200", headers: bearer_token }
-
-        it "returns variants with price greater than or equal to the given price" do
-          expect(json_response["data"].count).to eq 1
-          expect(json_response["data"].first["id"]).to eq variant.id.to_s
-        end
-      end
     end
 
     context "sorting" do
