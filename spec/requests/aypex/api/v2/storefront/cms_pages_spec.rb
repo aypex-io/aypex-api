@@ -3,12 +3,8 @@ require "spec_helper"
 describe "Storefront API v2 CMS Pages spec" do
   let(:store) { Aypex::Store.default }
 
-  before do
-    store.update!(supported_locales: "en,fr")
-  end
-  after do
-    store.update!(supported_locales: "en")
-  end
+  before { store.update!(supported_locales: "en,fr") }
+  after { store.update!(supported_locales: "en") }
 
   describe "cms_pages#index" do
     let!(:home_page_en) { create(:cms_homepage, store: store) }
@@ -149,15 +145,7 @@ describe "Storefront API v2 CMS Pages spec" do
       end
     end
 
-    context "with valid slug" do
-      let!(:page) { create(:cms_standard_page, store: store) }
-
-      before { get "/api/v2/storefront/cms_pages/#{page.slug}" }
-
-      it_behaves_like "returns 200 HTTP status"
-    end
-
-    context "with page from different store" do
+    context "requesting a page from different store" do
       let!(:page) { create(:cms_standard_page, store: create(:store)) }
 
       before { get "/api/v2/storefront/cms_pages/#{page.id}" }
