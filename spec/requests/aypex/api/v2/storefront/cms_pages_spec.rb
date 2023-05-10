@@ -138,10 +138,8 @@ describe "Storefront API v2 CMS Pages spec" do
         expect(json_response["included"]).to include(
           have_type("cms_section")
           .and(have_id(page_item.id.to_s)
-            .and(have_relationship(:cms_components)
-              )
-            )
-          )
+            .and(have_relationship(:cms_components)))
+        )
       end
     end
 
