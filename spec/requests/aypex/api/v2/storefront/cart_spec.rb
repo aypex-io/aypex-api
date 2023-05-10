@@ -719,7 +719,7 @@ describe "API V2 Storefront Cart Spec" do
           it_behaves_like "returns 200 HTTP status"
           it_behaves_like "returns valid cart JSON"
 
-          xit "changes the adjustment total to 0.0" do
+          it "changes the adjustment total to 0.0" do
             expect(json_response["data"]).to have_attribute(:adjustment_total).with_value(0.0.to_s)
           end
 
@@ -741,7 +741,7 @@ describe "API V2 Storefront Cart Spec" do
 
           before { execute }
 
-          xit "changes the adjustment total to 0.0" do
+          it "changes the adjustment total to 0.0" do
             expect(json_response["data"]).to have_attribute(:adjustment_total).with_value(0.0.to_s)
           end
 
@@ -755,7 +755,7 @@ describe "API V2 Storefront Cart Spec" do
 
           before { execute }
 
-          xit "changes the adjustment total to 0.0" do
+          it "changes the adjustment total to 0.0" do
             expect(json_response["data"]).to have_attribute(:adjustment_total).with_value(0.0.to_s)
           end
 
@@ -790,8 +790,8 @@ describe "API V2 Storefront Cart Spec" do
           it_behaves_like "returns 200 HTTP status"
           it_behaves_like "returns valid cart JSON"
 
-          xit "changes the adjustment total to 0.0" do
-            expect(json_response["data"]).not_to have_attribute(:adjustment_total).with_value(0.0.to_s)
+          it "changes the adjustment total to 0.0" do
+            expect(json_response["data"]).to have_attribute(:adjustment_total).with_value(0.0.to_s)
           end
 
           it "does not include the promotion in the response" do
@@ -803,7 +803,7 @@ describe "API V2 Storefront Cart Spec" do
           let!(:coupon_code) { "" }
           before { execute }
 
-          xit "changes the adjustment total to 0.0" do
+          it "changes the adjustment total to 0.0" do
             expect(json_response["data"]).to have_attribute(:adjustment_total).with_value(0.0.to_s)
           end
 
