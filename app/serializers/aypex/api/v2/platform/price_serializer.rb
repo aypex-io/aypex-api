@@ -12,6 +12,8 @@ module Aypex
           attribute :display_compare_at_price_including_vat_for do |price, params|
             price.display_compare_at_price_including_vat_for(params[:price_options].presence || {}).to_s
           end
+
+          belongs_to :variant
         end
       end
     end

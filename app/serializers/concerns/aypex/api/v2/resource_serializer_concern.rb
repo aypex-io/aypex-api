@@ -11,7 +11,7 @@ module Aypex
           base.set_type model_klazz.json_api_type
 
           # include standard attributes
-          base.attributes(*model_klazz.json_api_columns)
+          base.attributes(*model_klazz.json_api_columns.reject { |k| k.ends_with?("settings") })
 
           # include money attributes
           display_getter_methods(model_klazz).each do |method_name|

@@ -4,9 +4,18 @@ module Aypex
       class CmsSectionSerializer < BaseSerializer
         set_type :cms_section
 
-        attributes :name, :settings, :position, :type
+        attributes :name, :position, :type
 
-        has_many :cms_components
+        attribute :is_full_screen, if: proc { |record| record.respond_to?(:is_full_screen) } do |object|
+          object.is_full_screen
+        end
+        attribute :has_gutters, if: proc { |record| record.respond_to?(:has_gutters) } do |object|
+          object.has_gutters
+        end
+
+        belongs_to :cms_page, serializer: :cms_page
+
+        has_many :cms_components, serializer: :cms_component
       end
     end
   end

@@ -2,11 +2,9 @@ require "spec_helper"
 
 describe Aypex::Api::Webhooks::StockMovementDecorator do
   let(:webhook_payload_body) do
-    Aypex::Api::V2::Platform::VariantSerializer.new(
-      variant.reload,
-      include: Aypex::Api::V2::Platform::VariantSerializer.relationships_to_serialize.keys
-    ).serializable_hash
+    Aypex::Api::V2::Platform::VariantSerializer.new(variant.reload, include: Aypex::Api::V2::Platform::VariantSerializer.relationships_to_serialize.keys).serializable_hash
   end
+
   let(:stock_item) { create(:stock_item) }
   let(:stock_location) { variant.stock_locations.first }
 
@@ -16,10 +14,7 @@ describe Aypex::Api::Webhooks::StockMovementDecorator do
     let!(:variant) { create(:variant, product: product) }
     let!(:variant2) { create(:variant, product: product) }
     let(:webhook_payload_body) do
-      Aypex::Api::V2::Platform::ProductSerializer.new(
-        product,
-        include: Aypex::Api::V2::Platform::ProductSerializer.relationships_to_serialize.keys
-      ).serializable_hash
+      Aypex::Api::V2::Platform::ProductSerializer.new(product.reload, include: Aypex::Api::V2::Platform::ProductSerializer.relationships_to_serialize.keys).serializable_hash
     end
 
     describe "emitting product.out_of_stock" do

@@ -46,10 +46,25 @@ describe Aypex::Api::V2::Platform::StoreSerializer do
             seo_robots: store.seo_robots,
             supported_locales: store.supported_locales,
             deleted_at: store.deleted_at,
-            settings: store.settings,
             logo: url_helpers.rails_blob_path(store.logo.attachment),
             mailer_logo: url_helpers.rails_blob_path(store.mailer_logo.attachment),
-            favicon_path: url_helpers.rails_blob_path(store.favicon_image.attachment)
+            favicon_path: url_helpers.rails_blob_path(store.favicon_image.attachment),
+            address_require_phone_number: store.address_require_phone_number,
+            address_require_alt_phone_number: store.address_require_alt_phone_number,
+            address_show_company_address_field: store.address_show_company_address_field,
+            checkout_allow_guest_checkout: store.checkout_allow_guest_checkout,
+            checkout_alternative_shipping_phone: store.checkout_alternative_shipping_phone,
+            checkout_shipping_instructions: store.checkout_shipping_instructions,
+            checkout_always_include_confirm_step: store.checkout_always_include_confirm_step,
+            show_variant_full_price: store.show_variant_full_price,
+            tax_using_ship_address: store.tax_using_ship_address,
+            use_the_user_preferred_locale: store.use_the_user_preferred_locale,
+            digital_asset_authorized_clicks: store.digital_asset_authorized_clicks,
+            digital_asset_authorized_days: store.digital_asset_authorized_days,
+            digital_asset_link_expire_time: store.digital_asset_link_expire_time,
+            limit_digital_download_count: store.limit_digital_download_count,
+            limit_digital_download_days: store.limit_digital_download_days,
+            return_eligibility_number_of_days: store.return_eligibility_number_of_days
           },
           relationships: {
             default_country: {
