@@ -30,7 +30,7 @@ describe Aypex::Api::V2::Platform::PaymentMethodSerializer do
             public_metadata: {},
             private_metadata: {},
             test_mode: resource.test_mode,
-            dummy_key:resource.dummy_key
+            dummy_key: resource.dummy_key
 
           },
           relationships: {
