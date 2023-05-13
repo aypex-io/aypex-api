@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::ProductSerializer do
-  include_context "API v2 serializers params"
-
   subject { described_class.new(product, params: serializer_params).serializable_hash }
+
+  include_context "API v2 serializers params"
 
   let!(:images) { create_list(:image, 2) }
   let(:product) do
@@ -18,6 +18,7 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
       images: images,
       tax_category: create(:tax_category))
   end
+
   let(:serializable_hash) do
     {
       data: {
@@ -55,18 +56,6 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
             data: {
               id: product.tax_category.id.to_s,
               type: :tax_category
-            }
-          },
-          primary_variant: {
-            data: {
-              id: product.master.id.to_s,
-              type: :variant
-            }
-          },
-          default_variant: {
-            data: {
-              id: product.default_variant.id.to_s,
-              type: :variant
             }
           },
           variants: {

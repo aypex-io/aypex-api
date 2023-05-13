@@ -34,10 +34,7 @@ RSpec::Matchers.define :emit_webhook_event do |event_to_emit|
     allow(queue_requests).to receive(:call).with(any_args)
 
     with_webhooks_enabled { Timecop.freeze { block.call } }
-
-    expect(queue_requests).to(
-      have_received(:call).with(event_name: event_to_emit, webhook_payload_body: webhook_payload_body.to_json).once
-    )
+    expect(queue_requests).to(have_received(:call).with(event_name: event_to_emit, webhook_payload_body: webhook_payload_body.to_json).once)
   end
 
   def block_definition(obj_method)

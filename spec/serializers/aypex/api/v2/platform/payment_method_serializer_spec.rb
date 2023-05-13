@@ -27,9 +27,11 @@ describe Aypex::Api::V2::Platform::PaymentMethodSerializer do
             deleted_at: resource.deleted_at,
             created_at: resource.created_at,
             updated_at: resource.updated_at,
-            settings: resource.settings,
             public_metadata: {},
-            private_metadata: {}
+            private_metadata: {},
+            test_mode: resource.test_mode,
+            dummy_key:resource.dummy_key
+
           },
           relationships: {
             stores: {

@@ -11,6 +11,7 @@ describe Aypex::Api::V2::Platform::VariantSerializer do
   it { expect(subject).to be_kind_of(Hash) }
 
   it do
+    variant.reload
     expect(subject).to eq(
       {
         data: {

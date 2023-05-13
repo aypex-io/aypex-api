@@ -97,7 +97,7 @@ describe "Storefront API v2 CMS Pages spec" do
         expect(json_response["included"]).to include(
           have_type("cms_component")
             .and(have_id(cms_section.cms_components.first.id.to_s))
-            .and(have_jsonapi_attributes(:settings, :position))
+            .and(have_jsonapi_attributes(:type, :position))
         )
 
         expect(json_response["included"]).to include(
@@ -105,7 +105,7 @@ describe "Storefront API v2 CMS Pages spec" do
             .and(
               have_id(cms_section.id.to_s)
               .and(have_relationship(:cms_components))
-              .and(have_jsonapi_attributes(:settings, :position))
+              .and(have_jsonapi_attributes(:type, :has_gutters, :is_full_screen, :position))
             )
         )
       end

@@ -8,40 +8,40 @@ module Aypex
 
           attributes :name, :options_text, :total_on_hand
 
-          attribute :purchasable do |product|
-            product.purchasable?
+          attribute :purchasable do |variant|
+            variant.purchasable?
           end
 
-          attribute :in_stock do |product|
-            product.in_stock?
+          attribute :in_stock do |variant|
+            variant.in_stock?
           end
 
-          attribute :backorderable do |product|
-            product.backorderable?
+          attribute :backorderable do |variant|
+            variant.backorderable?
           end
 
-          attribute :available do |product|
-            product.available?
+          attribute :available do |variant|
+            variant.available?
           end
 
-          attribute :currency do |_product, params|
+          attribute :currency do |_variant, params|
             params[:currency]
           end
 
-          attribute :price do |object, params|
-            price(object, params[:currency])
+          attribute :price do |variant, params|
+            price(variant, params[:currency])
           end
 
-          attribute :display_price do |object, params|
-            display_price(object, params[:currency])
+          attribute :display_price do |variant, params|
+            display_price(variant, params[:currency])
           end
 
-          attribute :compare_at_price do |object, params|
-            compare_at_price(object, params[:currency])
+          attribute :compare_at_price do |variant, params|
+            compare_at_price(variant, params[:currency])
           end
 
-          attribute :display_compare_at_price do |object, params|
-            display_compare_at_price(object, params[:currency])
+          attribute :display_compare_at_price do |variant, params|
+            display_compare_at_price(variant, params[:currency])
           end
 
           belongs_to :product
@@ -50,6 +50,7 @@ module Aypex
           has_many :option_values
           has_many :stock_items
           has_many :stock_locations
+          has_many :prices, if: proc { |variant| variant.is_master? }
         end
       end
     end

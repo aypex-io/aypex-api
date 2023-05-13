@@ -27,6 +27,14 @@ describe Aypex::Api::V2::Platform::PriceSerializer do
             display_compare_at_amount: resource.display_compare_at_amount.to_s,
             display_compare_at_price_including_vat_for: resource.display_compare_at_price_including_vat_for({}).to_s,
             display_price_including_vat_for: resource.display_price_including_vat_for({}).to_s
+          },
+          relationships: {
+            variant: {
+              data: {
+                id: resource.variant.id.to_s,
+                type: :variant
+              }
+            }
           }
         }
       )

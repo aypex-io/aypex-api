@@ -44,37 +44,25 @@ module Aypex
 
           belongs_to :tax_category
 
-          has_one :primary_variant,
-            object_method_name: :master,
-            id_method_name: :master_id,
-            record_type: :variant,
-            serializer: :variant
-
-          has_one :default_variant,
+          has_one :base_variant,
             object_method_name: :default_variant,
             id_method_name: :default_variant_id,
             record_type: :variant,
-            serializer: :variant
+            serializer: :variant, if: proc { |product| !product.has_variants? }
 
-          has_many :variants
+          has_many :variants, if: proc { |product| product.has_variants? }
+          has_many :images
           has_many :option_types
           has_many :product_properties
-          has_many :categories, serializer: :category, record_type: :category do |object, params|
+          has_many :categories, serializer: :category, record_type: :category do |product, params|
             if params[:store].present?
-              object.categories_for_store(params[:store])
+              product.categories_for_store(params[:store])
             else
-              object.categories
+              product.categories
             end
           end
 
-          has_many :images,
-            object_method_name: :images,
-            id_method_name: :image_ids,
-            record_type: :image,
-            serializer: :image
-
-          # TODO: add stock items
-          # TODO: add prices
+          has_many :prices, if: proc { |product| !product.has_variants? }
         end
       end
     end
