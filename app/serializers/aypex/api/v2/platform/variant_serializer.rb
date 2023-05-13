@@ -50,7 +50,11 @@ module Aypex
           has_many :option_values
           has_many :stock_items
           has_many :stock_locations
-          has_many :prices, if: proc { |variant| variant.is_master? }
+          has_many :prices, serializer: ->(object, params) {
+                                          # Hack for Webhooks Price Issue
+                                          object.variant.reload
+                                          return Aypex::Api::V2::Platform::PriceSerializer
+                                        }, if: proc { |variant| !variant.is_master? }
         end
       end
     end

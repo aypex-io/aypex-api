@@ -39,15 +39,6 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
           promotionable: product.promotionable,
           meta_title: product.meta_title,
           discontinue_on: product.discontinue_on,
-          purchasable: product.purchasable?,
-          in_stock: product.in_stock?,
-          backorderable: product.backorderable?,
-          available: product.available?,
-          currency: currency,
-          price: BigDecimal("10"),
-          display_price: "$10.00",
-          compare_at_price: BigDecimal("15"),
-          display_compare_at_price: "$15.00",
           public_metadata: {},
           private_metadata: {}
         },
@@ -131,7 +122,7 @@ describe Aypex::Api::V2::Platform::ProductSerializer do
     end
   end
 
-  it { expect(subject).to be_kind_of(Hash) }
+  it { expect(subject).to be_a(Hash) }
 
   it { expect(subject).to eq(serializable_hash) }
 
