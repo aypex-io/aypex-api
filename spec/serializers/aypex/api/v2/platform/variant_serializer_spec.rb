@@ -91,6 +91,14 @@ describe Aypex::Api::V2::Platform::VariantSerializer do
                   type: :stock_item
                 }
               ]
+            },
+            prices: {
+              data: [
+                {
+                  id: variant.prices.first.id.to_s,
+                  type: :price
+                }
+              ]
             }
           }
         }

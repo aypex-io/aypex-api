@@ -6,49 +6,67 @@ module Aypex
           include ResourceSerializerConcern
           include DisplayMoneyHelper
 
-          attribute :purchasable do |product|
-            product.purchasable?
+          attribute :purchasable, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.purchasable?
           end
 
-          attribute :in_stock do |product|
-            product.in_stock?
+          attribute :in_stock, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.in_stock?
           end
 
-          attribute :backorderable do |product|
-            product.backorderable?
+          attribute :backorderable, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.backorderable?
           end
 
-          attribute :available do |product|
-            product.available?
+          attribute :available, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.available?
           end
 
-          attribute :currency do |_product, params|
+          attribute :currency, if: proc { |product|
+            !product.has_variants?
+          } do |object, params|
             params[:currency]
           end
 
-          attribute :price do |product, params|
-            price(product, params[:currency])
+          attribute :price, if: proc { |product|
+            !product.has_variants?
+          } do |object, params|
+            price(object, params[:currency])
           end
 
-          attribute :display_price do |product, params|
-            display_price(product, params[:currency])
+          attribute :display_price, if: proc { |product|
+            !product.has_variants?
+          } do |object, params|
+            display_price(object, params[:currency])
           end
 
-          attribute :compare_at_price do |product, params|
-            compare_at_price(product, params[:currency])
+          attribute :compare_at_price, if: proc { |product|
+            !product.has_variants?
+          } do |object, params|
+            compare_at_price(object, params[:currency])
           end
 
-          attribute :display_compare_at_price do |product, params|
-            display_compare_at_price(product, params[:currency])
+          attribute :display_compare_at_price, if: proc { |product|
+            !product.has_variants?
+          } do |object, params|
+            display_compare_at_price(object, params[:currency])
+          end
+
+          attribute :barcode, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.barcode
           end
 
           belongs_to :tax_category
-
-          has_one :base_variant,
-            object_method_name: :default_variant,
-            id_method_name: :default_variant_id,
-            record_type: :variant,
-            serializer: :variant, if: proc { |product| !product.has_variants? }
 
           has_many :variants, if: proc { |product| product.has_variants? }
           has_many :images
