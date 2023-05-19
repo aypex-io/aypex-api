@@ -13,7 +13,9 @@ describe Aypex::Api::V2::Platform::UserSerializer do
         data: {
           id: resource.id.to_s,
           type: type,
-          links: {},
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
             email: resource.email,
             first_name: resource.first_name,

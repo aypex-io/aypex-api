@@ -313,7 +313,7 @@ describe "API V2 Platform Products Spec" do
     context "with product image data" do
       shared_examples "returns product image data" do
         it "returns product image data" do
-          expect(json_response["data"]["relationships"]["images"].count).to eq(1)
+          expect(json_response["data"]["relationships"]["images"].count).to eq(2)
           expect(json_response["included"].count).to eq(1)
           expect(json_response["included"].first["type"]).to eq("image")
         end
