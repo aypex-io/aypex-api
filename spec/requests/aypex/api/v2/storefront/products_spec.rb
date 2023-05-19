@@ -795,7 +795,7 @@ describe "API V2 Storefront Products Spec" do
         let(:currency) { "EUR" }
 
         before do
-          product.master.prices.create(currency: currency, amount: 99.90, compare_at_amount: 129.90)
+          product.master.prices.create(currency: currency, amount: 99.90, compared_amount: 129.90)
           get "/api/v2/storefront/products?currency=#{currency}&include=default_variant"
         end
 
@@ -806,14 +806,14 @@ describe "API V2 Storefront Products Spec" do
           expect(json_response["data"][0]["attributes"]["currency"]).to eq currency
           expect(json_response["data"][0]["attributes"]["price"]).to eq("99.9")
           expect(json_response["data"][0]["attributes"]["display_price"]).to eq("€99.90")
-          expect(json_response["data"][0]["attributes"]["compare_at_price"]).to eq("129.9")
-          expect(json_response["data"][0]["attributes"]["display_compare_at_price"]).to eq("€129.90")
+          expect(json_response["data"][0]["attributes"]["compared_price"]).to eq("129.9")
+          expect(json_response["data"][0]["attributes"]["display_compared_price"]).to eq("€129.90")
           expect(json_response["included"][0]["id"]).to eq(product.default_variant_id.to_s)
           expect(json_response["included"][0]["type"]).to eq("variant")
           expect(json_response["included"][0]["attributes"]["price"]).to eq("99.9")
           expect(json_response["included"][0]["attributes"]["display_price"]).to eq("€99.90")
-          expect(json_response["included"][0]["attributes"]["compare_at_price"]).to eq("129.9")
-          expect(json_response["included"][0]["attributes"]["display_compare_at_price"]).to eq("€129.90")
+          expect(json_response["included"][0]["attributes"]["compared_price"]).to eq("129.9")
+          expect(json_response["included"][0]["attributes"]["display_compared_price"]).to eq("€129.90")
         end
       end
 
@@ -882,15 +882,15 @@ describe "API V2 Storefront Products Spec" do
         expect(json_response["data"]["attributes"]["currency"]).to eq("EUR")
         expect(json_response["data"]["attributes"]["price"]).to be_nil
         expect(json_response["data"]["attributes"]["display_price"]).to be_nil
-        expect(json_response["data"]["attributes"]["compare_at_price"]).to be_nil
-        expect(json_response["data"]["attributes"]["display_compare_at_price"]).to be_nil
+        expect(json_response["data"]["attributes"]["compared_price"]).to be_nil
+        expect(json_response["data"]["attributes"]["display_compared_price"]).to be_nil
         expect(json_response["included"][0]["id"]).to eq(product.default_variant_id.to_s)
         expect(json_response["included"][0]["type"]).to eq("variant")
         expect(json_response["included"][0]["attributes"]["currency"]).to eq("EUR")
         expect(json_response["included"][0]["attributes"]["price"]).to be_nil
         expect(json_response["included"][0]["attributes"]["display_price"]).to be_nil
-        expect(json_response["included"][0]["attributes"]["compare_at_price"]).to be_nil
-        expect(json_response["included"][0]["attributes"]["display_compare_at_price"]).to be_nil
+        expect(json_response["included"][0]["attributes"]["compared_price"]).to be_nil
+        expect(json_response["included"][0]["attributes"]["display_compared_price"]).to be_nil
       end
     end
 

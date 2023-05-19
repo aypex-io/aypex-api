@@ -2,12 +2,12 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::ReimbursementSerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :reimbursement }
 
   let(:reimbursement_credit) { create(:reimbursement_credit, creditable: create(:store_credit)) }
   let(:payment) { create(:payment, state: "completed") }
-  let(:type) { :reimbursement }
   let(:refund) { create(:refund, amount: payment.credit_allowed - 1) }
   let(:resource) { create(type, refunds: [refund], credits: [reimbursement_credit]) }
 
@@ -15,6 +15,10 @@ describe Aypex::Api::V2::Platform::ReimbursementSerializer do
     expect(subject).to eq(
       data: {
         id: resource.id.to_s,
+        type: type,
+        links: {
+          self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+        },
         attributes: {
           number: resource.number,
           reimbursement_status: resource.reimbursement_status,
@@ -54,8 +58,7 @@ describe Aypex::Api::V2::Platform::ReimbursementSerializer do
               type: :return_item
             }]
           }
-        },
-        type: type
+        }
       }
     )
   end

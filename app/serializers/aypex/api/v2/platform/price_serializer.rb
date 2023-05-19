@@ -5,15 +5,38 @@ module Aypex
         class PriceSerializer < BaseSerializer
           include ResourceSerializerConcern
 
-          attribute :display_price_including_vat_for do |price, params|
-            price.display_price_including_vat_for(params[:price_options].presence || {}).to_s
+          attribute :currency
+          attribute :amount
+          attribute :amount_inc_vat do |price, params|
+            price.amount_including_vat(params[:price_options].presence || {}).to_s
+          end
+          attribute :display_amount do |price|
+            price.display_amount.to_s
+          end
+          attribute :display_amount_inc_vat do |price, params|
+            price.display_amount_including_vat(params[:price_options].presence || {}).to_s
           end
 
-          attribute :display_compare_at_price_including_vat_for do |price, params|
-            price.display_compare_at_price_including_vat_for(params[:price_options].presence || {}).to_s
+          attribute :compared_amount
+          attribute :compared_amount_inc_vat do |price, params|
+            price.compared_amount_including_vat(params[:price_options].presence || {}).to_s
           end
 
+          attribute :display_compared_amount do |price, params|
+            price.display_compared_amount.to_s
+          end
+
+          attribute :display_compared_amount_inc_vat do |price, params|
+            price.display_compared_amount_including_vat(params[:price_options].presence || {}).to_s
+          end
+
+          # When product has no variants lets tie the price directly to the product.
           belongs_to :variant, if: proc { |price| !price.variant.is_master? }
+          belongs_to :product, if: proc { |price| price.variant.is_master? } do |price|
+            price.variant.product
+          end
+
+          attributes :created_at, :updated_at, :deleted_at
         end
       end
     end

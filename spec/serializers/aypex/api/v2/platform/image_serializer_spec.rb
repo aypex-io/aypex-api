@@ -1,25 +1,26 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::ImageSerializer do
-  subject { described_class.new(image) }
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :image }
 
   let(:product) { create(:product) }
-  let(:image) { create(:image, viewable: product) }
-
-  it { expect(subject.serializable_hash).to be_a(Hash) }
+  let(:resource) { create(type, viewable: product) }
 
   it do
-    expect(subject.serializable_hash).to eq(
+    expect(subject).to eq(
       {
         data: {
-          id: image.id.to_s,
-          type: :image,
+          id: resource.id.to_s,
+          type: type,
           attributes: {
-            position: image.position,
-            alt: image.alt,
-            created_at: image.created_at,
-            updated_at: image.updated_at,
-            original_url: image.original_url
+            position: resource.position,
+            alt: resource.alt,
+            created_at: resource.created_at,
+            updated_at: resource.updated_at,
+            original_url: resource.original_url
           },
           relationships: {
             viewable: {
@@ -33,4 +34,6 @@ describe Aypex::Api::V2::Platform::ImageSerializer do
       }
     )
   end
+
+  it_behaves_like "an ActiveJob serializable hash"
 end

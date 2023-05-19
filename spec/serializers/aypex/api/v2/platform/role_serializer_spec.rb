@@ -2,10 +2,11 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::RoleSerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
   let(:type) { :role }
+
+  let!(:store) { Aypex::Store.default }
   let(:resource) { create(type) }
 
   it do
@@ -13,6 +14,9 @@ describe Aypex::Api::V2::Platform::RoleSerializer do
       data: {
         id: resource.id.to_s,
         type: type,
+        links: {
+          self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+        },
         attributes: {
           name: resource.name,
           created_at: resource.created_at,

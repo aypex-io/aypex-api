@@ -1,21 +1,24 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::PromotionSerializer do
-  subject { described_class.new(resource, params: serializer_params).serializable_hash }
   include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :promotion }
 
   let(:promotion_category) { create(:promotion_category) }
   let(:promotion_rule) { create(:promotion_rule) }
   let(:resource) { create(:promotion_with_item_adjustment, promotion_category: promotion_category, promotion_rules: [promotion_rule]) }
-
-  it { expect(subject).to be_kind_of(Hash) }
 
   it do
     expect(subject).to eq(
       {
         data: {
           id: resource.id.to_s,
-          type: :promotion,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
             description: resource.description,
             expires_at: resource.expires_at,

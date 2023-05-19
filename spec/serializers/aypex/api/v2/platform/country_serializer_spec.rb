@@ -1,38 +1,41 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::CountrySerializer do
-  subject { described_class.new(country) }
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:country) { create(:country, states: create_list(:state, 2)) }
-
-  it { expect(subject.serializable_hash).to be_kind_of(Hash) }
+  let(:type) { :country }
+  let(:resource) { create(type, states: create_list(:state, 2)) }
 
   it do
-    expect(subject.serializable_hash).to eq(
+    expect(subject).to eq(
       {
         data: {
-          id: country.id.to_s,
-          type: :country,
+          id: resource.id.to_s,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
-            iso_name: country.iso_name,
-            iso: country.iso,
-            iso3: country.iso3,
-            name: country.name,
-            numcode: country.numcode,
-            states_required: country.states_required,
-            created_at: country.created_at,
-            updated_at: country.updated_at,
-            zipcode_required: country.zipcode_required
+            iso_name: resource.iso_name,
+            iso: resource.iso,
+            iso3: resource.iso3,
+            name: resource.name,
+            numcode: resource.numcode,
+            states_required: resource.states_required,
+            created_at: resource.created_at,
+            updated_at: resource.updated_at,
+            zipcode_required: resource.zipcode_required
           },
           relationships: {
             states: {
               data: [
                 {
-                  id: country.states.first.id.to_s,
+                  id: resource.states.first.id.to_s,
                   type: :state
                 },
                 {
-                  id: country.states.second.id.to_s,
+                  id: resource.states.second.id.to_s,
                   type: :state
                 }
               ]
@@ -42,4 +45,6 @@ describe Aypex::Api::V2::Platform::CountrySerializer do
       }
     )
   end
+
+  it_behaves_like "an ActiveJob serializable hash"
 end

@@ -7,6 +7,12 @@ module Aypex
 
           belongs_to :promotion
 
+          link :self, if: proc { |object, params|
+                                 Aypex::Engine.routes.url_helpers.respond_to?(:api_v2_platform_promotion_action_url) && params.any?
+                               } do |object, params|
+            Aypex::Engine.routes.url_helpers.send(:api_v2_platform_promotion_action_url, object.id, host: params[:store][:url], only_path: false)
+          end
+
           # Some promotion actions have a :calculator, while others do not.
           has_one :calculator, if: proc { |record| record.respond_to?(:calculator) }
 

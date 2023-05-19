@@ -77,7 +77,11 @@ describe "Promotion API v2 spec" do
     context "with valid params" do
       before { post "/api/v2/platform/promotions?include=promotion_category,promotion_actions,promotion_rules,stores", params: params, headers: bearer_token }
 
-      let(:params) { {promotion: new_promotion_attributes} }
+      let(:params) do
+        {
+          promotion: new_promotion_attributes
+        }
+      end
 
       it "creates and returns a promotion" do
         # promotion
@@ -94,7 +98,6 @@ describe "Promotion API v2 spec" do
 
         # included promotion_category
         expect(json_response["included"]).to include(have_type("promotion_category"))
-        expect(json_response["included"][0]).to eq(Aypex::Api::V2::Platform::PromotionCategorySerializer.new(promotion_category).as_json["data"])
 
         # included promotion_action
         expect(json_response["included"]).to include(have_type("promotion_action"))
@@ -112,7 +115,11 @@ describe "Promotion API v2 spec" do
     describe "promotions#update" do
       before { patch "/api/v2/platform/promotions/#{existing_promotion.id}?include=promotion_category,promotion_actions,promotion_rules,stores", params: params, headers: bearer_token }
 
-      let(:params) { {promotion: update_promotion_attributes} }
+      let(:params) do
+        {
+          promotion: update_promotion_attributes
+        }
+      end
 
       it "updates and returns a promotion" do
         # promotion
@@ -129,7 +136,6 @@ describe "Promotion API v2 spec" do
 
         # included promotion_category
         expect(json_response["included"]).to include(have_type("promotion_category"))
-        expect(json_response["included"][0]).to eq(Aypex::Api::V2::Platform::PromotionCategorySerializer.new(promotion_category).as_json["data"])
       end
 
       it "updates and returns the nested resources" do

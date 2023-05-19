@@ -2,7 +2,6 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::PropertySerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
   let(:type) { :property }
@@ -13,6 +12,9 @@ describe Aypex::Api::V2::Platform::PropertySerializer do
       data: {
         id: resource.id.to_s,
         type: type,
+        links: {
+          self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+        },
         attributes: {
           name: resource.name,
           presentation: resource.presentation,

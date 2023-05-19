@@ -1,28 +1,33 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::ProductPropertySerializer do
-  subject { described_class.new(product_property) }
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:product_property) { create(:product_property) }
-
-  it { expect(subject.serializable_hash).to be_kind_of(Hash) }
+  let(:type) { :product_property }
+  let(:resource) { create(type) }
 
   it do
-    expect(subject.serializable_hash).to eq(
+    expect(subject).to eq(
       {
         data: {
-          id: product_property.id.to_s,
-          type: :product_property,
+          id: resource.id.to_s,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
-            value: product_property.value,
-            position: product_property.position,
-            show_property: product_property.show_property,
-            filter_param: product_property.filter_param,
-            created_at: product_property.created_at,
-            updated_at: product_property.updated_at
+            value: resource.value,
+            position: resource.position,
+            show_property: resource.show_property,
+            filter_param: resource.filter_param,
+            created_at: resource.created_at,
+            updated_at: resource.updated_at
           }
         }
       }
     )
   end
+
+  it_behaves_like "an ActiveJob serializable hash"
 end

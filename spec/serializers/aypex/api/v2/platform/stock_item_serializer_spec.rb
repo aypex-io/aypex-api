@@ -2,17 +2,21 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::StockItemSerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :stock_item }
 
   let(:resource) { stock_location.stock_items.order(:id).first }
   let(:stock_location) { create(:stock_location_with_items) }
-  let(:type) { :stock_item }
 
   it do
     expect(subject).to eq(
       data: {
         id: resource.id.to_s,
+        type: type,
+        links: {
+          self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+        },
         attributes: {
           backorderable: resource.backorderable,
           count_on_hand: resource.count_on_hand,
@@ -36,8 +40,7 @@ describe Aypex::Api::V2::Platform::StockItemSerializer do
               type: :variant
             }
           }
-        },
-        type: type
+        }
       }
     )
   end

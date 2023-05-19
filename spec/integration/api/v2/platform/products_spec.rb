@@ -5,7 +5,7 @@ describe "Products API", swagger: true do
 
   resource_name = "Product"
   options = {
-    include_example: "prices",
+    include_example: "prices,variants.prices",
     filter_examples: [{name: "filter[name_eq]", example: "Green Toy Boat"}]
   }
 

@@ -5,6 +5,49 @@ module Aypex
         class ProductSerializer < BaseSerializer
           include ResourceSerializerConcern
           include DisplayMoneyHelper
+          include LinkHelper
+
+          attribute :sku, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.sku
+          end
+
+          attribute :weight, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.weight
+          end
+
+          attribute :height, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.height
+          end
+
+          attribute :depth, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.depth
+          end
+
+          attribute :cost_price, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.cost_price
+          end
+
+          attribute :track_inventory, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.master.track_inventory
+          end
+
+          attribute :total_on_hand, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.master.total_on_hand
+          end
 
           attribute :purchasable, if: proc { |product|
             !product.has_variants?
@@ -48,16 +91,16 @@ module Aypex
             display_price(object, params[:currency])
           end
 
-          attribute :compare_at_price, if: proc { |product|
+          attribute :compared_price, if: proc { |product|
             !product.has_variants?
           } do |object, params|
-            compare_at_price(object, params[:currency])
+            compared_price(object, params[:currency])
           end
 
-          attribute :display_compare_at_price, if: proc { |product|
+          attribute :display_compared_price, if: proc { |product|
             !product.has_variants?
           } do |object, params|
-            display_compare_at_price(object, params[:currency])
+            display_compared_price(object, params[:currency])
           end
 
           attribute :barcode, if: proc { |product|
@@ -68,8 +111,20 @@ module Aypex
 
           belongs_to :tax_category
 
-          has_many :variants, if: proc { |product| product.has_variants? }
-          has_many :images
+          has_many :variants, if: proc { |product, params| product.has_variants? && params.any? },
+            links: {
+              self: ->(object, params) {
+                related_link(object, params, :variants)
+              }
+            }
+
+          has_many :images, if: proc { |product, params| product.images.any? && params.any? },
+            links: {
+              self: ->(object, params) {
+                related_link(object, params, :images)
+              }
+            }
+
           has_many :option_types
           has_many :product_properties
           has_many :categories, serializer: :category, record_type: :category do |product, params|
@@ -80,7 +135,12 @@ module Aypex
             end
           end
 
-          has_many :prices, if: proc { |product| !product.has_variants? }
+          has_many :prices, if: proc { |product, params| !product.has_variants? && params.any? },
+            links: {
+              self: ->(object, params) {
+                related_link(object, params, :prices)
+              }
+            }
         end
       end
     end

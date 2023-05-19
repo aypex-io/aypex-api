@@ -23,18 +23,18 @@ module Aypex
             Aypex::Money.new(price.amount, currency: currency).to_s
           end
 
-          def compare_at_price(product_or_variant, currency)
+          def compared_price(product_or_variant, currency)
             price = find_price(product_or_variant, currency)
-            return nil if price.new_record? || price.compare_at_amount.blank?
+            return nil if price.new_record? || price.compared_amount.blank?
 
-            price.compare_at_amount
+            price.compared_amount
           end
 
-          def display_compare_at_price(product_or_variant, currency)
+          def display_compared_price(product_or_variant, currency)
             price = find_price(product_or_variant, currency)
-            return nil if price.new_record? || price.compare_at_amount.blank?
+            return nil if price.new_record? || price.compared_amount.blank?
 
-            Aypex::Money.new(price.compare_at_amount, currency: currency).to_s
+            Aypex::Money.new(price.compared_amount, currency: currency).to_s
           end
         end
       end

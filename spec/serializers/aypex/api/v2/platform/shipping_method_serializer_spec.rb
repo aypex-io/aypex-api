@@ -2,22 +2,23 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::ShippingMethodSerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :shipping_method }
 
   let(:shipping_category) { create(:shipping_category) }
   let(:tax_category) { create(:tax_category) }
-
-  let(:resource) { create(:shipping_method, shipping_categories: [shipping_category], tax_category: tax_category) }
-
-  it { expect(subject).to be_kind_of(Hash) }
+  let(:resource) { create(type, shipping_categories: [shipping_category], tax_category: tax_category) }
 
   it do
     expect(subject).to eq(
       {
         data: {
           id: resource.id.to_s,
-          type: :shipping_method,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
             name: resource.name,
             code: resource.code,

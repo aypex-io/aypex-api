@@ -2,19 +2,21 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::PrototypeSerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :prototype }
 
   let(:property) { create(:property) }
   let(:option_type) { create(:option_type) }
   let(:resource) { create(type, properties: [property], option_types: [option_type], categories: [category]) }
   let(:category) { create(:category) }
-  let(:type) { :prototype }
 
   it do
     expect(subject).to eq(
       data: {
         id: resource.id.to_s,
+        type: type,
+        links: {}, # TODO: Add endpoint for this.
         attributes: {
           name: resource.name,
           created_at: resource.created_at,
@@ -41,8 +43,7 @@ describe Aypex::Api::V2::Platform::PrototypeSerializer do
               type: :category
             }]
           }
-        },
-        type: type
+        }
       }
     )
   end

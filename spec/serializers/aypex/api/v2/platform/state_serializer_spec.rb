@@ -1,24 +1,28 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::StateSerializer do
-  subject { described_class.new(state) }
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :state }
 
   let(:country) { create(:country) }
-  let(:state) { create(:state, country: country) }
-
-  it { expect(subject.serializable_hash).to be_kind_of(Hash) }
+  let(:resource) { create(type, country: country) }
 
   it do
-    expect(subject.serializable_hash).to eq(
+    expect(subject).to eq(
       {
         data: {
-          id: state.id.to_s,
-          type: :state,
+          id: resource.id.to_s,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
-            name: state.name,
-            abbr: state.abbr,
-            created_at: state.created_at,
-            updated_at: state.updated_at
+            name: resource.name,
+            abbr: resource.abbr,
+            created_at: resource.created_at,
+            updated_at: resource.updated_at
           },
           relationships: {
             country: {
@@ -32,4 +36,6 @@ describe Aypex::Api::V2::Platform::StateSerializer do
       }
     )
   end
+
+  it_behaves_like "an ActiveJob serializable hash"
 end

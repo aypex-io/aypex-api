@@ -1,34 +1,38 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::WishlistSerializer do
-  subject { described_class.new(wishlist) }
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :wishlist }
 
   let!(:user) { create(:user) }
-  let!(:wishlist) { create(:wishlist, user: user) }
-  let!(:wished_item) { create(:wished_item, wishlist: wishlist) }
-
-  it { expect(subject.serializable_hash).to be_kind_of(Hash) }
+  let!(:resource) { create(type, user: user) }
+  let!(:wished_item) { create(:wished_item, wishlist: resource) }
 
   it do
-    expect(subject.serializable_hash).to eq(
+    expect(subject).to eq(
       {
         data: {
-          id: wishlist.id.to_s,
-          type: :wishlist,
+          id: resource.id.to_s,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
-            name: wishlist.name,
+            name: resource.name,
             is_default: false,
             is_private: true,
-            token: wishlist.token,
+            token: resource.token,
             variant_included: false,
-            created_at: wishlist.created_at,
-            updated_at: wishlist.updated_at
+            created_at: resource.created_at,
+            updated_at: resource.updated_at
           },
           relationships: {
             wished_items: {
               data: [
                 {
-                  id: wishlist.wished_items.first.id.to_s,
+                  id: resource.wished_items.first.id.to_s,
                   type: :wished_item
                 }
               ]
@@ -38,4 +42,6 @@ describe Aypex::Api::V2::Platform::WishlistSerializer do
       }
     )
   end
+
+  it_behaves_like "an ActiveJob serializable hash"
 end
