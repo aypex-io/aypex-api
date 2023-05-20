@@ -17,13 +17,13 @@ describe Aypex::Api::V2::Platform::PriceSerializer do
           attributes: {
             currency: resource.currency,
             amount: resource.amount,
-            amount_inc_vat: resource.amount_including_vat({}).to_s,
+            amount_inc_vat: resource.amount_inc_vat({}).to_s,
             display_amount: resource.display_amount.to_s,
-            display_amount_inc_vat: resource.display_amount_including_vat({}).to_s,
+            display_amount_inc_vat: resource.display_amount_inc_vat({}).to_s,
             compared_amount: resource.compared_amount,
-            compared_amount_inc_vat: resource.compared_amount_including_vat({}).to_s,
+            compared_amount_inc_vat: resource.compared_amount_inc_vat({}).to_s,
             display_compared_amount: resource.display_compared_amount.to_s,
-            display_compared_amount_inc_vat: resource.display_compared_amount_including_vat({}).to_s,
+            display_compared_amount_inc_vat: resource.display_compared_amount_inc_vat({}).to_s,
             deleted_at: resource.deleted_at,
             created_at: resource.created_at,
             updated_at: resource.updated_at
