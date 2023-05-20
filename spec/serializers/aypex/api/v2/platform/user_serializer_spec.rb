@@ -1,8 +1,9 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::UserSerializer do
-  include_context "API v2 serializers params"
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  include_context "API v2 serializers params"
 
   let(:type) { :user }
   let(:resource) { create(:user_with_addresses) }
@@ -47,6 +48,7 @@ describe Aypex::Api::V2::Platform::UserSerializer do
       }
     )
   end
+
   it_behaves_like "an ActiveJob serializable hash"
 
   context "when user has orders" do

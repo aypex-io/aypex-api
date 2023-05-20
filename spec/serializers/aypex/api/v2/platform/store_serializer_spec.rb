@@ -1,8 +1,9 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::StoreSerializer do
-  include_context "API v2 serializers params"
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  include_context "API v2 serializers params"
 
   let(:type) { :store }
 
@@ -17,7 +18,7 @@ describe Aypex::Api::V2::Platform::StoreSerializer do
   end
   let(:url_helpers) { Rails.application.routes.url_helpers }
 
-  it { expect(subject).to be_kind_of(Hash) }
+  it { expect(subject).to be_a(Hash) }
 
   it do
     expect(subject).to eq(

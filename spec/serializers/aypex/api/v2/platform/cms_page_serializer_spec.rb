@@ -1,8 +1,9 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::CmsPageSerializer do
-  include_context "API v2 serializers params"
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  include_context "API v2 serializers params"
 
   let(:type) { :cms_page }
   let(:resource) { create(:cms_feature_page, cms_sections: create_list(:cms_section_image_hero, 2)) }

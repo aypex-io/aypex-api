@@ -1,15 +1,16 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::VariantSerializer do
-  include_context "API v2 serializers params"
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  include_context "API v2 serializers params"
 
   let(:type) { :variant }
 
   let!(:resource) { create(type, price: 10, compared_price: 15, tax_category: create(:tax_category)) }
   let!(:digital) { create(:digital, variant: resource) }
 
-  it { expect(subject).to be_kind_of(Hash) }
+  it { expect(subject).to be_a(Hash) }
 
   it do
     expect(subject).to eq(

@@ -59,6 +59,7 @@ RSpec.configure do |config|
         {name: "Orders", description: "Platform API Tag"},
         {name: "Payments", description: "Platform API Tag"},
         {name: "Payment Methods", description: "Platform API Tag"},
+        {name: "Prices", description: "Platform API Tag"},
         {name: "Products", description: "Platform API Tag"},
         {name: "Promotions", description: "Platform API Tag"},
         {name: "Promotion Actions", description: "Platform API Tag"},
@@ -1141,6 +1142,38 @@ RSpec.configure do |config|
             required: %w[payment_method],
             "x-internal": false,
             title: "Update Bogus Gateway"
+          },
+
+          # Price
+          create_price_params: {
+            type: :object,
+            properties: {
+              price: {
+                type: :object,
+                required: %w[variant_id currency amount],
+                properties: {
+                  variant_id: {type: :string, example: "1"},
+                  amount: {type: :integer, example: 55.00},
+                  currency: {type: :string, example: "USD"}
+                }
+              }
+            },
+            required: %w[price],
+            "x-internal": false
+          },
+          update_price_params: {
+            type: :object,
+            properties: {
+              price: {
+                type: :object,
+                properties: {
+                  amount: {type: :integer, example: 155.00},
+                  currency: {type: :string, example: "AED"}
+                }
+              }
+            },
+            required: %w[classification],
+            "x-internal": false
           },
 
           # Product
