@@ -8,18 +8,18 @@ module Aypex
           attribute :currency
           attribute :amount
           attribute :amount_inc_vat do |price, params|
-            price.amount_including_vat(params[:price_options].presence || {}).to_s
+            price.amount_inc_vat(params[:price_options].presence || {}).to_s
           end
           attribute :display_amount do |price|
             price.display_amount.to_s
           end
           attribute :display_amount_inc_vat do |price, params|
-            price.display_amount_including_vat(params[:price_options].presence || {}).to_s
+            price.display_amount_inc_vat(params[:price_options].presence || {}).to_s
           end
 
           attribute :compared_amount
           attribute :compared_amount_inc_vat do |price, params|
-            price.compared_amount_including_vat(params[:price_options].presence || {}).to_s
+            price.compared_amount_inc_vat(params[:price_options].presence || {}).to_s
           end
 
           attribute :display_compared_amount do |price, params|
@@ -27,7 +27,7 @@ module Aypex
           end
 
           attribute :display_compared_amount_inc_vat do |price, params|
-            price.display_compared_amount_including_vat(params[:price_options].presence || {}).to_s
+            price.display_compared_amount_inc_vat(params[:price_options].presence || {}).to_s
           end
 
           # When product has no variants lets tie the price directly to the product.
