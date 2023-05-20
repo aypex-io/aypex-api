@@ -56,6 +56,7 @@ describe Aypex::Api::V2::ResourceSerializerConcern do
           data: {
             id: test_order.id.to_s,
             type: :test_order,
+            links: {},
             attributes: {
               created_at: created_at,
               display_adjustment_total: test_order.display_adjustment_total.to_s,

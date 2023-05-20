@@ -32,12 +32,12 @@ module Aypex
           display_price(product, params[:currency])
         end
 
-        attribute :compare_at_price do |product, params|
-          compare_at_price(product, params[:currency])
+        attribute :compared_price do |product, params|
+          compared_price(product, params[:currency])
         end
 
-        attribute :display_compare_at_price do |product, params|
-          display_compare_at_price(product, params[:currency])
+        attribute :display_compared_price do |product, params|
+          display_compared_price(product, params[:currency])
         end
 
         belongs_to :product

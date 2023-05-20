@@ -2,17 +2,20 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::TaxCategorySerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:resource) { create(:tax_category) }
   let(:type) { :tax_category }
+
+  let(:resource) { create(:tax_category) }
 
   it do
     expect(subject).to eq(
       data: {
         id: resource.id.to_s,
         type: type,
+        links: {
+          self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+        },
         attributes: {
           name: resource.name,
           description: resource.description,

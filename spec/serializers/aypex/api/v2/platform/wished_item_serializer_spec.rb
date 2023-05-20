@@ -1,31 +1,33 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::WishedItemSerializer do
-  subject { described_class.new(wished_item, params: serializer_params) }
-
   include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  let(:type) { :wished_item }
 
   let!(:user) { create(:user) }
   let!(:variant) { create(:variant) }
   let!(:wishlist) { create(:wishlist, user: user) }
-  let!(:wished_item) { create(:wished_item, wishlist: wishlist, variant: variant, quantity: 3) }
-
-  it { expect(subject.serializable_hash).to be_kind_of(Hash) }
+  let!(:resource) { create(type, wishlist: wishlist, variant: variant, quantity: 3) }
 
   it do
-    expect(subject.serializable_hash).to eq(
+    expect(subject).to eq(
       {
         data: {
-          id: wished_item.id.to_s,
+          id: resource.id.to_s,
           type: :wished_item,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
             quantity: 3,
-            price: variant.price,
-            total: variant.price * 3,
-            display_price: "$19.99",
-            display_total: "$59.97",
-            created_at: wished_item.created_at,
-            updated_at: wished_item.updated_at
+            price: resource.price(currency: "USD").to_s,
+            total: resource.total(currency: "USD").to_s,
+            display_price: resource.display_price(currency: "USD").to_s,
+            display_total: resource.display_total(currency: "USD").to_s,
+            created_at: resource.created_at,
+            updated_at: resource.updated_at
           },
           relationships: {
             variant: {
@@ -40,4 +42,6 @@ describe Aypex::Api::V2::Platform::WishedItemSerializer do
       }
     )
   end
+
+  it_behaves_like "an ActiveJob serializable hash"
 end

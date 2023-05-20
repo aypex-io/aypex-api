@@ -2,17 +2,19 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::AssetSerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:viewable) { create(:variant) }
   let(:type) { :asset }
+
+  let(:viewable) { create(:variant) }
   let(:resource) { create(type, viewable: viewable) }
 
   it do
     expect(subject).to eq(
       data: {
         id: resource.id.to_s,
+        type: type,
+        links: {}, # TODO: Add endpoint.
         attributes: {
           viewable_type: resource.viewable_type,
           position: resource.position,
@@ -29,8 +31,7 @@ describe Aypex::Api::V2::Platform::AssetSerializer do
               type: :variant
             }
           }
-        },
-        type: type
+        }
       }
     )
   end

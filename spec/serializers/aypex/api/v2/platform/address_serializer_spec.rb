@@ -1,50 +1,55 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::AddressSerializer do
-  subject { described_class.new(address).serializable_hash }
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:address) { create(:address, user: create(:user)) }
+  let(:type) { :address }
+  let(:resource) { create(type, user: create(:user)) }
 
   it do
     expect(subject).to eq(
       {
         data: {
-          id: address.id.to_s,
-          type: :address,
+          id: resource.id.to_s,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
-            firstname: address.firstname,
-            lastname: address.lastname,
-            address1: address.address1,
-            address2: address.address2,
-            city: address.city,
-            zipcode: address.zipcode,
-            phone: address.phone,
-            state_name: address.state_name,
-            alternative_phone: address.alternative_phone,
-            company: address.company,
-            created_at: address.created_at,
-            updated_at: address.updated_at,
-            deleted_at: address.deleted_at,
-            label: address.label,
+            firstname: resource.firstname,
+            lastname: resource.lastname,
+            address1: resource.address1,
+            address2: resource.address2,
+            city: resource.city,
+            zipcode: resource.zipcode,
+            phone: resource.phone,
+            state_name: resource.state_name,
+            alternative_phone: resource.alternative_phone,
+            company: resource.company,
+            created_at: resource.created_at,
+            updated_at: resource.updated_at,
+            deleted_at: resource.deleted_at,
+            label: resource.label,
             public_metadata: {},
             private_metadata: {}
           },
           relationships: {
             country: {
               data: {
-                id: address.country.id.to_s,
+                id: resource.country.id.to_s,
                 type: :country
               }
             },
             state: {
               data: {
-                id: address.state.id.to_s,
+                id: resource.state.id.to_s,
                 type: :state
               }
             },
             user: {
               data: {
-                id: address.user.id.to_s,
+                id: resource.user.id.to_s,
                 type: :user
               }
             }

@@ -2,10 +2,11 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::StockLocationSerializer do
   include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:resource) { create(:stock_location, country: country) }
+  let(:type) { :stock_location }
+
+  let(:resource) { create(type, country: country) }
   let(:type) { :stock_location }
   let(:country) { create(:country) }
 
@@ -14,6 +15,9 @@ describe Aypex::Api::V2::Platform::StockLocationSerializer do
       data: {
         id: resource.id.to_s,
         type: type,
+        links: {
+          self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+        },
         attributes: {
           active: resource.active,
           address1: resource.address1,

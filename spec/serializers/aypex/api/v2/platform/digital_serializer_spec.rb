@@ -1,28 +1,28 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::DigitalSerializer do
-  subject { described_class.new(digital).serializable_hash }
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:digital) { create(:digital) }
-
-  it { expect(subject).to be_kind_of(Hash) }
+  let(:type) { :digital }
+  let(:resource) { create(type) }
 
   it do
     expect(subject).to eq(
       {
         data: {
-          id: digital.id.to_s,
+          id: resource.id.to_s,
           type: :digital,
           attributes: {
-            byte_size: digital.attachment.byte_size.to_i,
-            content_type: digital.attachment.content_type.to_s,
-            filename: digital.attachment.filename.to_s,
-            url: Rails.application.routes.url_helpers.polymorphic_url(digital.attachment, only_path: true)
+            byte_size: resource.attachment.byte_size.to_i,
+            content_type: resource.attachment.content_type.to_s,
+            filename: resource.attachment.filename.to_s,
+            url: Rails.application.routes.url_helpers.polymorphic_url(resource.attachment, only_path: true)
           },
           relationships: {
             variant: {
               data: {
-                id: digital.variant.id.to_s,
+                id: resource.variant.id.to_s,
                 type: :variant
               }
             }
@@ -31,10 +31,6 @@ describe Aypex::Api::V2::Platform::DigitalSerializer do
       }
     )
   end
-
-  it { expect(subject[:data][:id]).to be_kind_of(String) }
-  it { expect(subject[:data][:type]).to be(:digital) }
-  it { expect(subject[:data][:attributes][:url]).to include("thinking-cat.jpg") }
 
   it_behaves_like "an ActiveJob serializable hash"
 end

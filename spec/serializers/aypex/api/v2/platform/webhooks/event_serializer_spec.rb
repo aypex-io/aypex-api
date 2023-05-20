@@ -14,6 +14,7 @@ describe Aypex::Api::V2::Platform::Webhooks::EventSerializer do
       data: {
         id: resource.id.to_s,
         type: type,
+        links: {},
         attributes: {
           created_at: resource.created_at,
           execution_time: resource.execution_time,

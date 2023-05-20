@@ -2,20 +2,20 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::PaymentMethodSerializer do
   include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  subject { described_class.new(resource, params: serializer_params) }
-
-  let!(:store) { Aypex::Store.default }
+  let(:type) { :payment_method }
   let(:resource) { create(:credit_card_payment_method) }
 
-  it { expect(subject.serializable_hash).to be_kind_of(Hash) }
-
   it do
-    expect(subject.serializable_hash).to eq(
+    expect(subject).to eq(
       {
         data: {
           id: resource.id.to_s,
-          type: :payment_method,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
             name: resource.name,
             description: resource.description,
@@ -31,7 +31,6 @@ describe Aypex::Api::V2::Platform::PaymentMethodSerializer do
             private_metadata: {},
             test_mode: resource.test_mode,
             dummy_key: resource.dummy_key
-
           },
           relationships: {
             stores: {
@@ -47,4 +46,6 @@ describe Aypex::Api::V2::Platform::PaymentMethodSerializer do
       }
     )
   end
+
+  it_behaves_like "an ActiveJob serializable hash"
 end

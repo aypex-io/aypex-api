@@ -1,12 +1,15 @@
 require "spec_helper"
 
-describe Aypex::Api::V2::Platform::BaseCategorySerializer, retry: 3 do
-  subject { described_class.new(base_category).serializable_hash }
+describe Aypex::Api::V2::Platform::BaseCategorySerializer do
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:base_category) { create(:base_category) }
+  let(:type) { :base_category }
+
+  let(:resource) { create(type) }
   let(:category) { create(:category, base_category: base_category) }
   let(:categories_json) do
-    base_category.categories.map do |category|
+    resource.categories.map do |category|
       {
         id: category.id.to_s,
         type: :category
@@ -14,26 +17,27 @@ describe Aypex::Api::V2::Platform::BaseCategorySerializer, retry: 3 do
     end
   end
 
-  it { expect(subject).to be_kind_of(Hash) }
-
   it do
     expect(subject).to eq(
       {
         data: {
-          id: base_category.id.to_s,
-          type: :base_category,
+          id: resource.id.to_s,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
-            name: base_category.name,
-            created_at: base_category.created_at,
-            updated_at: base_category.updated_at,
-            position: base_category.position,
+            name: resource.name,
+            created_at: resource.created_at,
+            updated_at: resource.updated_at,
+            position: resource.position,
             public_metadata: {},
             private_metadata: {}
           },
           relationships: {
             root: {
               data: {
-                id: base_category.root.id.to_s,
+                id: resource.root.id.to_s,
                 type: :category
               }
             },

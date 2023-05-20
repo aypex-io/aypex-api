@@ -27,6 +27,12 @@ module Aypex
             record_type: :address,
             serializer: :address
 
+          link :self, if: proc { |object, params|
+                            Aypex::Engine.routes.url_helpers.respond_to?(:api_v2_platform_user_url) && params.any?
+                          } do |object, params|
+            Aypex::Engine.routes.url_helpers.send(:api_v2_platform_user_url, object.id, host: params[:store][:url], only_path: false)
+          end
+
           def self.price_stats(stats)
             stats.map { |value| {currency: value.currency.to_s, amount: value.money.to_s} }
           end

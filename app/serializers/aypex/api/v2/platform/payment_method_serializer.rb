@@ -13,6 +13,12 @@ module Aypex
             object.dummy_key
           end
 
+          link :self, if: proc { |object, params|
+                            Aypex::Engine.routes.url_helpers.respond_to?(:api_v2_platform_payment_method_url) && params.any?
+                          } do |object, params|
+            Aypex::Engine.routes.url_helpers.send(:api_v2_platform_payment_method_url, object.id, host: params[:store][:url], only_path: false)
+          end
+
           has_many :stores
         end
       end

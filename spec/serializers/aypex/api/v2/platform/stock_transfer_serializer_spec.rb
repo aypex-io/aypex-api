@@ -1,23 +1,24 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::StockTransferSerializer do
+  include_context "API v2 serializers params"
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  include_context "API v2 serializers params"
+  let(:type) { :stock_transfer }
 
   let(:destination_location) { create(:stock_location) }
   let(:resource) { create(type, destination_location: destination_location, source_location: source_location) }
   let(:source_location) { create(:stock_location) }
   let(:stock_item) { stock_location.stock_items.order(:id).first }
   let(:stock_location) { create(:stock_location_with_items) }
-  let(:type) { :stock_transfer }
-
   let!(:stock_movement) { create(:stock_movement, stock_item: stock_item, originator: resource) }
 
   it do
     expect(subject).to eq(
       data: {
         id: resource.id.to_s,
+        type: type,
+        links: {}, # TODO: Add Endpoint for this.
         attributes: {
           type: resource.type,
           reference: resource.reference,
@@ -46,8 +47,7 @@ describe Aypex::Api::V2::Platform::StockTransferSerializer do
               type: :stock_location
             }
           }
-        },
-        type: type
+        }
       }
     )
   end

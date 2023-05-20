@@ -2,70 +2,72 @@ require "spec_helper"
 
 describe Aypex::Api::V2::Platform::CategorySerializer do
   include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  subject { described_class.new(category, params: serializer_params).serializable_hash }
+  let(:type) { :category }
 
   let(:base_category) { create(:base_category, store: store) }
-  let(:category) { create(:category, products: create_list(:product, 2, stores: [store]), base_category: base_category) }
-  let!(:children) { [create(:category, parent: category, base_category: base_category), create(:category, parent: category, base_category: base_category)] }
-
-  it { expect(subject).to be_kind_of(Hash) }
+  let(:resource) { create(type, products: create_list(:product, 2, stores: [store]), base_category: base_category) }
+  let!(:children) { [create(:category, parent: resource, base_category: base_category), create(:category, parent: resource, base_category: base_category)] }
 
   context "without products" do
     it do
       expect(subject).to eq(
         {
           data: {
-            id: category.id.to_s,
-            type: :category,
+            id: resource.id.to_s,
+            type: type,
+            links: {
+              self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+            },
             attributes: {
-              position: category.position,
-              name: category.name,
-              permalink: category.permalink,
-              lft: category.lft,
-              rgt: category.rgt,
-              description: category.description,
-              created_at: category.created_at,
-              updated_at: category.updated_at,
-              meta_title: category.meta_title,
-              meta_description: category.meta_description,
-              meta_keywords: category.meta_keywords,
-              depth: category.depth,
-              pretty_name: category.pretty_name,
-              seo_title: category.seo_title,
-              is_root: category.root?,
-              is_child: category.child?,
-              is_leaf: category.leaf?,
+              position: resource.position,
+              name: resource.name,
+              permalink: resource.permalink,
+              lft: resource.lft,
+              rgt: resource.rgt,
+              description: resource.description,
+              created_at: resource.created_at,
+              updated_at: resource.updated_at,
+              meta_title: resource.meta_title,
+              meta_description: resource.meta_description,
+              meta_keywords: resource.meta_keywords,
+              depth: resource.depth,
+              pretty_name: resource.pretty_name,
+              seo_title: resource.seo_title,
+              is_root: resource.root?,
+              is_child: resource.child?,
+              is_leaf: resource.leaf?,
               public_metadata: {},
               private_metadata: {}
             },
             relationships: {
               parent: {
                 data: {
-                  id: category.parent.id.to_s,
+                  id: resource.parent.id.to_s,
                   type: :category
                 }
               },
               base_category: {
                 data: {
-                  id: category.base_category.id.to_s,
+                  id: resource.base_category.id.to_s,
                   type: :base_category
                 }
               },
               image: {
                 data: {
-                  id: category.image.id.to_s,
+                  id: resource.image.id.to_s,
                   type: :image
                 }
               },
               children: {
                 data: [
                   {
-                    id: category.children.first.id.to_s,
+                    id: resource.children.first.id.to_s,
                     type: :category
                   },
                   {
-                    id: category.children.second.id.to_s,
+                    id: resource.children.second.id.to_s,
                     type: :category
                   }
                 ]
@@ -86,56 +88,59 @@ describe Aypex::Api::V2::Platform::CategorySerializer do
       expect(subject).to eq(
         {
           data: {
-            id: category.id.to_s,
-            type: :category,
+            id: resource.id.to_s,
+            type: type,
+            links: {
+              self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+            },
             attributes: {
-              position: category.position,
-              name: category.name,
-              permalink: category.permalink,
-              lft: category.lft,
-              rgt: category.rgt,
-              description: category.description,
-              created_at: category.created_at,
-              updated_at: category.updated_at,
-              meta_title: category.meta_title,
-              meta_description: category.meta_description,
-              meta_keywords: category.meta_keywords,
-              depth: category.depth,
-              pretty_name: category.pretty_name,
-              seo_title: category.seo_title,
-              is_root: category.root?,
-              is_child: category.child?,
-              is_leaf: category.leaf?,
+              position: resource.position,
+              name: resource.name,
+              permalink: resource.permalink,
+              lft: resource.lft,
+              rgt: resource.rgt,
+              description: resource.description,
+              created_at: resource.created_at,
+              updated_at: resource.updated_at,
+              meta_title: resource.meta_title,
+              meta_description: resource.meta_description,
+              meta_keywords: resource.meta_keywords,
+              depth: resource.depth,
+              pretty_name: resource.pretty_name,
+              seo_title: resource.seo_title,
+              is_root: resource.root?,
+              is_child: resource.child?,
+              is_leaf: resource.leaf?,
               public_metadata: {},
               private_metadata: {}
             },
             relationships: {
               parent: {
                 data: {
-                  id: category.parent.id.to_s,
+                  id: resource.parent.id.to_s,
                   type: :category
                 }
               },
               base_category: {
                 data: {
-                  id: category.base_category.id.to_s,
+                  id: resource.base_category.id.to_s,
                   type: :base_category
                 }
               },
               image: {
                 data: {
-                  id: category.image.id.to_s,
+                  id: resource.image.id.to_s,
                   type: :image
                 }
               },
               products: {
                 data: [
                   {
-                    id: category.products.first.id.to_s,
+                    id: resource.products.first.id.to_s,
                     type: :product
                   },
                   {
-                    id: category.products.second.id.to_s,
+                    id: resource.products.second.id.to_s,
                     type: :product
                   }
                 ]
@@ -143,11 +148,11 @@ describe Aypex::Api::V2::Platform::CategorySerializer do
               children: {
                 data: [
                   {
-                    id: category.children.first.id.to_s,
+                    id: resource.children.first.id.to_s,
                     type: :category
                   },
                   {
-                    id: category.children.second.id.to_s,
+                    id: resource.children.second.id.to_s,
                     type: :category
                   }
                 ]

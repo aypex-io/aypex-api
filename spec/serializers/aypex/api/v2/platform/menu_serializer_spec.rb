@@ -1,30 +1,33 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::MenuSerializer do
-  subject { described_class.new(menu).serializable_hash }
+  include_context "API v2 serializers params"
+  subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
-  let(:menu) { create(:menu) }
-
-  it { expect(subject).to be_kind_of(Hash) }
+  let(:type) { :menu }
+  let(:resource) { create(type) }
 
   it do
     expect(subject).to eq(
       {
         data: {
-          id: menu.id.to_s,
-          type: :menu,
+          id: resource.id.to_s,
+          type: type,
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
-            name: menu.name,
-            location: menu.location,
-            locale: menu.locale,
-            created_at: menu.created_at,
-            updated_at: menu.updated_at
+            name: resource.name,
+            location: resource.location,
+            locale: resource.locale,
+            created_at: resource.created_at,
+            updated_at: resource.updated_at
           },
           relationships: {
             menu_items: {
               data: [
                 {
-                  id: menu.menu_items.first.id.to_s,
+                  id: resource.menu_items.first.id.to_s,
                   type: :menu_item
                 }
               ]
