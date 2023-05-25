@@ -3,7 +3,6 @@ module Aypex
     module V2
       module Platform
         class PricesController < ResourceController
-
           private
 
           def model_class
