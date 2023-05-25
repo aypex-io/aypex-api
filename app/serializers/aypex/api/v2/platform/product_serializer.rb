@@ -13,6 +13,12 @@ module Aypex
             object.sku
           end
 
+          attribute :base_variant_id, if: proc { |product|
+            !product.has_variants?
+          } do |object|
+            object.master.id
+          end
+
           attribute :weight, if: proc { |product|
             !product.has_variants?
           } do |object|

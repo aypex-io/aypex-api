@@ -1,8 +1,9 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::RefundSerializer do
-  include_context "API v2 serializers params"
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  include_context "API v2 serializers params"
 
   let(:type) { :refund }
   let(:resource) { create(type, amount: 5.0) }

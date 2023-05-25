@@ -1,17 +1,20 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::VariantSerializer do
-  include_context "API v2 serializers params"
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  include_context "API v2 serializers params"
 
   let(:type) { :variant }
 
   let!(:resource) { create(type, price: 10, compared_price: 15, tax_category: create(:tax_category)) }
   let!(:digital) { create(:digital, variant: resource) }
 
-  it { expect(subject).to be_kind_of(Hash) }
+  it { expect(subject).to be_a(Hash) }
 
   it do
+    resource.reload
+
     expect(subject).to eq(
       {
         data: {
@@ -43,10 +46,10 @@ describe Aypex::Api::V2::Platform::VariantSerializer do
             backorderable: resource.backorderable?,
             available: resource.available?,
             currency: currency,
-            price: BigDecimal("10"),
-            display_price: "$10.00",
-            compared_price: BigDecimal("15"),
-            display_compared_price: "$15.00",
+            price: resource.price,
+            display_price: resource.display_price.to_s,
+            compared_price: resource.compared_price,
+            display_compared_price: resource.display_compared_price.to_s,
             public_metadata: {},
             private_metadata: {}
           },

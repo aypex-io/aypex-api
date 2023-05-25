@@ -1,9 +1,9 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::InventoryUnitSerializer do
-  include_context "API v2 serializers params"
-
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
+
+  include_context "API v2 serializers params"
 
   let(:type) { :inventory_unit }
   let(:resource) { create(type) }

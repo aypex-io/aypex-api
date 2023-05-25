@@ -1,11 +1,12 @@
 require "spec_helper"
 
 describe Aypex::Api::V2::Platform::PriceSerializer do
-  include_context "API v2 serializers params"
   subject { described_class.new(resource, params: serializer_params).serializable_hash }
 
+  include_context "API v2 serializers params"
+
   let(:type) { :price }
-  let(:resource) { create(:price) }
+  let(:resource) { create(:price, currency: "EUR") }
 
   it do
     expect(subject).to(
@@ -13,7 +14,9 @@ describe Aypex::Api::V2::Platform::PriceSerializer do
         data: {
           id: resource.id.to_s,
           type: type,
-          links: {}, # TODO: Add route and controller for this.
+          links: {
+            self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
+          },
           attributes: {
             currency: resource.currency,
             amount: resource.amount,

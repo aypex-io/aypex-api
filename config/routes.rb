@@ -91,6 +91,7 @@ Aypex::Engine.add_routes do
             patch :reposition
           end
         end
+        resources :prices
         resources :classifications
         resources :images
         resources :variants
