@@ -13,6 +13,8 @@ describe Aypex::Api::V2::Platform::VariantSerializer do
   it { expect(subject).to be_a(Hash) }
 
   it do
+    resource.reload
+
     expect(subject).to eq(
       {
         data: {
