@@ -10,9 +10,32 @@ jobs:
   security:
     runs-on: ubuntu-latest
     strategy:
-        fail-fast: false
-        matrix:
-          ruby: ['3.2']
+      fail-fast: false
+      matrix:
+        ruby: ['3.2']
+
+        # Set N number of parallel jobs you want to run tests on.
+        # Use higher number if you have slow tests to split them on more parallel jobs.
+        # Remember to update ci_node_index below to 0..N-1
+        ci_node_total: [1]
+
+        # set N-1 indexes for parallel jobs
+        # When you run 2 parallel jobs then first job will have index 0, the second job will have index 1 etc
+        ci_node_index: [0]
+
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: aypex_api
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby ${{ matrix.ruby }}
@@ -21,11 +44,26 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - name: Install Gems
-        run: |
-          bundle exec install
+      - name: Set up Redis
+        uses: shogo82148/actions-setup-redis@v1.19.0
 
-      - uses: actions/checkout@master
+      - name: Install libvips
+        run: sudo apt-get install -y libvips
+
+      - name: Make bin/core/ci executable
+        run: chmod +x ./bin/ci
+
+      - name: Setup Test Enviroment
+        env:
+          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/aypex_api
+          RAILS_ENV: test
+          DB: postgresql
+          CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+          CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+        run: |
+          bundle exec rake test_app
+          ./bin/ci
+
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/ruby@master
         env:
