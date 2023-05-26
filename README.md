@@ -1,5 +1,6 @@
-[![Aypex::Api CI](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml)
-[![Standard RB](https://github.com/aypex-io/aypex-api/actions/workflows/standard_rb.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/standard_rb_core.yml)
+[![CI Tests](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/ci.yml)
+[![SNYK Gem Dependency](https://github.com/aypex-io/aypex-api/actions/workflows/snyk.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/snyk.yml)
+[![Standard Ruby Format](https://github.com/aypex-io/aypex-api/actions/workflows/standard_rb.yml/badge.svg)](https://github.com/aypex-io/aypex-api/actions/workflows/standard_rb.yml)
 
 # Aypex::Api
 
