@@ -35,6 +35,12 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
+      - name: Set up Redis
+        uses: shogo82148/actions-setup-redis@v1.19.0
+
+      - name: Install libvips
+        run: sudo apt-get install -y libvips
+
       - name: Setup Test Environment
         env:
           DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/aypex_api
