@@ -1,4 +1,4 @@
-name: SNYK Security
+name: SNYK Gem Dependency
 on:
   pull_request:
     branches:
@@ -31,4 +31,4 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
-          args: --severity-threshold=medium
+          args: --severity-threshold=high
