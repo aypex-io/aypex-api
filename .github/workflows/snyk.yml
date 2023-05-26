@@ -54,3 +54,5 @@ jobs:
         uses: snyk/actions/ruby@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          args: --severity-threshold=high
