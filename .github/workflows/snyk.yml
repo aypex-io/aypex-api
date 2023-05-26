@@ -14,19 +14,6 @@ jobs:
       matrix:
         ruby: ['3.2']
 
-    services:
-      postgres:
-        image: postgres:12
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: aypex_api
-        ports: ['5432:5432']
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
     steps:
       - uses: actions/checkout@v3
       - name: Set up Ruby ${{ matrix.ruby }}
@@ -35,20 +22,9 @@ jobs:
           ruby-version: ${{ matrix.ruby }}
           bundler-cache: true
 
-      - name: Set up Redis
-        uses: shogo82148/actions-setup-redis@v1.19.0
-
-      - name: Install libvips
-        run: sudo apt-get install -y libvips
-
-      - name: Setup Test Environment
-        env:
-          DATABASE_URL: postgres://postgres:postgres@127.0.0.1:5432/aypex_api
-          RAILS_ENV: test
-          DB: postgresql
-
+      - name: Bundle Gems
         run: |
-          bundle exec rake test_app
+          bundle install
 
       - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/ruby@master
