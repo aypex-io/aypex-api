@@ -156,7 +156,8 @@ describe "Storefront API v2 Account spec" do
         after { post "/api/v2/storefront/account", params: params }
 
         it {
-          expect(Aypex::Api::Dependency).to receive_message_chain(:storefront_account_create_service, :constantize).and_return(service)}
+          expect(Aypex::Api::Dependency).to receive_message_chain(:storefront_account_create_service, :constantize).and_return(service)
+        }
 
         it_behaves_like "mock tests for failed user saving"
       end

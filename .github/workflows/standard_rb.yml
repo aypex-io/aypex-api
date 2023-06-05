@@ -1,3 +1,4 @@
+---
 name: Lint Ruby Formatting
 on:
   pull_request:

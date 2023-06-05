@@ -1,3 +1,4 @@
+---
 name: SNYK Gem Dependency
 on:
   pull_request:
