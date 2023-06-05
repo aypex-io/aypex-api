@@ -39,11 +39,19 @@ module Aypex
           end
 
           def user_create_params
-            user_update_params.except(:bill_address_id, :ship_address_id)
+            user_params = user_update_params.except(:bill_address_id, :ship_address_id)
+            user_params[:selected_locale] ||= current_locale
+            user_params[:store_id] = current_store.id
+
+            user_params
           end
 
           def user_update_params
-            params.require(:user).permit(permitted_user_attributes)
+            user_params = params.require(:user).permit(permitted_user_attributes)
+            user_params[:selected_locale] ||= current_locale
+            user_params[:store_id] = current_store.id
+
+            user_params
           end
         end
       end
