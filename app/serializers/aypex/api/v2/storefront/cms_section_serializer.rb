@@ -4,7 +4,7 @@ module Aypex
       class CmsSectionSerializer < BaseSerializer
         set_type :cms_section
 
-        attributes :name, :position, :type
+        attributes :position, :type
 
         attribute :is_full_screen, if: proc { |record| record.respond_to?(:is_full_screen) } do |object|
           object.is_full_screen

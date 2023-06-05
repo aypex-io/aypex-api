@@ -46,7 +46,6 @@ describe "Platform API v2 CmsSections" do
       let(:params) do
         {
           cms_section: {
-            name: "Rename resource and update Position!",
             position: 1
           }
         }
@@ -58,10 +57,9 @@ describe "Platform API v2 CmsSections" do
 
       it_behaves_like "returns 200 HTTP status"
 
-      it "moves resource_d from position 4 to position 1, and updates the name" do
+      it "moves resource_d from position 4 to position 1" do
         reload_sections
         expect(resource_d.position).to eq(1)
-        expect(resource_d.name).to eq("Rename resource and update Position!")
       end
     end
 

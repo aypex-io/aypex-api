@@ -20,7 +20,6 @@ describe Aypex::Api::V2::Platform::CmsSectionSerializer do
             self: "http://#{store.url}/api/v2/platform/#{type.to_s.pluralize}/#{resource.id}"
           },
           attributes: {
-            name: resource.name,
             type: resource.type,
             position: resource.position,
             created_at: resource.created_at,

@@ -15,7 +15,6 @@ describe Aypex::Api::V2::Storefront::CmsSectionSerializer do
           id: cms_section.id.to_s,
           type: :cms_section,
           attributes: {
-            name: cms_section.name,
             type: cms_section.type,
             position: cms_section.position
           },
