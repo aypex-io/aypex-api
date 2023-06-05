@@ -25,7 +25,10 @@ describe Aypex::Api::V2::Platform::StateChangeSerializer do
           },
           relationships: {
             user: {
-              data: nil
+              data: {
+                id: resource.user.id.to_s,
+                type: :user
+              }
             }
           }
         }

@@ -41,7 +41,6 @@ describe "CMS Section API", swagger: true do
   let(:valid_create_param_value) { build(:cms_section_image_hero, cms_page: cms_page).attributes }
   let(:valid_update_param_value) do
     {
-      name: "Super Hero",
       position: 1,
       type: "Aypex::Cms::Section::ImageHero"
     }
@@ -49,7 +48,7 @@ describe "CMS Section API", swagger: true do
 
   let(:invalid_param_value) do
     {
-      name: ""
+      type: nil
     }
   end
 

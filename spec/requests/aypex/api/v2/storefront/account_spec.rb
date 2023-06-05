@@ -99,7 +99,6 @@ describe "Storefront API v2 Account spec" do
         ship_address_id: default_ship_address.id.to_s,
         first_name: "Peter",
         last_name: "Parker",
-        store_id: store.id,
         public_metadata: {"has_other_account" => "true"},
         private_metadata: {"shops_in_other_stores" => "false"}
       }
@@ -136,8 +135,14 @@ describe "Storefront API v2 Account spec" do
           password_confirmation: ""
         }
       end
+      let(:built_params) {
+        params[:user][:store_id] = user.store_id
+        params[:user][:selected_locale] = "en"
+
+        params
+      }
       let(:service) { double(Aypex::Account::Create) }
-      let(:permitted_params) { {user_params: ActionController::Parameters.new(params).require(:user).permit!} }
+      let(:permitted_params) { {user_params: ActionController::Parameters.new(built_params).require(:user).permit!} }
       let(:result) { instance_double(Aypex::ServiceModule::Result) }
       let(:error) { instance_double(ActiveModel::Errors) }
 
@@ -150,7 +155,8 @@ describe "Storefront API v2 Account spec" do
       describe "mocks" do
         after { post "/api/v2/storefront/account", params: params }
 
-        it { expect(Aypex::Api::Dependency).to receive_message_chain(:storefront_account_create_service, :constantize).and_return(service) }
+        it {
+          expect(Aypex::Api::Dependency).to receive_message_chain(:storefront_account_create_service, :constantize).and_return(service)}
 
         it_behaves_like "mock tests for failed user saving"
       end
@@ -246,8 +252,14 @@ describe "Storefront API v2 Account spec" do
             password_confirmation: ""
           }
         end
+        let(:built_params) {
+          params[:user][:store_id] = user.store_id
+          params[:user][:selected_locale] = "en"
+
+          params
+        }
         let(:service) { double(Aypex::Account::Update) }
-        let(:permitted_params) { {user_params: ActionController::Parameters.new(params).require(:user).permit!, user: user} }
+        let(:permitted_params) { {user_params: ActionController::Parameters.new(built_params).require(:user).permit!, user: user} }
         let(:result) { instance_double(Aypex::ServiceModule::Result) }
         let(:error) { instance_double(ActiveModel::Errors) }
 
