@@ -6,14 +6,6 @@ module Aypex
 end
 
 shared_examples "an ActiveJob serializable hash" do
-  context "Rails < 6", if: Rails::VERSION::MAJOR < 6 do
-    it "can not be serialized by ActiveJob" do
-      expect { Aypex::TestArgumentsJob.perform_later(subject) }.to(
-        raise_error(ActiveJob::SerializationError, "Unsupported argument type: Symbol")
-      )
-    end
-  end
-
   it "can be serialized by ActiveJob" do
     # It should fail if subject contains any custom instance (e.g Aypex::Money)
     expect { Aypex::TestArgumentsJob.perform_later(subject) }.not_to raise_error

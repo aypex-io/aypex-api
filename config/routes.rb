@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   use_doorkeeper scope: "#{aypex_path}/aypex_oauth"
 end
 
-Aypex::Engine.add_routes do
+Aypex::Engine.routes.draw do
   namespace :api, defaults: {format: "json"} do
     namespace :v2 do
       namespace :storefront do
@@ -67,15 +67,15 @@ Aypex::Engine.add_routes do
 
       namespace :platform do
         # Promotions API
-        resources :promotions
-        resources :promotion_actions
-        resources :promotion_categories
-        resources :promotion_rules
+        resources :promotions, except: :new
+        resources :promotion_actions, except: :new
+        resources :promotion_categories, except: :new
+        resources :promotion_rules, except: :new
 
         # Returns API
-        resources :customer_returns
-        resources :reimbursements
-        resources :return_authorizations do
+        resources :customer_returns, except: :new
+        resources :reimbursements, except: :new
+        resources :return_authorizations, except: :new do
           member do
             patch :add
             patch :cancel
@@ -84,24 +84,24 @@ Aypex::Engine.add_routes do
         end
 
         # Product Catalog API
-        resources :products
-        resources :base_categories
-        resources :categories do
+        resources :products, except: :new
+        resources :base_categories, except: :new
+        resources :categories, except: :new do
           member do
             patch :reposition
           end
         end
-        resources :prices
-        resources :classifications
-        resources :images
-        resources :variants
-        resources :properties
-        resources :product_properties
-        resources :option_types
-        resources :option_values
+        resources :prices, except: :new
+        resources :classifications, except: :new
+        resources :images, except: :new
+        resources :variants, except: :new
+        resources :properties, except: :new
+        resources :product_properties, except: :new
+        resources :option_types, except: :new
+        resources :option_values, except: :new
 
         # Order API
-        resources :orders do
+        resources :orders, except: :new do
           member do
             patch :next
             patch :advance
@@ -115,11 +115,11 @@ Aypex::Engine.add_routes do
             patch :approve
           end
         end
-        resources :line_items
-        resources :adjustments
+        resources :line_items, except: :new
+        resources :adjustments, except: :new
 
         # Payments API
-        resources :payments do
+        resources :payments, except: :new do
           # TODO: support custom actions
           # member do
           #   patch :authorize
@@ -131,17 +131,17 @@ Aypex::Engine.add_routes do
         end
 
         # Store Credit API
-        resources :store_credits
-        resources :store_credit_categories
-        resources :store_credit_types
+        resources :store_credits, except: :new
+        resources :store_credit_categories, except: :new
+        resources :store_credit_types, except: :new
 
         # Geo API
-        resources :zones
+        resources :zones, except: :new
         resources :countries, only: [:index, :show]
         resources :states, only: [:index, :show]
 
         # Shipment API
-        resources :shipments do
+        resources :shipments, except: :new do
           member do
             %w[ready ship cancel resume pend].each do |state|
               patch state.to_sym
@@ -154,59 +154,59 @@ Aypex::Engine.add_routes do
         end
 
         # Tax API
-        resources :tax_rates
-        resources :tax_categories
+        resources :tax_rates, except: :new
+        resources :tax_categories, except: :new
 
         # Inventory API
-        resources :inventory_units
-        resources :stock_items
-        resources :stock_locations
-        resources :stock_movements
+        resources :inventory_units, except: :new
+        resources :stock_items, except: :new
+        resources :stock_locations, except: :new
+        resources :stock_movements, except: :new
 
         # User API
-        resources :users
-        resources :credit_cards
-        resources :addresses
+        resources :users, except: :new
+        resources :credit_cards, except: :new
+        resources :addresses, except: :new
 
-        resources :roles
+        resources :roles, except: :new
 
         # Menu API
-        resources :menus
-        resources :menu_items do
+        resources :menus, except: :new
+        resources :menu_items, except: :new do
           member do
             patch :reposition
           end
         end
 
         # CMS
-        resources :cms_pages
-        resources :cms_sections
-        resources :cms_components
+        resources :cms_pages, except: :new
+        resources :cms_sections, except: :new
+        resources :cms_components, except: :new
 
         # Wishlists API
-        resources :wishlists
-        resources :wished_items
+        resources :wishlists, except: :new
+        resources :wished_items, except: :new
 
         # Digitals API
-        resources :digitals
-        resources :digital_links do
+        resources :digitals, except: :new
+        resources :digital_links, except: :new do
           member do
             patch :reset
           end
         end
 
         # Store API
-        resources :stores
+        resources :stores, except: :new
 
         # Configurations API
-        resources :payment_methods
-        resources :shipping_categories
-        resources :shipping_methods
+        resources :payment_methods, except: :new
+        resources :shipping_categories, except: :new
+        resources :shipping_methods, except: :new
 
         # Webhooks API
-        namespace :webhooks do
+        namespace :webhooks, except: :new do
           resources :events, only: :index
-          resources :subscribers
+          resources :subscribers, only: :index
         end
       end
     end
